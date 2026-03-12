@@ -64,7 +64,7 @@ export function Hero({ hero, focusItems }: HeroProps) {
       {focusItems.map((item) => (
         <div
           key={item.href}
-          className="border-b border-[var(--color-border)] py-6 first:pt-0 last:border-b-0 last:pb-0"
+          className="border-b border-[var(--color-border)] py-5 first:pt-0 last:border-b-0 last:pb-0"
         >
           <Link href={item.href} className="group block">
             <p
