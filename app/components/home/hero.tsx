@@ -54,42 +54,34 @@ export function Hero({ hero, focusItems }: HeroProps) {
             ) : null}
           </div>
 
-          <div className="xl:pt-6">
-            <div className="border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
-              <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-                Institutionelle Struktur
-              </p>
+          <div className="xl:pt-6 xl:flex xl:justify-start">
+  <div className="w-full max-w-[720px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
+    <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+      Institutionelle Struktur
+    </p>
 
-              <div>
-                {focusItems.map((item, index) => (
-                  <div
-                    key={item.href}
-                    className={
-                      index !== focusItems.length - 1
-                        ? "border-b border-[var(--color-border)] pb-6"
-                        : "pt-6"
-                    }
-                  >
-                    {index !== 0 && index !== focusItems.length - 1 ? (
-                      <div className="py-0" />
-                    ) : null}
-
-                    <Link href={item.href} className="group block">
-                      <p
-                        className="text-[30px] leading-[1.08] text-[var(--color-text)] transition-opacity group-hover:opacity-75"
-                        style={{ fontFamily: "var(--font-serif)" }}
-                      >
-                        {item.label}
-                      </p>
-                      <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
-                        {item.description}
-                      </p>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+    <div>
+      {focusItems.map((item) => (
+        <div
+          key={item.href}
+          className="border-b border-[var(--color-border)] py-6 first:pt-0 last:border-b-0 last:pb-0"
+        >
+          <Link href={item.href} className="group block">
+            <p
+              className="text-[30px] leading-[1.08] text-[var(--color-text)] transition-opacity group-hover:opacity-75"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {item.label}
+            </p>
+            <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
+              {item.description}
+            </p>
+          </Link>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
         </div>
       </Container>
     </section>
