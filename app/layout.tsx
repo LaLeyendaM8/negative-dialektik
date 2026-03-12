@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import { SiteFooter } from "./components/layout/site-footer";
 import { SiteHeader } from "./components/layout/site-header";
+import { footerLinks } from "./content/site/footer";
+import { navigation } from "./content/site/navigation";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,28 +16,10 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
 });
 
-const navigation = [
-  { label: "Start", href: "/" },
-  { label: "Verlag", href: "/verlag" },
-  { label: "Katalog", href: "/katalog" },
-  { label: "Autoren", href: "/autoren" },
-  { label: "Texte", href: "/texte" },
-  { label: "Akademie", href: "/akademie" },
-  { label: "Stiftung", href: "/stiftung" },
-  { label: "Kontakt", href: "/kontakt" },
-];
-
-const footerLinks = [
-  { label: "Verlag", href: "/verlag" },
-  { label: "Kontakt", href: "/kontakt" },
-  { label: "Impressum", href: "/impressum" },
-  { label: "Datenschutz", href: "/datenschutz" },
-];
-
 export const metadata: Metadata = {
   title: "Negative Dialektik",
   description:
-    "Negative Dialektik veröffentlicht, übersetzt und vermittelt zentrale Texte der deutschen Philosophie, Kritischen Theorie und Sozialtheorie im spanischsprachigen Raum.",
+    "Negative Dialektik ist ein Institut für deutsche Philosophie. Verlag, Akademie und Stiftung verbinden editorische Arbeit, Lehre und kulturelle Vermittlung im spanischsprachigen Raum.",
 };
 
 export default function RootLayout({

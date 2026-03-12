@@ -1,7 +1,18 @@
 import Link from "next/link";
 import { Container } from "../layout/container";
 
-export function ClosingCta() {
+type ClosingCtaProps = {
+  closing: {
+    title: string;
+    paragraphs?: string[];
+    links: {
+      label: string;
+      href: string;
+    }[];
+  };
+};
+
+export function ClosingCta({ closing }: ClosingCtaProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[110px]">
       <Container>
@@ -10,24 +21,28 @@ export function ClosingCta() {
             className="mb-6 text-[40px] leading-[1.1] md:text-[48px]"
             style={{ fontFamily: "var(--font-serif)" }}
           >
-            Negative Dialektik verbindet editorische Arbeit, Übersetzung und
-            philosophische Vermittlung in einem internationalen Projekt.
+            {closing.title}
           </h2>
 
-          <div className="flex flex-wrap gap-6">
-            <Link
-              href="/katalog"
-              className="text-[16px] underline underline-offset-4"
+          {closing.paragraphs?.map((paragraph, index) => (
+            <p
+              key={index}
+              className="mb-6 text-[16px] leading-[1.7] text-[var(--color-text-secondary)]"
             >
-              Katalog entdecken
-            </Link>
+              {paragraph}
+            </p>
+          ))}
 
-            <Link
-              href="/kontakt"
-              className="text-[16px] underline underline-offset-4"
-            >
-              Kontakt aufnehmen
-            </Link>
+          <div className="flex flex-wrap gap-6">
+            {closing.links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-[16px] underline underline-offset-4"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </Container>

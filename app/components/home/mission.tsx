@@ -1,6 +1,14 @@
 import { Container } from "../layout/container";
 
-export function Mission() {
+type MissionProps = {
+  mission: {
+    title: string;
+    paragraphs: string[];
+    keywords: string[];
+  };
+};
+
+export function Mission({ mission }: MissionProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[120px] md:py-[140px]">
       <Container>
@@ -10,29 +18,28 @@ export function Mission() {
               className="text-[46px] leading-[1.05] md:text-[56px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-              Der Verlag
+              {mission.title}
             </h2>
           </div>
 
           <div className="max-w-[620px]">
-            <p className="mb-6 text-[18px] leading-[1.7]">
-              Negative Dialektik ist ein unabhängiger Verlag, der sich der
-              Übersetzung, Edition und Vermittlung zentraler Texte der deutschen
-              Philosophie widmet.
-            </p>
-
-            <p className="mb-8 text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">
-              Unser Fokus liegt auf der Kritischen Theorie,
-              Sozialphilosophie und politischen Theorie. Wir arbeiten mit
-              Übersetzern und Wissenschaftlern zusammen, um hochwertige
-              Editionen zu schaffen, die philosophische Debatten im
-              spanischsprachigen Raum erweitern.
-            </p>
+            {mission.paragraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className={`text-[18px] leading-[1.7] ${
+                  index === 0
+                    ? "mb-6 text-[var(--color-text)]"
+                    : "mb-8 text-[var(--color-text-secondary)]"
+                }`}
+              >
+                {paragraph}
+              </p>
+            ))}
 
             <div className="flex flex-wrap gap-6 text-[13px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-              <span>Edition</span>
-              <span>Übersetzung</span>
-              <span>Vermittlung</span>
+              {mission.keywords.map((keyword) => (
+                <span key={keyword}>{keyword}</span>
+              ))}
             </div>
           </div>
         </div>

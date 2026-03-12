@@ -3,66 +3,50 @@ import { PageHero } from "../components/shared/page-hero";
 import { PageShell } from "../components/shared/page-shell";
 import { RichText } from "../components/shared/rich-text";
 import { SectionHeading } from "../components/ui/section-heading";
+import { kontaktPage } from "../content/pages/kontakt";
 
 export default function KontaktPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Negative Dialektik"
-        title="Kontakt"
-        lead="Für verlegerische Anfragen, Kooperationen, institutionelle Zusammenarbeit und programmbegleitende Projekte."
+        eyebrow={kontaktPage.eyebrow}
+        title={kontaktPage.title}
+        lead={kontaktPage.lead}
       />
 
-      <section>
-        <SectionHeading
-          title="Allgemeine Anfragen"
-          subtitle="Für Rückfragen zum Verlag, zu Kooperationen oder zum laufenden Programm."
-        />
+      {kontaktPage.sections.map((section) => (
+        <section key={section.title} className="mt-16 first:mt-0">
+          <SectionHeading title={section.title} subtitle={section.subtitle} />
 
-        <RichText>
-          <p>
-            E-Mail:{" "}
-            <Link
-              href="mailto:info@negative-dialektik.com"
-              className="underline underline-offset-4"
-            >
-              info@negative-dialektik.com
-            </Link>
-          </p>
-        </RichText>
-      </section>
+          <RichText>
+            {"email" in section && section.email ? (
+              <p>
+                E-Mail:{" "}
+                <Link
+                  href={`mailto:${section.email}`}
+                  className="underline underline-offset-4"
+                >
+                  {section.email}
+                </Link>
+              </p>
+            ) : null}
 
-      <section className="mt-16">
-        <SectionHeading
-          title="Bereiche"
-          subtitle="Anfragen können sich unter anderem auf folgende Felder beziehen."
-        />
+            {"items" in section &&
+              section.items && (
+                <ul>
+                  {section.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
 
-        <RichText>
-          <ul>
-            <li>Verlag und Katalog</li>
-            <li>Übersetzungsprojekte</li>
-            <li>Akademische Kooperationen</li>
-            <li>Stiftungs- und Bildungsprojekte</li>
-            <li>Institutionelle Partnerschaften</li>
-          </ul>
-        </RichText>
-      </section>
-
-      <section className="mt-16">
-        <SectionHeading
-          title="Hinweis"
-          subtitle="Die Kontaktseite kann später um ein Formular, weitere Ansprechpartner oder institutionelle Adressen ergänzt werden."
-        />
-
-        <RichText>
-          <p>
-            In der aktuellen Relaunch-Phase dient diese Seite zunächst als
-            ruhiger, editorischer Kontaktpunkt. Zusätzliche Informationen können
-            später strukturiert ergänzt werden, ohne das Grundlayout zu verändern.
-          </p>
-        </RichText>
-      </section>
+            {"paragraphs" in section &&
+              section.paragraphs?.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+          </RichText>
+        </section>
+      ))}
     </PageShell>
   );
 }

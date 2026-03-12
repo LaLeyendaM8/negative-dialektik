@@ -1,15 +1,16 @@
 import { Container } from "../layout/container";
 
-type ProgramItem = {
-  title: string;
-  description: string;
-};
-
 type ProgramProps = {
-  items: ProgramItem[];
+  program: {
+    title: string;
+    items: {
+      title: string;
+      description: string;
+    }[];
+  };
 };
 
-export function Program({ items }: ProgramProps) {
+export function Program({ program }: ProgramProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[120px] md:py-[140px]">
       <Container>
@@ -17,11 +18,11 @@ export function Program({ items }: ProgramProps) {
           className="mb-16 text-[46px] leading-[1.05] md:text-[64px]"
           style={{ fontFamily: "var(--font-serif)" }}
         >
-          Verlagsprogramm
+          {program.title}
         </h2>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
-          {items.map((item) => (
+          {program.items.map((item) => (
             <div key={item.title}>
               <h3
                 className="mb-4 text-[28px]"
