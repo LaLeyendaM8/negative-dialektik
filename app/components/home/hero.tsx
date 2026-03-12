@@ -54,8 +54,8 @@ export function Hero({ hero, focusItems }: HeroProps) {
             ) : null}
           </div>
 
-          <div className="xl:pt-6 xl:flex xl:justify-start">
-  <div className="w-full max-w-[720px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
+          <div className="self-start xl:pt-6 xl:flex xl:justify-start">
+  <div className="self-start w-full max-w-[720px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
     <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
       Institutionelle Struktur
     </p>
@@ -64,7 +64,7 @@ export function Hero({ hero, focusItems }: HeroProps) {
       {focusItems.map((item) => (
         <div
           key={item.href}
-          className="border-b border-[var(--color-border)] py-5 first:pt-0 last:border-b-0 last:pb-0"
+          className="border-b border-[var(--color-border)] py-6 first:pt-0 last:border-b-0 last:pb-0"
         >
           <Link href={item.href} className="group block">
             <p
