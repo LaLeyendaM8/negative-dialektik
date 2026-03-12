@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./container";
 
@@ -15,12 +16,15 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
     <header className="border-b border-[var(--color-border)] bg-[var(--color-background)]">
       <Container>
         <div className="flex items-center justify-between py-7 md:py-8">
-          <Link
-            href="/"
-            className="text-[30px]"
-            style={{ fontFamily: "var(--font-serif)" }}
-          >
-            -D
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/logo/logo.svg"
+              alt="Negative Dialektik"
+              width={56}
+              height={32}
+              className="h-auto w-[56px] md:w-[64px]"
+              priority
+            />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex lg:gap-12">

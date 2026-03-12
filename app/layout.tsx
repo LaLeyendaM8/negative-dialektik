@@ -18,6 +18,9 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Negative Dialektik",
+  icons: {
+    icon: "/logo/favicon.svg",
+  },
   description:
     "Negative Dialektik ist ein Institut für deutsche Philosophie. Verlag, Akademie und Stiftung verbinden editorische Arbeit, Lehre und kulturelle Vermittlung im spanischsprachigen Raum.",
 };

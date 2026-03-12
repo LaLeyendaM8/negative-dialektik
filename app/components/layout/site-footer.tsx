@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./container";
 
@@ -16,12 +17,15 @@ export function SiteFooter({ links }: SiteFooterProps) {
       <Container>
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div>
-            <div
-              className="mb-3 text-[28px]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              -D
-            </div>
+            <Link href="/" className="mb-3 block shrink-0">
+              <Image
+                src="/logo/logo.svg"
+                alt="Negative Dialektik"
+                width={56}
+                height={32}
+                className="h-auto w-[56px]"
+              />
+            </Link>
 
             <p className="text-[14px] text-[var(--color-text-secondary)]">
               Negative Dialektik
