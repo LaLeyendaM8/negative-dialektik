@@ -1,21 +1,8 @@
-import { ClosingCta } from "@/app/components/home/closing-cta";
-import { Hero } from "@/app/components/home/hero";
-import { Mission } from "@/app/components/home/mission";
-import { NewReleases } from "@/app/components/home/new-releases";
-import { Program } from "@/app/components/home/program";
-import { SiteFooter } from "@/app/components/layout/site-footer";
-import { SiteHeader } from "@/app/components/layout/site-header";
-
-const navigation = [
-  { label: "Start", href: "/" },
-  { label: "Verlag", href: "/verlag" },
-  { label: "Katalog", href: "/katalog" },
-  { label: "Autoren", href: "/autoren" },
-  { label: "Texte", href: "/texte" },
-  { label: "Akademie", href: "/akademie" },
-  { label: "Stiftung", href: "/stiftung" },
-  { label: "Kontakt", href: "/kontakt" },
-];
+import { ClosingCta } from "./components/home/closing-cta";
+import { Hero } from "./components/home/hero";
+import { Mission } from "./components/home/mission";
+import { NewReleases } from "./components/home/new-releases";
+import { Program } from "./components/home/program";
 
 const books = [
   {
@@ -64,27 +51,14 @@ const programItems = [
   },
 ];
 
-const footerLinks = [
-  { label: "Verlag", href: "/verlag" },
-  { label: "Kontakt", href: "/kontakt" },
-  { label: "Impressum", href: "/impressum" },
-  { label: "Datenschutz", href: "/datenschutz" },
-];
-
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
-      <SiteHeader navigation={navigation} />
-
-      <main>
-        <Hero />
-        <Mission />
-        <NewReleases books={books} />
-        <Program items={programItems} />
-        <ClosingCta />
-      </main>
-
-      <SiteFooter links={footerLinks} />
-    </div>
+    <main>
+      <Hero />
+      <Mission />
+      <NewReleases books={books} />
+      <Program items={programItems} />
+      <ClosingCta />
+    </main>
   );
 }
