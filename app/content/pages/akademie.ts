@@ -1,20 +1,20 @@
 export const akademiePage = {
-  eyebrow: "Negative Dialektik",
+  eyebrow: "NEGATIVE DIALEKTIK",
   title: "Akademie",
   lead:
-    "Die Akademie entwickelt Programme, Seminare und institutionelle Formate zur Vermittlung deutscher Philosophie auf hohem begrifflichen Niveau.",
+    "Die Akademie von Negative Dialektik ist der institutionelle Ort fortgeschrittener Lehrformate zur systematischen Aneignung deutscher Philosophie im interdisziplinären Kontext.",
   intro: [
-    "Negative Dialektik verbindet verlegerische Arbeit mit philosophischer Ausbildung. Die Akademie ist der institutionelle Bereich, in dem Forschung, Lehre und editorische Vermittlung in konkrete Programme übersetzt werden.",
-    "Unsere Arbeit richtet sich an Studenten, Institutionen, kulturelle Programme und akademische Partner, die an einer präzisen Einführung in das deutsche Denken und seine europäischen Kontexte interessiert sind.",
+    "Die Angebote richten sich an Studierende, Universitäten und kulturelle Institutionen, die an einer präzisen Auseinandersetzung mit dem deutschen Denken interessiert sind.",
   ],
   sections: [
     {
       title: "Akademische Linien",
-      subtitle:
-        "Die Programme orientieren sich an klar umrissenen Feldern der philosophischen Tradition.",
+      paragraphs: [
+        "Die Programme orientieren sich an klar konturierten Feldern.",
+      ],
       groups: [
         {
-          title: "Ausbildung in deutscher Philosophie",
+          title: "Geist",
           items: [
             "Deutscher Idealismus",
             "Dialektik",
@@ -23,35 +23,38 @@ export const akademiePage = {
           ],
         },
         {
-          title: "Ausbildung in Ästhetik und Romantik",
+          title: "Bildung",
           items: [
-            "Philosophie der Kunst",
-            "Theorie der zeitgenössischen Kunst",
-            "Literatur der deutschen Romantik",
+            "Grundbegriffe politischer und sozialer Theorie",
+            "Theorien der Gewalt und der Strafe",
+            "Anarchismus",
+            "Philosophie der Geschlechter und Gender Studies",
+            "Systemtheorie",
+            "Rechtsphilosophie",
+            "Anthropozän",
           ],
         },
         {
-          title: "Ausbildung in europäischen Genealogien",
+          title: "Rose",
           items: [
-            "Grundlegende Texte der europäischen Tradition",
-            "Mystik und religiöses Denken",
-            "Tiefenpsychologie",
+            "Moderne Ästhetik",
+            "Deutsche Romantik",
+            "Philosophie der Kunst",
+            "Theorien der Gegenwartskunst",
           ],
         },
       ],
     },
     {
       title: "Formate",
-      subtitle:
-        "Die Akademie arbeitet mit unterschiedlichen Formaten, die je nach Partner und Kontext angepasst werden können.",
-      items: [
+      list: [
         "Seminare und Lektürekurse",
-        "Curricula und modulare Programme",
+        "Strukturierte Curricula und modulare Programme",
         "Vorträge und institutionelle Kooperationen",
         "Begleitende editorische Projekte",
       ],
       paragraphs: [
-        "Alle Programme folgen einem zentralen Kriterium: die begriffliche Dichte des deutschen Denkens nicht zu vereinfachen, sondern mit Klarheit, Präzision und methodischer Verantwortung zu vermitteln.",
+        "Alle Formate folgen einem zentralen Prinzip: die begriffliche Dichte des deutschen Denkens nicht zu reduzieren, sondern mit methodischer Präzision zu vermitteln.",
       ],
     },
   ],

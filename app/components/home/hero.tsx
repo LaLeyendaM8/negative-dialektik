@@ -68,14 +68,14 @@ export function Hero({ hero, focusItems }: HeroProps) {
         >
           <Link href={item.href} className="group block">
             <p
-              className="text-[30px] leading-[1.08] text-[var(--color-text)] transition-opacity group-hover:opacity-75"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {item.label}
-            </p>
-            <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
-              {item.description}
-            </p>
+  className="text-[28px] uppercase tracking-[0.05em] leading-[1.08] text-[var(--color-text)] transition-opacity group-hover:opacity-75 md:text-[30px]"
+  style={{ fontFamily: "var(--font-serif)" }}
+>
+  {item.label}
+</p>
+<p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
+  {item.description}
+</p>
           </Link>
         </div>
       ))}

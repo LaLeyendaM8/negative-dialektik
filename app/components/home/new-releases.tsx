@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "../layout/container";
 
@@ -7,6 +8,7 @@ type Book = {
   author: string;
   meta: string;
   coverTitle: string;
+  coverImage: string;
 };
 
 type NewReleasesProps = {
@@ -21,37 +23,40 @@ export function NewReleases({ books }: NewReleasesProps) {
           className="mb-16 text-[46px] leading-[1.05] md:text-[64px]"
           style={{ fontFamily: "var(--font-serif)" }}
         >
-          Reihen
+          Aktuelles Programm
         </h2>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">
           {books.map((book) => (
             <Link
               key={book.slug}
-              href={`/katalog/titel/${book.slug}`}
+              href="/programm"
               className="group block"
             >
-              <div className="mb-6 flex aspect-[4/5] items-center justify-center border border-[var(--color-border)] bg-[var(--color-card)] p-8 transition-colors group-hover:border-[var(--color-text)]">
-                <p
-                  className="max-w-[12ch] text-center text-[26px] leading-[1.35]"
-                  style={{ fontFamily: "var(--font-serif)" }}
-                >
-                  {book.coverTitle}
-                </p>
+              <div className="mb-6 overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]">
+                <div className="relative aspect-[4/5] w-full">
+                  <Image
+                    src={book.coverImage}
+                    alt={book.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                  />
+                </div>
               </div>
 
               <h3
-                className="mb-2 text-[26px]"
+                className="mb-2 text-[24px] leading-[1.15] md:text-[26px]"
                 style={{ fontFamily: "var(--font-serif)" }}
               >
                 {book.title}
               </h3>
 
-              <p className="mb-2 text-[16px] text-[var(--color-text-secondary)]">
+              <p className="mb-2 text-[15px] text-[var(--color-text-secondary)]">
                 {book.author}
               </p>
 
-              <p className="text-[14px] text-[var(--color-text-secondary)]">
+              <p className="text-[14px] leading-[1.6] text-[var(--color-text-secondary)]">
                 {book.meta}
               </p>
             </Link>

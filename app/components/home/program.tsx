@@ -25,15 +25,15 @@ export function Program({ program }: ProgramProps) {
           {program.items.map((item) => (
             <div key={item.title}>
               <h3
-                className="mb-4 text-[28px]"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {item.title}
-              </h3>
+  className="mb-4 text-[24px] uppercase tracking-[0.06em] md:text-[26px]"
+  style={{ fontFamily: "var(--font-serif)" }}
+>
+  {item.title}
+</h3>
 
-              <p className="text-[17px] leading-[1.7] text-[var(--color-text-secondary)]">
-                {item.description}
-              </p>
+<p className="text-[16px] leading-[1.7] text-[var(--color-text-secondary)]">
+  {item.description}
+</p>
             </div>
           ))}
         </div>

@@ -14,7 +14,7 @@ export const kontaktPage = {
       title: "Bereiche",
       subtitle: "Anfragen können sich unter anderem auf folgende Felder beziehen.",
       items: [
-        "Verlag und Katalog",
+        "Verlag und programm",
         "Übersetzungsprojekte",
         "Akademische Kooperationen",
         "Stiftungs- und Bildungsprojekte",

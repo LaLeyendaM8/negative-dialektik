@@ -6,48 +6,25 @@ export default function ImpressumPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="Negative Dialektik"
+        eyebrow="NEGATIVE DIALEKTIK"
         title="Impressum"
-        lead="Angaben gemäß den geltenden gesetzlichen Informationspflichten."
+        lead="Angaben gemäß § 5 TMG"
       />
 
       <RichText>
         <p>
-          <strong>Negative Dialektik</strong>
+          Negative Dialektik<br />
+          Institut für deutsche Philosophie<br />
+          Tunja, Kolumbien
         </p>
 
         <p>
-          [Name des Verantwortlichen]
-          <br />
-          [Straße und Hausnummer]
-          <br />
-          [PLZ Ort]
-          <br />
-          [Land]
-        </p>
-
-        <p>
-          E-Mail: [info@negative-dialektik.com]
-          <br />
-          Telefon: [Telefonnummer]
+          E-Mail: info@negative-dialektik.com
         </p>
 
         <h2>Verantwortlich für den Inhalt</h2>
-
         <p>
-          [Name des Verantwortlichen]
-          <br />
-          [Straße und Hausnummer]
-          <br />
-          [PLZ Ort]
-        </p>
-
-        <h2>Hinweis</h2>
-
-        <p>
-          Diese Seite dient in der aktuellen Relaunch-Phase als strukturelle
-          Vorlage. Die endgültigen rechtlichen Angaben müssen vor der
-          Veröffentlichung vollständig geprüft und ergänzt werden.
+          Josef Hackspacher
         </p>
       </RichText>
     </PageShell>

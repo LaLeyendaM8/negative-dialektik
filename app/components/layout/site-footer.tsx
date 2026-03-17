@@ -17,7 +17,7 @@ export function SiteFooter({ links }: SiteFooterProps) {
       <Container>
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div>
-            <Link href="/" className="mb-3 block shrink-0">
+            <Link href="/" className="mb-3 block shrink-0 text-[var(--color-text)]">
               <Image
                 src="/logo/logo.svg"
                 alt="Negative Dialektik"
@@ -47,7 +47,7 @@ export function SiteFooter({ links }: SiteFooterProps) {
 
         <div className="mt-10 border-t border-[var(--color-border)] pt-8">
           <p className="text-center text-[12px] text-[var(--color-text-secondary)]">
-            © 2024 Negative Dialektik. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Negative Dialektik. Alle Rechte vorbehalten.
           </p>
         </div>
       </Container>

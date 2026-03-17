@@ -13,23 +13,27 @@ export default function StiftungPage() {
       />
 
       <RichText>
-        {stiftungPage.content.paragraphs.map((paragraph, index) => (
+        {stiftungPage.intro.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
         ))}
 
-        <h2>{stiftungPage.content.goalTitle}</h2>
-        {stiftungPage.content.goalParagraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+        {stiftungPage.sections.map((section) => (
+          <div key={section.title}>
+            <h2>{section.title}</h2>
 
-        <h2>{stiftungPage.content.cooperationTitle}</h2>
-        {stiftungPage.content.cooperationParagraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+            {"paragraphs" in section &&
+              section.paragraphs?.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
 
-        <h2>{stiftungPage.content.perspectiveTitle}</h2>
-        {stiftungPage.content.perspectiveParagraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+            {"list" in section && section.list && (
+              <ul>
+                {section.list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
         ))}
       </RichText>
     </PageShell>

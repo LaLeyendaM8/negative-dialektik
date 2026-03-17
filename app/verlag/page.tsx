@@ -13,28 +13,27 @@ export default function VerlagPage() {
       />
 
       <RichText>
-        {verlagPage.content.intro.map((paragraph, index) => (
+        {verlagPage.intro.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
         ))}
 
-        <h2>{verlagPage.content.editorialTitle}</h2>
+        {verlagPage.sections.map((section) => (
+          <div key={section.title}>
+            <h2>{section.title}</h2>
 
-        {verlagPage.content.editorialParagraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
+            {"paragraphs" in section &&
+              section.paragraphs?.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
 
-        <h2>{verlagPage.content.focusTitle}</h2>
-
-        <ul>
-          {verlagPage.content.focusItems.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-
-        <h2>{verlagPage.content.methodTitle}</h2>
-
-        {verlagPage.content.methodParagraphs.map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+            {"list" in section && section.list && (
+              <ul>
+                {section.list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
         ))}
       </RichText>
     </PageShell>

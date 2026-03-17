@@ -2,24 +2,24 @@ import { PageHero } from "../components/shared/page-hero";
 import { PageShell } from "../components/shared/page-shell";
 import { RichText } from "../components/shared/rich-text";
 import { SectionHeading } from "../components/ui/section-heading";
-import { katalogPage } from "../content/pages/katalog";
+import { programmPage } from "../content/pages/programm";
 
-export default function KatalogPage() {
+export default function ProgramPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={katalogPage.eyebrow}
-        title={katalogPage.title}
-        lead={katalogPage.lead}
+        eyebrow={programmPage.eyebrow}
+        title={programmPage.title}
+        lead={programmPage.lead}
       />
 
       <RichText>
-        {katalogPage.intro.map((paragraph, index) => (
+        {programmPage.intro.map((paragraph, index) => (
           <p key={index}>{paragraph}</p>
         ))}
       </RichText>
 
-      {katalogPage.sections.map((section) => (
+      {programmPage.sections.map((section) => (
         <section key={section.title} className="mt-16">
           <SectionHeading title={section.title} subtitle={section.subtitle} />
 

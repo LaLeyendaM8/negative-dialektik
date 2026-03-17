@@ -1,10 +1,10 @@
-export const katalogPage = {
+export const programmPage = {
   eyebrow: "Negative Dialektik",
-  title: "Katalog",
+  title: "programm",
   lead:
-    "Der Katalog von Negative Dialektik versammelt Editionen, Reihen und langfristige editorische Linien aus dem Feld der deutschen Philosophie.",
+    "Der programm von Negative Dialektik versammelt Editionen, Reihen und langfristige editorische Linien aus dem Feld der deutschen Philosophie.",
   intro: [
-    "Unser Katalog ist nicht als lose Sammlung einzelner Titel gedacht, sondern als strukturierter editorischer Zusammenhang. Jede Reihe folgt einem begrifflichen Kriterium und erschließt Texte, die in ihrem jeweiligen Feld orientierend wirken.",
+    "Unser programm ist nicht als lose Sammlung einzelner Titel gedacht, sondern als strukturierter editorischer Zusammenhang. Jede Reihe folgt einem begrifflichen Kriterium und erschließt Texte, die in ihrem jeweiligen Feld orientierend wirken.",
   ],
   sections: [
     {
@@ -37,7 +37,7 @@ export const katalogPage = {
       subtitle:
         "Die Titel erscheinen als präzise vorbereitete Editionen, deren editorische Form langfristig mit dem Verlag mitwachsen kann.",
       paragraphs: [
-        "In der ersten Ausbaustufe wird der Katalog schrittweise um Neuerscheinungen, Reihenübersichten und spätere Detailseiten für einzelne Titel ergänzt. Die Struktur ist bereits darauf angelegt, zukünftige Veröffentlichungen klar und konsistent aufzunehmen.",
+        "In der ersten Ausbaustufe wird der programm schrittweise um Neuerscheinungen, Reihenübersichten und spätere Detailseiten für einzelne Titel ergänzt. Die Struktur ist bereits darauf angelegt, zukünftige Veröffentlichungen klar und konsistent aufzunehmen.",
       ],
     },
   ],
