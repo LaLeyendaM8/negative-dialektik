@@ -34,12 +34,12 @@ export function NewReleases({ books }: NewReleasesProps) {
               className="group block"
             >
               <div className="mb-6 overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]">
-                <div className="relative aspect-[4/5] w-full">
+                <div className="relative aspect-[4/5] w-full bg-[var(--color-card)]">
                   <Image
                     src={book.coverImage}
                     alt={book.title}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+                    className="object-contain transition-transform duration-500 group-hover:scale-[1.015]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
                   />
                 </div>

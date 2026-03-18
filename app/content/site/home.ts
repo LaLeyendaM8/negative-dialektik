@@ -33,6 +33,10 @@ export const homeMission = {
     "Der Verlag von Negative Dialektik ist ein programmbasierter Fachverlag für deutsche Philosophie, der durch kuratierte Reihen und philologisch fundierte Übersetzungen Referenzausgaben im spanischsprachigen Raum verankert.",
   ],
   keywords: ["Kritische Theorie", "Sozialphilosophie", "Ästhetik"],
+  link: {
+    label: "Zum Verlag",
+    href: "/verlag",
+  },
 };
 
 export const homeProgram = {

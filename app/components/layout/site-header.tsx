@@ -19,13 +19,11 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
     <div className="flex items-center justify-between py-6 md:py-8">
       <Link href="/" className="shrink-0 text-[var(--color-text)]">
         <img
-          src="/logo/logo.svg"
-          alt="Negative Dialektik"
-          width={56}
-          height={32}
-          className="h-auto w-[56px] md:w-[64px]"
-        />
-      </Link>
+    src="/logo/logo.svg"
+    alt="Negative Dialektik"
+    className="hidden h-auto w-[56px] md:block md:w-[64px] dark:invert"
+  />
+</Link>
 
       <nav className="hidden items-center gap-8 md:flex lg:gap-12">
         {navigation.map((item) => (

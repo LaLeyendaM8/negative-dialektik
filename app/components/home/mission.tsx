@@ -1,10 +1,15 @@
 import { Container } from "../layout/container";
+import Link from "next/link";
 
 type MissionProps = {
   mission: {
     title: string;
     paragraphs: string[];
     keywords: string[];
+    link?: {
+      label: string;
+      href: string;
+    };
   };
 };
 
@@ -37,10 +42,21 @@ export function Mission({ mission }: MissionProps) {
             ))}
 
             <div className="flex flex-wrap gap-6 text-[13px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-              {mission.keywords.map((keyword) => (
-                <span key={keyword}>{keyword}</span>
-              ))}
-            </div>
+  {mission.keywords.map((keyword) => (
+    <span key={keyword}>{keyword}</span>
+  ))}
+</div>
+
+{mission.link && (
+  <div className="mt-8">
+    <Link
+      href={mission.link.href}
+      className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4 transition-opacity hover:opacity-70"
+    >
+      {mission.link.label}
+    </Link>
+  </div>
+)}
           </div>
         </div>
       </Container>

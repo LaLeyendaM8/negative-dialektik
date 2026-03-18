@@ -24,9 +24,12 @@ export function Hero({ hero, focusItems }: HeroProps) {
       <Container>
         <div className="grid grid-cols-1 gap-16 xl:grid-cols-[1.05fr_0.95fr] xl:gap-20">
           <div className="max-w-[900px]">
-            <p className="mb-7 text-[12px] uppercase tracking-[0.18em] text-[var(--color-text-secondary)]">
-              {hero.eyebrow}
-            </p>
+            <p
+  className="mb-5 text-[18px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)] md:text-[20px]"
+  style={{ fontFamily: "var(--font-serif)" }}
+>
+  {hero.eyebrow}
+</p>
 
             <h1
               className="mb-9 max-w-[11ch] text-[52px] leading-[0.95] tracking-[-0.04em] sm:text-[60px] lg:text-[70px] xl:text-[78px]"
