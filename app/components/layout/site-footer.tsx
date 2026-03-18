@@ -18,7 +18,7 @@ export function SiteFooter({ links }: SiteFooterProps) {
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div>
             <Link href="/" className="mb-3 block shrink-0 text-[var(--color-text)]">
-              <Image
+              <img
                 src="/logo/logo.svg"
                 alt="Negative Dialektik"
                 width={56}

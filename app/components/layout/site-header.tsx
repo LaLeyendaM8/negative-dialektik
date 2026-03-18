@@ -18,13 +18,12 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
   <Container>
     <div className="flex items-center justify-between py-6 md:py-8">
       <Link href="/" className="shrink-0 text-[var(--color-text)]">
-        <Image
+        <img
           src="/logo/logo.svg"
           alt="Negative Dialektik"
           width={56}
           height={32}
           className="h-auto w-[56px] md:w-[64px]"
-          priority
         />
       </Link>
 
