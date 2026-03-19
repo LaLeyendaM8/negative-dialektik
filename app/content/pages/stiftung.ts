@@ -19,7 +19,7 @@ export const stiftungPage = {
     {
       title: "Leitgedanke",
       paragraphs: [
-        "Die Stiftung verfolgt das Ziel, philosophisches Denken nicht zu popularisieren, sondern zugänglich zu machen — ohne begriffliche Vereinfachung.",
+        "Die Stiftung verfolgt das Ziel, philosophisches Denken nicht zu popularisieren, sondern zugänglich zu machen — ohne begriffliche Reduktion.",
       ],
     },
   ],

@@ -1,6 +1,6 @@
 export const impressumPage = {
   title: "Impressum",
-  lead: "Angaben gemäß § 5 TMG",
+  lead: "Angaben zu Anbieter und Kontakt",
   paragraphs: [
     "Negative Dialektik\nInstitut für deutsche Philosophie\nTunja, Kolumbien",
     "E-Mail: info@negative-dialektik.com",

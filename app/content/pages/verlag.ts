@@ -1,16 +1,17 @@
 export const verlagPage = {
-  
   title: "Verlag",
   lead:
     "Negative Dialektik übersetzt, ediert und publiziert zentrale Werke der deutschen Philosophie ins Spanische.",
+
   intro: [
-    "Der Verlag von Negative Dialektik ist ein programmbasierter Fachverlag für deutsche Philosophie, der durch kuratierte Reihen und philologisch fundierte Übersetzungen Referenzausgaben im spanischsprachigen Raum verankert.",
+    "Der Verlag ist ein programmbasierter Fachverlag für deutsche Philosophie, der durch kuratierte Reihen und philologisch fundierte Übersetzungen Referenzausgaben im spanischsprachigen Raum etabliert.",
   ],
+
   sections: [
     {
       title: "Definition",
       paragraphs: [
-        "Negative Dialektik übersetzt, ediert und publiziert zentrale Werke der deutschen Philosophie in spanischer Sprache.",
+        "Negative Dialektik übersetzt, ediert und publiziert zentrale Werke der deutschen Philosophie ins Spanische.",
       ],
     },
     {

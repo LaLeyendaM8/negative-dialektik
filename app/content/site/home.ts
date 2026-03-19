@@ -64,7 +64,7 @@ export const homeBooks = [
     slug: "rose",
     title: "ROSE",
     description:
-        "Arbeiten zur Ästhetik, Kunstphilosophie und deutschen Romantik.",
+        "Arbeiten zur Ästhetik, Kunstphilosophie und zur deutschen Romantik.",
     coverTitle: "Rose",
     coverImage: "/images/books/rose.jpeg",
   },
@@ -103,7 +103,7 @@ export const homeStiftung = {
 
 export const homeClosing = {
   title: "NEGATIVE DIALEKTIK",
-  paragraphs: ["Institut für deutsche Philosophie · Tunja, Colombia"],
+  paragraphs: ["Institut für deutsche Philosophie · Tunja, Kolumbien"],
   links: [
     {
       label: "Impressum",

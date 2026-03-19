@@ -2,7 +2,7 @@ export const akademiePage = {
  
   title: "Akademie",
   lead:
-    "Die Akademie von Negative Dialektik ist der institutionelle Ort fortgeschrittener Lehrformate zur systematischen Aneignung deutscher Philosophie im interdisziplinären Kontext.",
+    "Die Akademie von Negative Dialektik ist der institutionelle Ort fortgeschrittener Lehrformate für die systematische Aneignung deutscher Philosophie im interdisziplinären Kontext.",
   intro: [
     "Die Angebote richten sich an Studierende, Universitäten und kulturelle Institutionen, die an einer präzisen Auseinandersetzung mit dem deutschen Denken interessiert sind.",
   ],
