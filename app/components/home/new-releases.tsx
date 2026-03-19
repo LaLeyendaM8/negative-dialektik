@@ -52,13 +52,6 @@ export function NewReleases({ books }: NewReleasesProps) {
                 {book.title}
               </h3>
 
-              <p className="mb-2 text-[15px] text-[var(--color-text-secondary)]">
-                {book.author}
-              </p>
-
-              <p className="text-[14px] leading-[1.6] text-[var(--color-text-secondary)]">
-                {book.meta}
-              </p>
             </Link>
           ))}
         </div>

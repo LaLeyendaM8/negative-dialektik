@@ -41,10 +41,8 @@ export function Mission({ mission }: MissionProps) {
               </p>
             ))}
 
-            <div className="flex flex-wrap gap-6 text-[13px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-  {mission.keywords.map((keyword) => (
-    <span key={keyword}>{keyword}</span>
-  ))}
+            <div className="text-[13px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
+  {mission.keywords.join(" · ")}
 </div>
 
 {mission.link && (
