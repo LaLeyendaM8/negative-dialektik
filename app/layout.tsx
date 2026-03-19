@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
 import { SiteFooter } from "./components/layout/site-footer";
 import { SiteHeader } from "./components/layout/site-header";
-import { footerLinks } from "./content/site/footer";
+import { footerContent } from "./content/site/footer";
 import { navigation } from "./content/site/navigation";
 import "./globals.css";
 
@@ -38,7 +38,11 @@ export default function RootLayout({
         <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
           <SiteHeader navigation={navigation} />
           {children}
-          <SiteFooter links={footerLinks} />
+          <SiteFooter
+  links={footerContent.links}
+  brand={footerContent.brand}
+  rights={footerContent.rights}
+/>
         </div>
       </body>
     </html>
