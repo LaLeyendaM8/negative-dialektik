@@ -39,54 +39,36 @@ export const homeMission = {
   },
 };
 
-export const homeProgram = {
-  title: "Aktuelles Programm",
-  items: [
-    {
-      title: "GEIST",
-      description:
-        "Maßgebliche Arbeiten der Gegenwartsphilosophie, Kritischen Theorie sowie der Sozial- und Politischen Philosophie.",
-    },
-    {
-      title: "BILDUNG",
-      description:
-        "Systematische Einführungen in zentrale Begriffe, Autoren und Problemfelder der deutschen und europäischen Tradition.",
-    },
-    {
-      title: "ROSE",
-      description:
-        "Arbeiten zur Ästhetik, Kunstphilosophie und deutschen Romantik.",
-    },
-    {
-      title: "SCHRIFTEN DES INSTITUTS",
-      description:
-        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beiträge von Negative Dialektik.",
-    },
-  ],
-};
-
 export const homeBooks = [
   {
     slug: "geist",
     title: "GEIST",
+    description:
+        "Maßgebliche Arbeiten der Gegenwartsphilosophie, Kritischen Theorie sowie der Sozial- und Politischen Philosophie.",
     coverTitle: "Geist",
     coverImage: "/images/books/geist.jpeg",
   },
   {
     slug: "bildung",
     title: "BILDUNG",
+    description:
+        "Systematische Einführungen in zentrale Begriffe, Autoren und Problemfelder der deutschen und europäischen Tradition.",
     coverTitle: "Bildung",
     coverImage: "/images/books/bildung.jpeg",
   },
   {
     slug: "rose",
     title: "ROSE",
+    description:
+        "Arbeiten zur Ästhetik, Kunstphilosophie und deutschen Romantik.",
     coverTitle: "Rose",
     coverImage: "/images/books/rose.jpeg",
   },
   {
     slug: "schriften-des-instituts",
     title: "SCHRIFTEN DES INSTITUTS",
+    description:
+        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beiträge von Negative Dialektik.",
     coverTitle: "Schriften des Instituts",
     coverImage: "/images/books/schriften-des-instituts.jpeg",
   },

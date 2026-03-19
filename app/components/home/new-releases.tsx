@@ -5,6 +5,7 @@ import { Container } from "../layout/container";
 type Book = {
   slug: string;
   title: string;
+  description:string;
   coverTitle: string;
   coverImage: string;
 };
@@ -44,11 +45,15 @@ export function NewReleases({ books }: NewReleasesProps) {
               </div>
 
               <h3
-                className="mb-2 text-[24px] leading-[1.15] md:text-[26px]"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {book.title}
-              </h3>
+  className="mb-3 text-[24px] leading-[1.15] md:text-[26px]"
+  style={{ fontFamily: "var(--font-serif)" }}
+>
+  {book.title}
+</h3>
+
+<p className="max-w-[28ch] text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">
+  {book.description}
+</p>
 
             </Link>
           ))}
