@@ -3,12 +3,13 @@ import { PageShell } from "../../components/shared/page-shell";
 import { RichText } from "../../components/shared/rich-text";
 import { getContent } from "@/lib/getContent";
 
-export default function StiftungPage({
+export default async function StiftungPage({
   params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  const { stiftungPage } = getContent(params.lang);
+  const { lang } = await params;
+  const { stiftungPage } = getContent(lang);
 
   return (
     <PageShell>

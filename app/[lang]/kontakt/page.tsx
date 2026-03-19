@@ -3,12 +3,13 @@ import { PageShell } from "../../components/shared/page-shell";
 import { submitContactForm, subscribeNewsletter } from "./actions";
 import { getContent } from "@/lib/getContent";
 
-export default function KontaktPage({
+export default async function KontaktPage({
   params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  const { kontaktPage } = getContent(params.lang);
+  const { lang } = await params;
+  const { kontaktPage } = getContent(lang);
 
   return (
     <PageShell>

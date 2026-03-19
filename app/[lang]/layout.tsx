@@ -24,29 +24,26 @@ export const metadata: Metadata = {
     "Negative Dialektik ist ein Institut für deutsche Philosophie. Verlag, Akademie und Stiftung bilden eine gemeinsame editorische und institutionelle Struktur.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-  params: { lang: string };
-}>) {
-  const { navigation, footerContent, uiText } = getContent(params.lang);
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  const { navigation, footerContent, uiText } = getContent(lang);
 
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <body
         className={`${inter.variable} ${cormorant.variable} antialiased bg-[var(--color-background)] text-[var(--color-text)]`}
       >
         <div className="min-h-screen bg-[var(--color-background)] text-[var(--color-text)]">
-          <SiteHeader
-            lang={params.lang}
-            navigation={navigation}
-            uiText={uiText}
-          />
+          <SiteHeader lang={lang} navigation={navigation} uiText={uiText} />
           {children}
           <SiteFooter
-            lang={params.lang}
+            lang={lang}
             links={footerContent.links}
             brand={footerContent.brand}
             rights={footerContent.rights}

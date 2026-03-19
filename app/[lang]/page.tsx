@@ -6,11 +6,13 @@ import { NewReleases } from "../components/home/new-releases";
 import { StiftungPreview } from "../components/home/stiftung-preview";
 import { getContent } from "@/lib/getContent";
 
-export default function HomePage({
+export default async function HomePage({
   params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
+  const { lang } = await params;
+
   const {
     homeAcademy,
     homeProgram,
@@ -20,20 +22,16 @@ export default function HomePage({
     homeHero,
     homeMission,
     homeStiftung,
-  } = getContent(params.lang);
+  } = getContent(lang);
 
   return (
     <main>
-      <Hero lang={params.lang} hero={homeHero} focusItems={homeFocusItems} />
-      <Mission lang={params.lang} mission={homeMission} />
-      <NewReleases
-        lang={params.lang}
-        books={homeBooks}
-        title={homeProgram.title}
-      />
-      <AcademyPreview lang={params.lang} academy={homeAcademy} />
-      <StiftungPreview lang={params.lang} stiftung={homeStiftung} />
-      <ClosingCta lang={params.lang} closing={homeClosing} />
+      <Hero lang={lang} hero={homeHero} focusItems={homeFocusItems} />
+      <Mission lang={lang} mission={homeMission} />
+      <NewReleases lang={lang} books={homeBooks} title={homeProgram.title} />
+      <AcademyPreview lang={lang} academy={homeAcademy} />
+      <StiftungPreview lang={lang} stiftung={homeStiftung} />
+      <ClosingCta lang={lang} closing={homeClosing} />
     </main>
   );
 }

@@ -4,12 +4,13 @@ import { RichText } from "../../components/shared/rich-text";
 import { SectionHeading } from "../../components/ui/section-heading";
 import { getContent } from "@/lib/getContent";
 
-export default function ProgramPage({
+export default async function ProgramPage({
   params,
 }: {
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  const { programmPage } = getContent(params.lang);
+  const { lang } = await params;
+  const { programmPage } = getContent(lang);
 
   return (
     <PageShell>
