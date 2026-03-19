@@ -25,18 +25,18 @@ export function Hero({ hero, focusItems }: HeroProps) {
         <div className="grid grid-cols-1 gap-16 xl:grid-cols-[1.05fr_0.95fr] xl:gap-20">
           <div className="max-w-[900px]">
             <p
-  className="mb-5 text-[18px] uppercase tracking-[0.16em] text-[var(--color-text-secondary)] md:text-[20px]"
+  className="mb-4 text-[34px] leading-[0.98] tracking-[-0.03em] text-[var(--color-text)] sm:text-[44px] md:text-[58px]"
   style={{ fontFamily: "var(--font-serif)" }}
 >
   {hero.eyebrow}
 </p>
 
             <h1
-              className="mb-9 max-w-[11ch] text-[52px] leading-[0.95] tracking-[-0.04em] sm:text-[60px] lg:text-[70px] xl:text-[78px]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {hero.title}
-            </h1>
+  className="mb-8 max-w-[16ch] text-[20px] leading-[1.25] tracking-[-0.01em] text-[var(--color-text-secondary)] sm:text-[24px] md:text-[28px]"
+  style={{ fontFamily: "var(--font-serif)" }}
+>
+  {hero.title}
+</h1>
 
             <p className="mb-10 max-w-[720px] text-[19px] leading-[1.7] md:text-[20px]">
               {hero.lead}
