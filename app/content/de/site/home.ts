@@ -3,9 +3,10 @@ export const homeHero = {
   title: "Institut für deutsche Philosophie",
   lead:
     "Negative Dialektik ist ein Institut mit modularer Struktur, das Verlag, Akademie und Stiftung in einer gemeinsamen Infrastruktur der systematischen Vermittlung deutscher Philosophie bündelt.",
+  panelLabel: "Institutionelle Struktur",
   quote: {
-    source: "Christoph Menke",
-    text: "»›Negative Dialektik‹ ist ein junges, ernsthaftes und philosophisch äußerst ambitioniertes Projekt, das die Vermittlung der deutschen Philosophie, vor allem der kritischen Theorie, in den spanischsprachigen Raum mit großer Sorgfalt betreibt. In der gegenwärtigen Lage, in der das kritische Denken durch Ökonomisierung wie Autoritarismus bedroht ist, ist dieses mutige Vorhaben ein Zeichen des Widerstands und der Hoffnung. Ich wünsche dem Institut Glück und Erfolg.«",
+  source: "Christoph Menke",
+  text: "»›Negative Dialektik‹ ist ein junges, ernsthaftes und philosophisch äußerst ambitioniertes Projekt, das die Vermittlung der deutschen Philosophie, vor allem der kritischen Theorie, in den spanischsprachigen Raum mit großer Sorgfalt betreibt. In der gegenwärtigen Lage, in der das kritische Denken durch Ökonomisierung wie Autoritarismus bedroht ist, ist dieses mutige Vorhaben ein Zeichen des Widerstands und der Hoffnung. Ich wünsche dem Institut Glück und Erfolg.«",
   },
 };
 

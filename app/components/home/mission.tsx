@@ -2,6 +2,7 @@ import { Container } from "../layout/container";
 import Link from "next/link";
 
 type MissionProps = {
+  lang: string;
   mission: {
     title: string;
     paragraphs: string[];
@@ -13,7 +14,7 @@ type MissionProps = {
   };
 };
 
-export function Mission({ mission }: MissionProps) {
+export function Mission({ lang, mission }: MissionProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[120px] md:py-[140px]">
       <Container>
@@ -42,19 +43,19 @@ export function Mission({ mission }: MissionProps) {
             ))}
 
             <div className="text-[13px] uppercase tracking-[0.14em] text-[var(--color-text-secondary)]">
-  {mission.keywords.join(" · ")}
-</div>
+              {mission.keywords.join(" · ")}
+            </div>
 
-{mission.link && (
-  <div className="mt-8">
-    <Link
-      href={mission.link.href}
-      className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4 transition-opacity hover:opacity-70"
-    >
-      {mission.link.label}
-    </Link>
-  </div>
-)}
+            {mission.link && (
+              <div className="mt-8">
+                <Link
+                  href={`/${lang}${mission.link.href}`}
+                  className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4 transition-opacity hover:opacity-70"
+                >
+                  {mission.link.label}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </Container>

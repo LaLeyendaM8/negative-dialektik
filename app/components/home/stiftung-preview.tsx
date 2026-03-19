@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "../layout/container";
 
 type StiftungPreviewProps = {
+  lang: string;
   stiftung: {
     title: string;
     paragraphs: string[];
@@ -12,7 +13,7 @@ type StiftungPreviewProps = {
   };
 };
 
-export function StiftungPreview({ stiftung }: StiftungPreviewProps) {
+export function StiftungPreview({ lang, stiftung }: StiftungPreviewProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[120px] md:py-[140px]">
       <Container>
@@ -43,7 +44,7 @@ export function StiftungPreview({ stiftung }: StiftungPreviewProps) {
             ))}
 
             <Link
-              href={stiftung.link.href}
+              href={`/${lang}${stiftung.link.href}`}
               className="text-[16px] underline underline-offset-4"
             >
               {stiftung.link.label}

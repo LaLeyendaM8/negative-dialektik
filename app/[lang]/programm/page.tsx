@@ -1,17 +1,19 @@
-import { PageHero } from "../components/shared/page-hero";
-import { PageShell } from "../components/shared/page-shell";
-import { RichText } from "../components/shared/rich-text";
-import { SectionHeading } from "../components/ui/section-heading";
-import { programmPage } from "../content/pages/programm";
+import { PageHero } from "../../components/shared/page-hero";
+import { PageShell } from "../../components/shared/page-shell";
+import { RichText } from "../../components/shared/rich-text";
+import { SectionHeading } from "../../components/ui/section-heading";
+import { getContent } from "@/lib/getContent";
 
-export default function ProgramPage() {
+export default function ProgramPage({
+  params,
+}: {
+  params: { lang: string };
+}) {
+  const { programmPage } = getContent(params.lang);
+
   return (
     <PageShell>
-      <PageHero
-        
-        title={programmPage.title}
-        lead={programmPage.lead}
-      />
+      <PageHero title={programmPage.title} lead={programmPage.lead} />
 
       <RichText>
         {programmPage.intro.map((paragraph, index) => (
@@ -27,7 +29,7 @@ export default function ProgramPage() {
             {"blocks" in section &&
               section.blocks &&
               section.blocks.map((block) => (
-                <div key={block.title}  className="mb-10 last:mb-0">
+                <div key={block.title} className="mb-10 last:mb-0">
                   <h3>{block.title}</h3>
                   {block.paragraphs.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>

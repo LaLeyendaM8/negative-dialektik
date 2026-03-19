@@ -1,5 +1,5 @@
 "use client";
-import { uiText } from "../../content/site/ui";
+
 import { useState } from "react";
 import Link from "next/link";
 
@@ -8,11 +8,22 @@ type NavigationItem = {
   href: string;
 };
 
-type MobileNavProps = {
-  navigation: NavigationItem[];
+type UiText = {
+  mobileNav: {
+    open: string;
+    close: string;
+    openAria: string;
+    closeAria: string;
+  };
 };
 
-export function MobileNav({ navigation }: MobileNavProps) {
+type MobileNavProps = {
+  lang: string;
+  navigation: NavigationItem[];
+  uiText: UiText;
+};
+
+export function MobileNav({ lang, navigation, uiText }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,9 +31,11 @@ export function MobileNav({ navigation }: MobileNavProps) {
       <button
         type="button"
         aria-expanded={isOpen}
-        aria-label={isOpen ? uiText.mobileNav.closeAria : uiText.mobileNav.openAria}
+        aria-label={
+          isOpen ? uiText.mobileNav.closeAria : uiText.mobileNav.openAria
+        }
         onClick={() => setIsOpen((prev) => !prev)}
-        className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em] text-[var(--color-text)] transition-opacity hover:opacity-70 md:hidden"
+        className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em] md:hidden"
       >
         {isOpen ? uiText.mobileNav.close : uiText.mobileNav.open}
       </button>
@@ -35,7 +48,7 @@ export function MobileNav({ navigation }: MobileNavProps) {
                 type="button"
                 aria-label={uiText.mobileNav.closeAria}
                 onClick={() => setIsOpen(false)}
-                className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em] text-[var(--color-text)] transition-opacity hover:opacity-70"
+                className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em]"
               >
                 {uiText.mobileNav.close}
               </button>
@@ -45,7 +58,7 @@ export function MobileNav({ navigation }: MobileNavProps) {
               {navigation.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={`/${lang}${item.href}`}
                   onClick={() => setIsOpen(false)}
                   className="text-[32px] leading-[1.05] text-[var(--color-text)]"
                   style={{ fontFamily: "var(--font-serif)" }}

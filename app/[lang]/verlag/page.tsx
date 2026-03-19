@@ -1,16 +1,18 @@
-import { PageHero } from "../components/shared/page-hero";
-import { PageShell } from "../components/shared/page-shell";
-import { RichText } from "../components/shared/rich-text";
-import { verlagPage } from "../content/pages/verlag";
+import { PageHero } from "../../components/shared/page-hero";
+import { PageShell } from "../../components/shared/page-shell";
+import { RichText } from "../../components/shared/rich-text";
+import { getContent } from "@/lib/getContent";
 
-export default function VerlagPage() {
+export default function VerlagPage({
+  params,
+}: {
+  params: { lang: string };
+}) {
+  const { verlagPage } = getContent(params.lang);
+
   return (
     <PageShell>
-      <PageHero
-        
-        title={verlagPage.title}
-        lead={verlagPage.lead}
-      />
+      <PageHero title={verlagPage.title} lead={verlagPage.lead} />
 
       <RichText>
         {verlagPage.intro.map((paragraph, index) => (
@@ -18,7 +20,7 @@ export default function VerlagPage() {
         ))}
 
         {verlagPage.sections.map((section) => (
-          <div key={section.title}  className="mb-10 last:mb-0">
+          <div key={section.title} className="mb-10 last:mb-0">
             <h2>{section.title}</h2>
 
             {"paragraphs" in section &&

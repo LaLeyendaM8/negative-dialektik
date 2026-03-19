@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "../layout/container";
 
 type ClosingCtaProps = {
+  lang: string;
   closing: {
     title: string;
     paragraphs?: string[];
@@ -12,7 +13,7 @@ type ClosingCtaProps = {
   };
 };
 
-export function ClosingCta({ closing }: ClosingCtaProps) {
+export function ClosingCta({ lang, closing }: ClosingCtaProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[110px]">
       <Container>
@@ -37,7 +38,7 @@ export function ClosingCta({ closing }: ClosingCtaProps) {
             {closing.links.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={`/${lang}${link.href}`}
                 className="text-[16px] underline underline-offset-4"
               >
                 {link.label}

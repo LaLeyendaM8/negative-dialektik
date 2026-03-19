@@ -1,15 +1,18 @@
-import { PageHero } from "../components/shared/page-hero";
-import { PageShell } from "../components/shared/page-shell";
+import { PageHero } from "../../components/shared/page-hero";
+import { PageShell } from "../../components/shared/page-shell";
 import { submitContactForm, subscribeNewsletter } from "./actions";
-import { kontaktPage } from "../content/pages/kontakt";
+import { getContent } from "@/lib/getContent";
 
-export default function KontaktPage() {
+export default function KontaktPage({
+  params,
+}: {
+  params: { lang: string };
+}) {
+  const { kontaktPage } = getContent(params.lang);
+
   return (
     <PageShell>
-      <PageHero
-  title={kontaktPage.title}
-  lead={kontaktPage.lead}
-/>
+      <PageHero title={kontaktPage.title} lead={kontaktPage.lead} />
 
       <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <section>
@@ -17,7 +20,7 @@ export default function KontaktPage() {
             className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
             style={{ fontFamily: "var(--font-serif)" }}
           >
-           {kontaktPage.form.title}
+            {kontaktPage.form.title}
           </h2>
 
           <form action={submitContactForm} className="space-y-6">
@@ -42,7 +45,7 @@ export default function KontaktPage() {
                 htmlFor="email"
                 className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
               >
-               {kontaktPage.form.fields.email}
+                {kontaktPage.form.fields.email}
               </label>
               <input
                 id="email"
@@ -58,7 +61,7 @@ export default function KontaktPage() {
                 htmlFor="message"
                 className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
               >
-             {kontaktPage.form.fields.message}
+                {kontaktPage.form.fields.message}
               </label>
               <textarea
                 id="message"
@@ -84,7 +87,7 @@ export default function KontaktPage() {
               className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-             {kontaktPage.form.submitLabel}
+              {kontaktPage.newsletter.title}
             </h2>
 
             <p className="mb-6 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
@@ -122,22 +125,22 @@ export default function KontaktPage() {
               className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-             {kontaktPage.institute.title}
+              {kontaktPage.institute.title}
             </h2>
 
-           <div className="space-y-3 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
-  {kontaktPage.institute.lines.map((line) => (
-    <p key={line}>{line}</p>
-  ))}
-  <p>
-    <a
-      href={`mailto:${kontaktPage.institute.email}`}
-      className="underline underline-offset-4"
-    >
-      {kontaktPage.institute.email}
-    </a>
-  </p>
-</div>
+            <div className="space-y-3 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
+              {kontaktPage.institute.lines.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+              <p>
+                <a
+                  href={`mailto:${kontaktPage.institute.email}`}
+                  className="underline underline-offset-4"
+                >
+                  {kontaktPage.institute.email}
+                </a>
+              </p>
+            </div>
           </section>
         </div>
       </div>

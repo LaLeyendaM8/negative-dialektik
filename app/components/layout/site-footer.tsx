@@ -7,24 +7,25 @@ type FooterLink = {
 };
 
 type SiteFooterProps = {
+  lang: string;
   links: FooterLink[];
   brand: string;
   rights: string;
 };
 
-export function SiteFooter({ links, brand, rights }: SiteFooterProps) {
+export function SiteFooter({ lang, links, brand, rights }: SiteFooterProps) {
   return (
     <footer className="border-t border-[var(--color-border)] py-14">
       <Container>
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
           <div>
-            <Link href="/" className="mb-3 block shrink-0">
-  <img
-    src="/logo/logo.svg"
-    alt="Negative Dialektik"
-    className="h-auto w-[56px] dark:invert"
-  />
-</Link>
+            <Link href={`/${lang}`} className="mb-3 block shrink-0">
+              <img
+                src="/logo/logo.svg"
+                alt="Negative Dialektik"
+                className="h-auto w-[56px] dark:invert"
+              />
+            </Link>
 
             <p className="text-[14px] text-[var(--color-text-secondary)]">
               {brand}
@@ -35,7 +36,7 @@ export function SiteFooter({ links, brand, rights }: SiteFooterProps) {
             {links.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={`/${lang}${item.href}`}
                 className="text-[14px] text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text)]"
               >
                 {item.label}

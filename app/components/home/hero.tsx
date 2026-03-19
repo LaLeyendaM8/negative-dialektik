@@ -2,10 +2,12 @@ import Link from "next/link";
 import { Container } from "../layout/container";
 
 type HeroProps = {
+  lang: string;
   hero: {
     eyebrow: string;
     title: string;
     lead: string;
+    panelLabel: string;
     quote?: {
       source: string;
       text: string;
@@ -18,25 +20,25 @@ type HeroProps = {
   }[];
 };
 
-export function Hero({ hero, focusItems }: HeroProps) {
+export function Hero({ lang, hero, focusItems }: HeroProps) {
   return (
     <section className="py-[120px] md:py-[150px] xl:py-[180px]">
       <Container>
         <div className="grid grid-cols-1 gap-16 xl:grid-cols-[1.05fr_0.95fr] xl:gap-20">
           <div className="max-w-[900px]">
             <p
-  className="mb-4 text-[34px] leading-[0.98] tracking-[-0.03em] text-[var(--color-text)] sm:text-[44px] md:text-[58px]"
-  style={{ fontFamily: "var(--font-serif)" }}
->
-  {hero.eyebrow}
-</p>
+              className="mb-4 text-[34px] leading-[0.98] tracking-[-0.03em] text-[var(--color-text)] sm:text-[44px] md:text-[58px]"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {hero.eyebrow}
+            </p>
 
             <h1
-  className="mb-8 text-[20px] leading-[1.25] tracking-[-0.01em] text-[var(--color-text-secondary)] sm:text-[24px] md:text-[28px]"
-  style={{ fontFamily: "var(--font-serif)" }}
->
-  {hero.title}
-</h1>
+              className="mb-8 text-[20px] leading-[1.25] tracking-[-0.01em] text-[var(--color-text-secondary)] sm:text-[24px] md:text-[28px]"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {hero.title}
+            </h1>
 
             <p className="mb-10 max-w-[720px] text-[19px] leading-[1.7] md:text-[20px]">
               {hero.lead}
@@ -57,34 +59,34 @@ export function Hero({ hero, focusItems }: HeroProps) {
             ) : null}
           </div>
 
-          <div className="self-start xl:pt-6 xl:flex xl:justify-start">
-  <div className="self-start w-full max-w-[720px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
-    <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-      Institutionelle Struktur
-    </p>
+          <div className="self-start xl:flex xl:justify-start xl:pt-6">
+            <div className="self-start w-full max-w-[720px] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
+              <p className="mb-8 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+               {hero.panelLabel}
+              </p>
 
-    <div>
-      {focusItems.map((item) => (
-        <div
-          key={item.href}
-          className="border-b border-[var(--color-border)] py-6 first:pt-0 last:border-b-0 last:pb-0"
-        >
-          <Link href={item.href} className="group block">
-            <p
-  className="text-[28px] uppercase tracking-[0.05em] leading-[1.08] text-[var(--color-text)] transition-opacity group-hover:opacity-75 md:text-[30px]"
-  style={{ fontFamily: "var(--font-serif)" }}
->
-  {item.label}
-</p>
-<p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
-  {item.description}
-</p>
-          </Link>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+              <div>
+                {focusItems.map((item) => (
+                  <div
+                    key={item.href}
+                    className="border-b border-[var(--color-border)] py-6 first:pt-0 last:border-b-0 last:pb-0"
+                  >
+                    <Link href={`/${lang}${item.href}`} className="group block">
+                      <p
+                        className="text-[28px] leading-[1.08] uppercase tracking-[0.05em] text-[var(--color-text)] transition-opacity group-hover:opacity-75 md:text-[30px]"
+                        style={{ fontFamily: "var(--font-serif)" }}
+                      >
+                        {item.label}
+                      </p>
+                      <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">
+                        {item.description}
+                      </p>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>

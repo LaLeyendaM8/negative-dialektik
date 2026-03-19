@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "../layout/container";
 
 type AcademyPreviewProps = {
+  lang: string;
   academy: {
     title: string;
     paragraphs: string[];
@@ -12,7 +13,7 @@ type AcademyPreviewProps = {
   };
 };
 
-export function AcademyPreview({ academy }: AcademyPreviewProps) {
+export function AcademyPreview({ lang, academy }: AcademyPreviewProps) {
   return (
     <section className="border-t border-[var(--color-border)] py-[120px] md:py-[140px]">
       <Container>
@@ -43,7 +44,7 @@ export function AcademyPreview({ academy }: AcademyPreviewProps) {
             ))}
 
             <Link
-              href={academy.link.href}
+              href={`/${lang}${academy.link.href}`}
               className="text-[16px] underline underline-offset-4"
             >
               {academy.link.label}
