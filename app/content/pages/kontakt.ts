@@ -1,5 +1,5 @@
 export const kontaktPage = {
-  eyebrow: "Negative Dialektik",
+  
   title: "Kontakt",
   lead:
     "Für verlegerische Anfragen, Kooperationen, institutionelle Zusammenarbeit und programmbegleitende Projekte.",

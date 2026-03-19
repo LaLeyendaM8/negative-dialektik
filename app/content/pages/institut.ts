@@ -1,5 +1,5 @@
 export const institutPage = {
-  eyebrow: "NEGATIVE DIALEKTIK",
+  
   title: "Institut",
   lead:
     "Negative Dialektik ist ein Institut für deutsche Philosophie mit Sitz in Kolumbien. Es widmet sich der editorischen und wissenschaftlichen Vermittlung zentraler Werke des deutschen Denkens im spanischsprachigen Raum.",

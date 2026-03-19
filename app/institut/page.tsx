@@ -7,7 +7,7 @@ export default function InstitutPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={institutPage.eyebrow}
+        
         title={institutPage.title}
         lead={institutPage.lead}
       />
@@ -18,13 +18,13 @@ export default function InstitutPage() {
         ))}
 
         {institutPage.sections.map((section) => (
-          <div key={section.title}>
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-        ))}
+  <div key={section.title} className="mb-10 last:mb-0">
+    <h2>{section.title}</h2>
+    {section.paragraphs.map((paragraph, index) => (
+      <p key={index}>{paragraph}</p>
+    ))}
+  </div>
+))}
       </RichText>
     </PageShell>
   );

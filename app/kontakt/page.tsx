@@ -6,7 +6,7 @@ export default function KontaktPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow="NEGATIVE DIALEKTIK"
+        
         title="Kontakt"
         lead="Informationen zu Neuerscheinungen, Veranstaltungen und akademischen Programmen."
       />

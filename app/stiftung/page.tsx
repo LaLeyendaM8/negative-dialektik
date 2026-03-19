@@ -7,7 +7,7 @@ export default function StiftungPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={stiftungPage.eyebrow}
+        
         title={stiftungPage.title}
         lead={stiftungPage.lead}
       />
@@ -18,7 +18,7 @@ export default function StiftungPage() {
         ))}
 
         {stiftungPage.sections.map((section) => (
-          <div key={section.title}>
+          <div key={section.title}  className="mb-10 last:mb-0">
             <h2>{section.title}</h2>
 
             {"paragraphs" in section &&

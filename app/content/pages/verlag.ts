@@ -1,5 +1,5 @@
 export const verlagPage = {
-  eyebrow: "NEGATIVE DIALEKTIK",
+  
   title: "Verlag",
   lead:
     "Negative Dialektik übersetzt, ediert und publiziert zentrale Werke der deutschen Philosophie in spanischer Sprache.",

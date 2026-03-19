@@ -7,7 +7,7 @@ export default function AkademiePage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={akademiePage.eyebrow}
+       
         title={akademiePage.title}
         lead={akademiePage.lead}
       />
@@ -18,7 +18,7 @@ export default function AkademiePage() {
         ))}
 
         {akademiePage.sections.map((section) => (
-          <div key={section.title}>
+          <div key={section.title}  className="mb-10 last:mb-0">
             <h2>{section.title}</h2>
 
             {"paragraphs" in section &&

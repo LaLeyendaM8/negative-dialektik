@@ -7,7 +7,7 @@ export default function VerlagPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={verlagPage.eyebrow}
+        
         title={verlagPage.title}
         lead={verlagPage.lead}
       />
@@ -18,7 +18,7 @@ export default function VerlagPage() {
         ))}
 
         {verlagPage.sections.map((section) => (
-          <div key={section.title}>
+          <div key={section.title}  className="mb-10 last:mb-0">
             <h2>{section.title}</h2>
 
             {"paragraphs" in section &&

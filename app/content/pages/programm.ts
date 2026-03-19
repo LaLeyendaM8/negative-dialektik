@@ -1,5 +1,5 @@
 export const programmPage = {
-  eyebrow: "Negative Dialektik",
+  
   title: "Programm",
   lead:
     "Der programm von Negative Dialektik versammelt Editionen, Reihen und langfristige editorische Linien aus dem Feld der deutschen Philosophie.",

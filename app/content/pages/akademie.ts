@@ -1,5 +1,5 @@
 export const akademiePage = {
-  eyebrow: "NEGATIVE DIALEKTIK",
+ 
   title: "Akademie",
   lead:
     "Die Akademie von Negative Dialektik ist der institutionelle Ort fortgeschrittener Lehrformate zur systematischen Aneignung deutscher Philosophie im interdisziplinären Kontext.",

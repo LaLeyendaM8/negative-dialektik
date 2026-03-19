@@ -1,5 +1,5 @@
 export const stiftungPage = {
-  eyebrow: "NEGATIVE DIALEKTIK",
+ 
   title: "Stiftung",
   lead:
     "Die Stiftung von Negative Dialektik fördert die kulturelle und öffentliche Vermittlung deutscher Philosophie im spanischsprachigen Raum.",

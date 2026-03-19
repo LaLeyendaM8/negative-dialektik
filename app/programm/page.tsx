@@ -8,7 +8,7 @@ export default function ProgramPage() {
   return (
     <PageShell>
       <PageHero
-        eyebrow={programmPage.eyebrow}
+        
         title={programmPage.title}
         lead={programmPage.lead}
       />
@@ -27,7 +27,7 @@ export default function ProgramPage() {
             {"blocks" in section &&
               section.blocks &&
               section.blocks.map((block) => (
-                <div key={block.title}>
+                <div key={block.title}  className="mb-10 last:mb-0">
                   <h3>{block.title}</h3>
                   {block.paragraphs.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
