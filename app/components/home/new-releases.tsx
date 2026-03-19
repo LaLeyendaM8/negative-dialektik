@@ -5,8 +5,6 @@ import { Container } from "../layout/container";
 type Book = {
   slug: string;
   title: string;
-  author: string;
-  meta: string;
   coverTitle: string;
   coverImage: string;
 };
