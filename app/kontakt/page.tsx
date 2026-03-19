@@ -1,15 +1,15 @@
 import { PageHero } from "../components/shared/page-hero";
 import { PageShell } from "../components/shared/page-shell";
 import { submitContactForm, subscribeNewsletter } from "./actions";
+import { kontaktPage } from "../content/pages/kontakt";
 
 export default function KontaktPage() {
   return (
     <PageShell>
       <PageHero
-        
-        title="Kontakt"
-        lead="Informationen zu Neuerscheinungen, Veranstaltungen und akademischen Programmen."
-      />
+  title={kontaktPage.title}
+  lead={kontaktPage.lead}
+/>
 
       <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr]">
         <section>
@@ -17,7 +17,7 @@ export default function KontaktPage() {
             className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
             style={{ fontFamily: "var(--font-serif)" }}
           >
-            Kontakt aufnehmen
+           {kontaktPage.form.title}
           </h2>
 
           <form action={submitContactForm} className="space-y-6">
@@ -26,7 +26,7 @@ export default function KontaktPage() {
                 htmlFor="name"
                 className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
               >
-                Name
+                {kontaktPage.form.fields.name}
               </label>
               <input
                 id="name"
@@ -42,7 +42,7 @@ export default function KontaktPage() {
                 htmlFor="email"
                 className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
               >
-                E-Mail
+               {kontaktPage.form.fields.email}
               </label>
               <input
                 id="email"
@@ -58,7 +58,7 @@ export default function KontaktPage() {
                 htmlFor="message"
                 className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
               >
-                Nachricht
+             {kontaktPage.form.fields.message}
               </label>
               <textarea
                 id="message"
@@ -73,7 +73,7 @@ export default function KontaktPage() {
               type="submit"
               className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
             >
-              Absenden
+              {kontaktPage.form.submitLabel}
             </button>
           </form>
         </section>
@@ -84,12 +84,11 @@ export default function KontaktPage() {
               className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-              Newsletter
+             {kontaktPage.form.submitLabel}
             </h2>
 
             <p className="mb-6 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
-              Informationen zu Neuerscheinungen, Veranstaltungen und akademischen
-              Programmen.
+              {kontaktPage.newsletter.text}
             </p>
 
             <form action={subscribeNewsletter} className="space-y-6">
@@ -98,7 +97,7 @@ export default function KontaktPage() {
                   htmlFor="newsletter-email"
                   className="mb-2 block text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]"
                 >
-                  E-Mail
+                  {kontaktPage.newsletter.fieldLabel}
                 </label>
                 <input
                   id="newsletter-email"
@@ -113,7 +112,7 @@ export default function KontaktPage() {
                 type="submit"
                 className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
               >
-                Abonnieren
+                {kontaktPage.newsletter.submitLabel}
               </button>
             </form>
           </section>
@@ -123,22 +122,22 @@ export default function KontaktPage() {
               className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
-              Institut
+             {kontaktPage.institute.title}
             </h2>
 
-            <div className="space-y-3 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
-              <p>NEGATIVE DIALEKTIK</p>
-              <p>Institut für deutsche Philosophie</p>
-              <p>Tunja, Kolumbien</p>
-              <p>
-                <a
-                  href="mailto:info@negative-dialektik.com"
-                  className="underline underline-offset-4"
-                >
-                  info@negative-dialektik.com
-                </a>
-              </p>
-            </div>
+           <div className="space-y-3 text-[17px] leading-[1.75] text-[var(--color-text-secondary)]">
+  {kontaktPage.institute.lines.map((line) => (
+    <p key={line}>{line}</p>
+  ))}
+  <p>
+    <a
+      href={`mailto:${kontaktPage.institute.email}`}
+      className="underline underline-offset-4"
+    >
+      {kontaktPage.institute.email}
+    </a>
+  </p>
+</div>
           </section>
         </div>
       </div>

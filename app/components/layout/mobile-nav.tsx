@@ -1,5 +1,5 @@
 "use client";
-
+import { uiText } from "../../content/site/ui";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -20,11 +20,11 @@ export function MobileNav({ navigation }: MobileNavProps) {
       <button
         type="button"
         aria-expanded={isOpen}
-        aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
+        aria-label={isOpen ? uiText.mobileNav.closeAria : uiText.mobileNav.openAria}
         onClick={() => setIsOpen((prev) => !prev)}
         className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em] text-[var(--color-text)] transition-opacity hover:opacity-70 md:hidden"
       >
-        {isOpen ? "Schließen" : "Menü"}
+        {isOpen ? uiText.mobileNav.close : uiText.mobileNav.open}
       </button>
 
       {isOpen && (
@@ -33,11 +33,11 @@ export function MobileNav({ navigation }: MobileNavProps) {
             <div className="mb-10 flex items-center justify-end">
               <button
                 type="button"
-                aria-label="Menü schließen"
+                aria-label={uiText.mobileNav.closeAria}
                 onClick={() => setIsOpen(false)}
                 className="inline-flex min-h-[44px] items-center justify-center text-[15px] uppercase tracking-[0.08em] text-[var(--color-text)] transition-opacity hover:opacity-70"
               >
-                Schließen
+                {uiText.mobileNav.close}
               </button>
             </div>
 

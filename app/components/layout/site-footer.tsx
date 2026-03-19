@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./container";
 
@@ -9,9 +8,11 @@ type FooterLink = {
 
 type SiteFooterProps = {
   links: FooterLink[];
+  brand: string;
+  rights: string;
 };
 
-export function SiteFooter({ links }: SiteFooterProps) {
+export function SiteFooter({ links, brand, rights }: SiteFooterProps) {
   return (
     <footer className="border-t border-[var(--color-border)] py-14">
       <Container>
@@ -26,7 +27,7 @@ export function SiteFooter({ links }: SiteFooterProps) {
 </Link>
 
             <p className="text-[14px] text-[var(--color-text-secondary)]">
-              Negative Dialektik
+              {brand}
             </p>
           </div>
 
@@ -45,7 +46,7 @@ export function SiteFooter({ links }: SiteFooterProps) {
 
         <div className="mt-10 border-t border-[var(--color-border)] pt-8">
           <p className="text-center text-[12px] text-[var(--color-text-secondary)]">
-            © {new Date().getFullYear()} Negative Dialektik. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} {brand}. {rights}
           </p>
         </div>
       </Container>

@@ -6,6 +6,7 @@ import { NewReleases } from "./components/home/new-releases";
 import { StiftungPreview } from "./components/home/stiftung-preview";
 import {
   homeAcademy,
+  homeProgram,
   homeBooks,
   homeClosing,
   homeFocusItems,
@@ -19,7 +20,7 @@ export default function HomePage() {
     <main>
       <Hero hero={homeHero} focusItems={homeFocusItems} />
       <Mission mission={homeMission} />
-      <NewReleases books={homeBooks} />
+      <NewReleases books={homeBooks} title={homeProgram.title} />
       <AcademyPreview academy={homeAcademy} />
       <StiftungPreview stiftung={homeStiftung} />
       <ClosingCta closing={homeClosing} />

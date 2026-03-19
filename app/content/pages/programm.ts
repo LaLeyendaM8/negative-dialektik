@@ -2,9 +2,9 @@ export const programmPage = {
   
   title: "Programm",
   lead:
-    "Der programm von Negative Dialektik versammelt Editionen, Reihen und langfristige editorische Linien aus dem Feld der deutschen Philosophie.",
+    "Das Programm von Negative Dialektik versammelt Editionen, Reihen und langfristige editorische Linien aus dem Feld der deutschen Philosophie.",
   intro: [
-    "Unser programm ist nicht als lose Sammlung einzelner Titel gedacht, sondern als strukturierter editorischer Zusammenhang. Jede Reihe folgt einem begrifflichen Kriterium und erschließt Texte, die in ihrem jeweiligen Feld orientierend wirken.",
+    "Unser Programm ist nicht als lose Sammlung einzelner Titel gedacht, sondern als strukturierter editorischer Zusammenhang. Jede Reihe folgt einem begrifflichen Kriterium und erschließt Texte, die in ihrem jeweiligen Feld orientierend wirken.",
   ],
   sections: [
     {

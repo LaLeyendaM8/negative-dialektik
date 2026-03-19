@@ -12,9 +12,10 @@ type Book = {
 
 type NewReleasesProps = {
   books: Book[];
+  title: string;
 };
 
-export function NewReleases({ books }: NewReleasesProps) {
+export function NewReleases({ books, title }: NewReleasesProps) {
   return (
     <section className="border-t border-[var(--color-border)] bg-[var(--color-surface)] py-[130px] md:py-[150px]">
       <Container>
@@ -22,7 +23,7 @@ export function NewReleases({ books }: NewReleasesProps) {
           className="mb-16 text-[46px] leading-[1.05] md:text-[64px]"
           style={{ fontFamily: "var(--font-serif)" }}
         >
-          Aktuelles Programm
+         {title}
         </h2>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4">

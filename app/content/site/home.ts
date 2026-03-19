@@ -39,6 +39,10 @@ export const homeMission = {
   },
 };
 
+export const homeProgram = {
+  title: "Aktuelles Programm",
+};
+
 export const homeBooks = [
   {
     slug: "geist",
