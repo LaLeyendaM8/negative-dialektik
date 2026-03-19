@@ -21,7 +21,7 @@ export function SiteHeader({ navigation }: SiteHeaderProps) {
         <img
     src="/logo/logo.svg"
     alt="Negative Dialektik"
-    className="hidden h-auto w-[56px] md:block md:w-[64px] dark:invert"
+    className="h-auto w-[56px] md:w-[64px] dark:invert"
   />
 </Link>
 
