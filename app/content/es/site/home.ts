@@ -6,7 +6,7 @@ export const homeHero = {
     "Negative Dialektik es un instituto de estructura modular que articula editorial, academia y fundación en una infraestructura común para la mediación sistemática de la filosofía alemana.",
   quote: {
     source: "Christoph Menke",
-    text: "«“Negative Dialektik” es un proyecto joven, serio y filosóficamente muy ambicioso, que lleva a cabo con gran cuidado la mediación de la filosofía alemana —sobre todo de la teoría crítica— en el ámbito hispanohablante. En la situación actual, en la que el pensamiento crítico se ve amenazado tanto por la economización como por el autoritarismo, este proyecto valiente constituye un signo de resistencia y de esperanza. Deseo al instituto éxito y continuidad.»",
+    text: "»›Negative Dialektik‹ es un proyecto joven, serio y filosóficamente muy ambicioso, que lleva a cabo con gran cuidado la mediación de la filosofía alemana —sobre todo de la teoría crítica— en el ámbito hispanohablante. En la situación actual, en la que el pensamiento crítico se ve amenazado tanto por la economización como por el autoritarismo, este proyecto valiente constituye un signo de resistencia y de esperanza. Deseo al instituto éxito y continuidad.«",
   },
 };
 
