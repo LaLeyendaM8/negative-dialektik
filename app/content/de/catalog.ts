@@ -98,7 +98,10 @@ export const catalogContent: CatalogContent = {
       language: "Spanisch",
       publicationDate: "2026-09-01",
       status: "angekuendigt",
+      stockStatus: "vorbestellung-manuell",
       price: "In Vorbereitung",
+      manualOrderNote:
+        "Bestellungen und Vorbestellungen werden in der aktuellen Ausbaustufe direkt ueber das Institut koordiniert.",
       seoTitle: "GEIST | Negative Dialektik",
       seoDescription:
         "Editorische Linie fuer Gegenwartsphilosophie, Kritische Theorie und Sozialphilosophie.",
@@ -127,7 +130,10 @@ export const catalogContent: CatalogContent = {
       language: "Spanisch",
       publicationDate: "2026-11-01",
       status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
       price: "In Vorbereitung",
+      manualOrderNote:
+        "Fuer diesen Titel nehmen wir derzeit noch keine Bestellungen entgegen, informieren aber gern ueber den Erscheinungsstand.",
       seoTitle: "BILDUNG | Negative Dialektik",
       seoDescription:
         "Reihe fuer systematische Einfuehrungen in Begriffe, Autoren und Problemfelder.",
@@ -156,7 +162,10 @@ export const catalogContent: CatalogContent = {
       language: "Spanisch",
       publicationDate: "2026-12-15",
       status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
       price: "In Vorbereitung",
+      manualOrderNote:
+        "Der Titel befindet sich noch in Vorbereitung. Bei Interesse koennen Sie bereits eine Nachricht an das Institut senden.",
       seoTitle: "ROSE | Negative Dialektik",
       seoDescription:
         "Reihe fuer Aesthetik, Kunstphilosophie und deutsche Romantik.",
@@ -185,7 +194,10 @@ export const catalogContent: CatalogContent = {
       language: "Spanisch",
       publicationDate: "2027-02-01",
       status: "in-vorbereitung",
+      stockStatus: "auf-anfrage",
       price: "In Vorbereitung",
+      manualOrderNote:
+        "Anfragen zu institutionellen Bestellungen oder spaeteren Vorbestellungen koennen bereits jetzt an das Institut gerichtet werden.",
       seoTitle: "Schriften des Instituts | Negative Dialektik",
       seoDescription:
         "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beitraege des Instituts.",

@@ -5,7 +5,8 @@ import { SectionHeading } from "../../components/ui/section-heading";
 import Image from "next/image";
 import Link from "next/link";
 import { getContent } from "@/lib/getContent";
-import { formatCatalogStatus } from "@/lib/catalog-ui";
+import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
+import { getBookInquiryHref } from "@/lib/commerce";
 
 export default async function ProgramPage({
   params,
@@ -20,19 +21,25 @@ export default async function ProgramPage({
   const upcomingBooks = catalogContent.books.filter(
     (book) => book.status === "in-vorbereitung",
   );
+  const manuallyRequestableBooks = catalogContent.books.filter(
+    (book) => book.stockStatus !== "nicht-verfuegbar",
+  );
+
   const labels =
     lang === "de"
       ? {
           overviewTitle: "Katalogstruktur",
           overviewText:
-            "Das Programm wird jetzt Schritt fuer Schritt als navigierbarer Katalog aufgebaut. Reihen und Titel sind bereits als eigenstaendige Seitentypen angelegt und koennen in den naechsten Schritten um Leseproben, Verfuegbarkeit und Kaufoptionen erweitert werden.",
+            "Das Programm wird Schritt fuer Schritt als navigierbarer Katalog und spaetere Shop-Grundlage aufgebaut. Reihen und Titel sind bereits als eigenstaendige Seitentypen angelegt und koennen in den naechsten Schritten um Checkout-Logik erweitert werden.",
           quickViewTitle: "Programm auf einen Blick",
           quickViewSeries: "Reihen",
           quickViewBooks: "Titel",
-          quickViewAnnounced: "Angekündigt",
+          quickViewAnnounced: "Angekuendigt",
           quickViewUpcoming: "Demnaechst",
+          quickViewOrderable: "Manuell anfragbar",
           openSeries: "Reihenseite oeffnen",
           openBook: "Buchseite oeffnen",
+          orderPath: "Bestellweg",
           announcedTitle: "Neuerscheinungen und Ankuendigungen",
           announcedSubtitle:
             "Titel, die bereits editorisch sichtbar gemacht werden und als erste Bezugspunkte des Programms nach aussen treten.",
@@ -43,14 +50,16 @@ export default async function ProgramPage({
       : {
           overviewTitle: "Estructura del catalogo",
           overviewText:
-            "El programa se esta convirtiendo paso a paso en un catalogo navegable. Las colecciones y los titulos ya existen como tipos de pagina propios y en las siguientes fases podran ampliarse con muestras, disponibilidad y opciones de compra.",
+            "El programa se esta convirtiendo paso a paso en un catalogo navegable y en la base de una futura tienda propia. Las colecciones y los titulos ya existen como tipos de pagina propios y podran ampliarse despues con checkout y pago.",
           quickViewTitle: "Vista general del programa",
           quickViewSeries: "Colecciones",
           quickViewBooks: "Titulos",
           quickViewAnnounced: "Anunciados",
           quickViewUpcoming: "Proximamente",
+          quickViewOrderable: "Consulta manual",
           openSeries: "Abrir pagina de la coleccion",
           openBook: "Abrir pagina del libro",
+          orderPath: "Via de pedido",
           announcedTitle: "Novedades y anuncios",
           announcedSubtitle:
             "Titulos que ya adquieren visibilidad editorial y funcionan como primeros puntos de referencia del programa.",
@@ -80,7 +89,7 @@ export default async function ProgramPage({
 
       <section className="mt-16">
         <SectionHeading title={labels.quickViewTitle} />
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
           <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {labels.quickViewSeries}
@@ -92,6 +101,7 @@ export default async function ProgramPage({
               {catalogContent.series.length}
             </p>
           </div>
+
           <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {labels.quickViewBooks}
@@ -103,6 +113,7 @@ export default async function ProgramPage({
               {catalogContent.books.length}
             </p>
           </div>
+
           <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {labels.quickViewAnnounced}
@@ -114,6 +125,7 @@ export default async function ProgramPage({
               {announcedBooks.length}
             </p>
           </div>
+
           <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {labels.quickViewUpcoming}
@@ -123,6 +135,18 @@ export default async function ProgramPage({
               style={{ fontFamily: "var(--font-serif)" }}
             >
               {upcomingBooks.length}
+            </p>
+          </div>
+
+          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
+            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+              {labels.quickViewOrderable}
+            </p>
+            <p
+              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {manuallyRequestableBooks.length}
             </p>
           </div>
         </div>
@@ -228,14 +252,25 @@ export default async function ProgramPage({
                   <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
                     {formatCatalogStatus(lang, book.status)}
                   </p>
+                  <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
+                    {formatStockStatus(lang, book.stockStatus)}
+                  </p>
                   <p className="mt-3 text-[15px] leading-[1.7] text-[var(--color-text-secondary)]">
                     {book.description}
                   </p>
                 </div>
               </div>
-              <p className="mt-6 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                {labels.openBook}
-              </p>
+              <div className="mt-6 flex flex-wrap gap-4">
+                <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
+                  {labels.openBook}
+                </p>
+                <Link
+                  href={getBookInquiryHref(lang, book)}
+                  className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+                >
+                  {labels.orderPath}
+                </Link>
+              </div>
             </Link>
           ))}
         </div>
@@ -264,12 +299,23 @@ export default async function ProgramPage({
                 <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
                   {formatCatalogStatus(lang, book.status)}
                 </p>
+                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
+                  {formatStockStatus(lang, book.stockStatus)}
+                </p>
                 <p className="mt-4 text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
                   {book.description}
                 </p>
-                <p className="mt-6 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                  {labels.openBook}
-                </p>
+                <div className="mt-6 flex flex-wrap gap-4">
+                  <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
+                    {labels.openBook}
+                  </p>
+                  <Link
+                    href={getBookInquiryHref(lang, book)}
+                    className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+                  >
+                    {labels.orderPath}
+                  </Link>
+                </div>
               </Link>
             ))}
           </div>
@@ -299,12 +345,23 @@ export default async function ProgramPage({
                 <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
                   {formatCatalogStatus(lang, book.status)}
                 </p>
+                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
+                  {formatStockStatus(lang, book.stockStatus)}
+                </p>
                 <p className="mt-4 text-[15px] leading-[1.75] text-[var(--color-text-secondary)]">
                   {book.description}
                 </p>
-                <p className="mt-6 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                  {labels.openBook}
-                </p>
+                <div className="mt-6 flex flex-wrap gap-4">
+                  <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
+                    {labels.openBook}
+                  </p>
+                  <Link
+                    href={getBookInquiryHref(lang, book)}
+                    className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+                  >
+                    {labels.orderPath}
+                  </Link>
+                </div>
               </Link>
             ))}
           </div>

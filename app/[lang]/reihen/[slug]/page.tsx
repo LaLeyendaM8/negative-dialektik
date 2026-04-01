@@ -5,7 +5,8 @@ import { PageHero } from "../../../components/shared/page-hero";
 import { PageShell } from "../../../components/shared/page-shell";
 import { RichText } from "../../../components/shared/rich-text";
 import { getCatalogContent, getSeriesBySlug } from "@/lib/getCatalog";
-import { formatCatalogStatus } from "@/lib/catalog-ui";
+import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
+import { getBookInquiryHref } from "@/lib/commerce";
 
 export default async function SeriesPage({
   params,
@@ -32,6 +33,7 @@ export default async function SeriesPage({
           titlesLead:
             "Die Reihe ist als editorischer Zusammenhang angelegt und bildet bereits die Grundlage fuer kuenftige Detailseiten und spaetere Kaufoptionen.",
           openBook: "Buchseite oeffnen",
+          orderPath: "Bestellweg",
         }
       : {
           eyebrow: "Coleccion",
@@ -41,6 +43,7 @@ export default async function SeriesPage({
           titlesLead:
             "La coleccion esta concebida como un conjunto editorial y ya sirve de base para futuras paginas de detalle y opciones de compra.",
           openBook: "Abrir pagina del libro",
+          orderPath: "Via de pedido",
         };
 
   return (
@@ -109,12 +112,23 @@ export default async function SeriesPage({
                   <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
                     {formatCatalogStatus(lang, book.status)}
                   </p>
+                  <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
+                    {formatStockStatus(lang, book.stockStatus)}
+                  </p>
                   <p className="mt-3 text-[15px] leading-[1.7] text-[var(--color-text-secondary)]">
                     {book.description}
                   </p>
-                  <p className="mt-6 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                    {labels.openBook}
-                  </p>
+                  <div className="mt-6 flex flex-wrap gap-4">
+                    <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
+                      {labels.openBook}
+                    </p>
+                    <Link
+                      href={getBookInquiryHref(lang, book)}
+                      className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+                    >
+                      {labels.orderPath}
+                    </Link>
+                  </div>
                 </Link>
               ))}
             </div>

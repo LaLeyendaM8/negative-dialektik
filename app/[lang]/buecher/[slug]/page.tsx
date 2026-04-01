@@ -5,7 +5,11 @@ import { PageHero } from "../../../components/shared/page-hero";
 import { PageShell } from "../../../components/shared/page-shell";
 import { RichText } from "../../../components/shared/rich-text";
 import { getBookBySlug, getCatalogContent, getSeriesBySlug } from "@/lib/getCatalog";
-import { formatCatalogDate, formatCatalogStatus } from "@/lib/catalog-ui";
+import {
+  formatCatalogDate,
+  formatCatalogStatus,
+  formatStockStatus,
+} from "@/lib/catalog-ui";
 
 export default async function BookPage({
   params,
@@ -23,24 +27,30 @@ export default async function BookPage({
   const relatedBooks = getCatalogContent(lang).books.filter(
     (entry) => entry.seriesSlug === book.seriesSlug && entry.slug !== book.slug,
   );
+  const contactQuery = `kind=order&book=${encodeURIComponent(book.title)}`;
   const primaryAction =
-    book.status === "lieferbar"
+    book.stockStatus === "bestellbar-manuell"
       ? {
-          href: book.buyLink ?? `/${lang}/kontakt`,
-          label: lang === "de" ? "Kaufen oder anfragen" : "Comprar o consultar",
+          href: `/${lang}/kontakt?${contactQuery}`,
+          label: lang === "de" ? "Manuell bestellen" : "Pedir manualmente",
         }
-      : book.status === "vorbestellbar"
+      : book.stockStatus === "vorbestellung-manuell"
         ? {
-            href: `/${lang}/kontakt`,
-            label: lang === "de" ? "Vorbestellen" : "Reservar",
+            href: `/${lang}/kontakt?${contactQuery}`,
+            label: lang === "de" ? "Vorbestellung anfragen" : "Solicitar preventa",
           }
-        : {
-            href: `/${lang}/kontakt`,
-            label:
-              lang === "de"
-                ? "Benachrichtigung anfragen"
-                : "Solicitar notificacion",
-          };
+        : book.stockStatus === "auf-anfrage"
+          ? {
+              href: `/${lang}/kontakt?${contactQuery}`,
+              label: lang === "de" ? "Bestellung anfragen" : "Consultar pedido",
+            }
+          : {
+              href: `/${lang}/kontakt?kind=info&book=${encodeURIComponent(book.title)}`,
+              label:
+                lang === "de"
+                  ? "Verfuegbarkeit anfragen"
+                  : "Consultar disponibilidad",
+            };
   const labels =
     lang === "de"
       ? {
@@ -58,6 +68,7 @@ export default async function BookPage({
           publicationDate: "Erscheinung",
           status: "Status",
           price: "Preis",
+          stockStatus: "Bestellstatus",
           ctaTitle: "Verfuegbarkeit",
           ctaText:
             "Diese Buchseite ist bereits als kuenftige Produktseite angelegt. Im naechsten Ausbau folgen direkte Kaufoptionen, Vorbestellung oder Benachrichtigungen je nach Status des Titels.",
@@ -68,6 +79,7 @@ export default async function BookPage({
           sampleTitle: "Leseprobe",
           sampleMissing: "Leseprobe folgt in einer spaeteren Ausbaustufe.",
           relatedTitle: "Weitere Titel der Reihe",
+          orderNoteTitle: "Bestellweg",
         }
       : {
           eyebrow: "Libro",
@@ -84,6 +96,7 @@ export default async function BookPage({
           publicationDate: "Publicacion",
           status: "Estado",
           price: "Precio",
+          stockStatus: "Estado de pedido",
           ctaTitle: "Disponibilidad",
           ctaText:
             "Esta pagina ya esta construida como futura pagina de producto. En la siguiente fase se integraran compra directa, preventa o notificaciones segun el estado del titulo.",
@@ -94,6 +107,7 @@ export default async function BookPage({
           sampleTitle: "Muestra",
           sampleMissing: "La muestra de lectura se incorporara en una fase posterior.",
           relatedTitle: "Otros titulos de la coleccion",
+          orderNoteTitle: "Via de pedido",
         };
 
   return (
@@ -176,6 +190,12 @@ export default async function BookPage({
                 <dt className="text-[var(--color-text-secondary)]">{labels.status}</dt>
                 <dd>{formatCatalogStatus(lang, book.status)}</dd>
               </div>
+              <div>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {labels.stockStatus}
+                </dt>
+                <dd>{formatStockStatus(lang, book.stockStatus)}</dd>
+              </div>
               {book.price ? (
                 <div>
                   <dt className="text-[var(--color-text-secondary)]">{labels.price}</dt>
@@ -243,6 +263,11 @@ export default async function BookPage({
                 </Link>
               ) : null}
             </div>
+            {book.manualOrderNote ? (
+              <p className="mt-6 max-w-[56ch] text-[15px] leading-[1.75] text-[var(--color-text-secondary)]">
+                {book.manualOrderNote}
+              </p>
+            ) : null}
           </section>
 
           <section className="mt-14 border-t border-[var(--color-border)] pt-8">

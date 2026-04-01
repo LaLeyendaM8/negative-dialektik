@@ -17,6 +17,7 @@ export async function submitContactForm(
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
+  const subject = String(formData.get("subject") ?? "").trim();
 
   if (!name || !email || !message) {
     return {
@@ -31,7 +32,7 @@ export async function submitContactForm(
         process.env.RESEND_FROM_EMAIL ||
         "Negative Dialektik <onboarding@resend.dev>",
       to: process.env.CONTACT_RECEIVER_EMAIL || "info@negative-dialektik.com",
-      subject: `Kontaktformular: ${name}`,
+      subject: subject || `Kontaktformular: ${name}`,
       replyTo: email,
       text: `Name: ${name}\nE-Mail: ${email}\n\nNachricht:\n${message}`,
     });

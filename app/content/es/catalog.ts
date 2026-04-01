@@ -100,7 +100,10 @@ export const catalogContent: CatalogContent = {
       language: "Espanol",
       publicationDate: "2026-09-01",
       status: "angekuendigt",
+      stockStatus: "vorbestellung-manuell",
       price: "En preparacion",
+      manualOrderNote:
+        "Los pedidos y preventas se coordinan por ahora directamente a traves del instituto.",
       seoTitle: "GEIST | Negative Dialektik",
       seoDescription:
         "Linea editorial de filosofia contemporanea, teoria critica y filosofia social.",
@@ -129,7 +132,10 @@ export const catalogContent: CatalogContent = {
       language: "Espanol",
       publicationDate: "2026-11-01",
       status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
       price: "En preparacion",
+      manualOrderNote:
+        "Para este titulo aun no tomamos pedidos, pero con gusto informamos sobre su estado editorial.",
       seoTitle: "BILDUNG | Negative Dialektik",
       seoDescription:
         "Coleccion de introducciones sistematicas a autores, conceptos y problemas.",
@@ -158,7 +164,10 @@ export const catalogContent: CatalogContent = {
       language: "Espanol",
       publicationDate: "2026-12-15",
       status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
       price: "En preparacion",
+      manualOrderNote:
+        "El titulo aun esta en preparacion. Si hay interes, ya puede enviarse una consulta al instituto.",
       seoTitle: "ROSE | Negative Dialektik",
       seoDescription:
         "Coleccion dedicada a la estetica, la filosofia del arte y el romanticismo aleman.",
@@ -187,7 +196,10 @@ export const catalogContent: CatalogContent = {
       language: "Espanol",
       publicationDate: "2027-02-01",
       status: "in-vorbereitung",
+      stockStatus: "auf-anfrage",
       price: "En preparacion",
+      manualOrderNote:
+        "Las consultas sobre pedidos institucionales o futuras preventas ya pueden dirigirse al instituto.",
       seoTitle: "Escritos del Instituto | Negative Dialektik",
       seoDescription:
         "Investigaciones propias, conferencias y textos programaticos del instituto.",

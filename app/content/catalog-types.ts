@@ -7,6 +7,12 @@ export type BookStatus =
   | "lieferbar"
   | "vergriffen";
 
+export type StockStatus =
+  | "nicht-verfuegbar"
+  | "auf-anfrage"
+  | "vorbestellung-manuell"
+  | "bestellbar-manuell";
+
 export type CatalogSeries = {
   slug: string;
   title: string;
@@ -43,7 +49,9 @@ export type CatalogBook = {
   status: BookStatus;
   price?: string;
   currency?: string;
+  stockStatus: StockStatus;
   buyLink?: string;
+  manualOrderNote?: string;
   samplePdf?: string;
   seoTitle: string;
   seoDescription: string;

@@ -1,236 +1,300 @@
-# Negative Dialektik Website Roadmap
+# Negative Dialektik Shop Roadmap
 
-Dieser Plan dient als gemeinsamer Arbeitsrahmen fuer die naechsten Ausbaustufen der Website. Er ist so strukturiert, dass wir ihn Schritt fuer Schritt direkt im Code abarbeiten koennen.
+Dieser Plan ersetzt die bisherige Ausbau-Roadmap und bildet den letzten grossen Entwicklungsblock ab: den eigenen Shop von Negative Dialektik.
 
-## Leitidee
+Die Website ist bereits als Verlagspraesenz, Katalog, Newsletter-Basis und manuelle Bestellstrecke aufgestellt. Der naechste Schritt ist der Uebergang zu einem echten Checkout-System mit sauberer Bestell- und Betriebslogik.
 
-V1 hat die Seite als serioese, image-starke Verlagspraesenz etabliert.
+## Zielbild
 
-Die naechsten Versionen sollen drei Dinge leisten:
+Negative Dialektik soll ueber die eigene Website Buecher direkt anbieten und verkaufen koennen.
 
-1. Das Programm als echten digitalen Katalog erfahrbar machen.
-2. Den Newsletter technisch sauber aufsetzen.
-3. E-Commerce spaeter sinnvoll und stabil ergaenzen.
+Der Shop soll:
 
-## Prioritaeten
+1. zur bestehenden Gestaltung und Tonalitaet passen
+2. auf den schon gebauten Buchseiten aufsetzen
+3. Bestellungen, Zahlungen und spaetere Auslieferung sauber abbilden
+4. klein und kontrollierbar starten, aber spaeter wachsen koennen
 
-Die empfohlene Reihenfolge lautet:
+## Architekturidee
 
-1. Datenstruktur fuer Reihen und Buecher
-2. Reihenseiten
-3. Buchseiten
-4. Programmseite als echter Katalog
-5. Newsletter professionell machen
-6. Formular-Feedback verbessern
-7. E-Commerce vorbereiten
-8. E-Commerce live schalten
+### Stripe
 
-## Phase 1: Verlag als echter Katalog
+Stripe ist sehr wahrscheinlich die beste erste Loesung fuer den Shop.
 
-Ziel: Die Website soll nicht nur das Institut repraesentieren, sondern das Verlagsprogramm strukturiert abbilden.
+Warum:
 
-### 1. Datenmodell fuer Reihen
+- schnell und professionell integrierbar
+- gute Checkout- und Payment-Infrastruktur
+- spaeter erweiterbar auf Rechnungen, Webhooks und Order-Handling
+- solide Dokumentation und einfacher Standard fuer kleine bis mittlere Shops
 
-Jede Reihe sollte mindestens diese Felder haben:
+### Supabase
 
-- `slug`
-- `title`
-- `subtitle`
-- `description`
-- `theme`
-- `coverImage`
-- `status`
-- `featuredBooks`
-- `seoTitle`
-- `seoDescription`
+Supabase bleibt sehr sinnvoll und wird weiterhin gebraucht.
 
-### 2. Datenmodell fuer Buecher
+Stripe speichert nicht euren gesamten Shop-Zustand fuer euch in der Form, wie ihr ihn braucht.
 
-Jedes Buch sollte mindestens diese Felder haben:
+Supabase kann fuer euch speichern:
 
-- `slug`
-- `title`
-- `subtitle`
-- `author`
-- `translator`
-- `editor`
-- `seriesSlug`
-- `description`
-- `longDescription`
-- `quote`
-- `coverImage`
-- `isbn`
-- `pages`
-- `format`
-- `language`
-- `publicationDate`
-- `status`
-- `price`
-- `currency`
-- `buyLink`
-- `samplePdf`
-- `seoTitle`
-- `seoDescription`
+- Produkte und interne Shopdaten
+- Lager-/Verfuegbarkeitsstatus
+- Bestellungen
+- Order-Status
+- Versandstatus
+- Newsletter-Abonnenten
+- spaetere Kunden- oder Adressdaten, falls noetig
 
-### 3. Neue Seitentypen
+Kurz gesagt:
 
-Diese Seiten sollen entstehen:
+- Stripe = Zahlung und Checkout
+- Supabase = eure Datenbasis und euer Betriebs-Backbone
 
-- `/programm` als echte Katalogseite mit Reihen und Buechern
-- `/reihen/[slug]` als Reihenseite mit Profil und Titeln
-- `/buecher/[slug]` oder `/books/[slug]` als Buchdetailseite mit Metadaten und CTA
+## Phase 4: Finalen Shop aufstellen
 
-### 4. Statussystem
+Ziel: Aus der vorbereiteten manuellen Bestellstrecke wird ein echter, kontrollierter Shop.
 
-Von Anfang an mit festen Stati arbeiten:
+### 4.1 Produkt- und Shop-Datenmodell fertigstellen
 
-- `in-vorbereitung`
-- `angekuendigt`
-- `vorbestellbar`
-- `lieferbar`
-- `vergriffen`
+Die Buchdaten muessen fuer echten Verkauf vervollstaendigt werden.
 
-## Phase 2: UX und Funktionalitaet
+Zusaetzliche oder sauber definierte Felder:
 
-Ziel: Die Seite soll sich nicht nur hochwertig praesentieren, sondern als echtes digitales Produkt anfuehlen.
-
-### 1. Programmseite verbessern
-
-Sinnvolle Bausteine:
-
-- Hero
-- Reihenuebersicht
-- Alle Titel
-- Filter nach Reihe, Thema oder Status
-- Neuerscheinungen
-- Demnaechst
-
-### 2. Buchseiten hochwertig machen
-
-Jede Buchseite sollte idealerweise enthalten:
-
-- Cover
-- Kurzbeschreibung
-- laengere editorische Beschreibung
-- bibliografische Daten
-- Reihe
-- Autor, Uebersetzer, Herausgeber
-- Status
-- Preis
-- CTA
-- aehnliche Titel
-- optional Leseprobe
-
-### 3. Kontaktformulare verbessern
-
-Fuer Kontakt und Newsletter:
-
-- Loading-State
-- Success-State
-- Error-State
-- verstaendliche Rueckmeldungen
-
-### 4. Newsletter richtig aufsetzen
-
-Zielbild:
-
-- echte Speicherung der Abonnenten
-- Sprache `de` oder `es`
-- Double-Opt-in
-- Exportmoeglichkeit oder Tool-Anbindung
-- spaeter Versandlogik
-
-## Phase 3: E-Commerce vorbereiten
-
-Ziel: Die Architektur frueh so anlegen, dass ein Shop spaeter sauber integriert werden kann.
-
-### 1. Bereits im Datenmodell vorsehen
-
+- `sku`
+- `stripePriceId`
+- `stripeProductId`
 - `price`
 - `currency`
 - `stockStatus`
-- `buyLink`
-- `sku` optional
-- `format`
+- `inventoryCount` optional
+- `isPhysicalProduct`
+- `shippingCategory`
+- `checkoutEnabled`
+- `taxCategory` optional
 
-### 2. Zwischenstufe vor vollem Shop
+Ziel:
 
-Bevor Checkout live geht, koennen Buchseiten schon diese CTAs besitzen:
+- jedes Buch kann technisch eindeutig verkauft werden
+- Preis und Verfuegbarkeit kommen nicht mehr nur aus Text, sondern aus belastbaren Feldern
 
-- `Kaufen` zu externem Haendler
-- `Vorbestellen`
-- `Anfragen`
-- `Benachrichtigen, wenn erhaeltlich`
+### 4.2 Checkout-Einstieg auf Buchseiten
 
-### 3. Spaeterer Vollausbau
+Die bestehenden manuellen CTAs werden auf echte Kaufpfade vorbereitet.
 
-- Warenkorb
-- Checkout
-- Payment
-- Bestellmails
-- Order-Management
-- Versand- und Rechtstexte
+Geplante Zustandslogik:
+
+- `Kaufen` bei sofort kaufbaren Titeln
+- `Vorbestellen` bei vorbestellbaren Titeln
+- `Anfragen` bei Spezialfaellen
+- `Nicht verfuegbar` bei noch nicht offenen Titeln
+
+Das Ziel ist:
+
+- die Buchseite bleibt die zentrale Produktseite
+- der CTA richtet sich aus den Daten logisch ab
+
+### 4.3 Stripe Checkout integrieren
+
+Erster echter Kaufpfad:
+
+- User klickt auf `Kaufen`
+- Server erstellt eine Stripe Checkout Session
+- User bezahlt ueber Stripe
+- Rueckleitung auf Success-/Cancel-Seite
+
+Spaeter moegliche Erweiterungen:
+
+- mehrere Zahlungsarten
+- Vorbestellung mit Zahlungslogik
+- Promotion Codes
+
+### 4.4 Bestellungen in Supabase speichern
+
+Bestellungen sollen nicht nur bei Stripe existieren, sondern auch in eurem System.
+
+Empfohlene Tabellen:
+
+- `orders`
+- `order_items`
+- optional `shipping_addresses`
+
+Wichtige Felder fuer `orders`:
+
+- `id`
+- `stripe_checkout_session_id`
+- `stripe_payment_intent_id` optional
+- `customer_email`
+- `customer_name` optional
+- `status`
+- `currency`
+- `total_amount`
+- `created_at`
+
+Wichtige Felder fuer `order_items`:
+
+- `id`
+- `order_id`
+- `book_slug`
+- `quantity`
+- `unit_price`
+- `title_snapshot`
+
+Ziel:
+
+- ihr koennt Bestellungen intern nachvollziehen
+- ihr seid nicht nur vom Stripe-Dashboard abhaengig
+
+### 4.5 Webhooks und Zahlungsbestaetigung
+
+Nach erfolgreicher Zahlung muss das System sauber reagieren.
+
+Dafuer braucht ihr:
+
+- Stripe Webhook Endpoint
+- Validierung der Events
+- Update der Bestellung in Supabase
+
+Typische Events:
+
+- `checkout.session.completed`
+- optional spaeter `payment_intent.payment_failed`
+
+Ziel:
+
+- Bestellungen werden automatisch bestaetigt
+- euer interner Order-Status stimmt mit Stripe ueberein
+
+### 4.6 Success-, Cancel- und Order-Status-Seiten
+
+Noetige Seiten:
+
+- Erfolg nach Kauf
+- Abbruch / nicht abgeschlossene Zahlung
+- spaeter evtl. einfache Bestellstatus-Ansicht
+
+Diese Seiten sollen:
+
+- klar und ruhig wirken
+- zur Verlagssprache passen
+- keine generischen SaaS-Vibes haben
+
+### 4.7 Versand- und Fulfillment-Logik vorbereiten
+
+Noch nicht sofort vollautomatisieren, aber strukturell vorbereiten.
+
+Mindestens noetig:
+
+- Versandstatus in Supabase
+- manuelles internes Fulfillment
+- interne Kennzeichnung wie:
+  - `neu`
+  - `bezahlt`
+  - `in bearbeitung`
+  - `versandt`
+  - `abgeschlossen`
+
+Spaeter moeglich:
+
+- Tracking-Nummern
+- Versandbestaetigungs-Mails
+
+### 4.8 Shop-Rechtstexte und Vertrauen
+
+Vor echtem Launch muessen fuer den Shop geprueft oder erweitert werden:
+
+- Impressum
+- Datenschutz
+- Widerruf
+- AGB falls gewuenscht
+- Versandinformationen
+- Zahlungsinformationen
+
+Ziel:
+
+- der Shop wirkt nicht improvisiert
+- der Kaufprozess ist seriös und vertrauenswuerdig
+
+## Empfohlene Reihenfolge
+
+Diese Reihenfolge ist fuer euch wahrscheinlich am sinnvollsten:
+
+1. Shop-Datenmodell fertigstellen
+2. Stripe vorbereiten und Product-/Price-IDs anbinden
+3. Checkout-Session serverseitig bauen
+4. Success-/Cancel-Seiten bauen
+5. Orders in Supabase speichern
+6. Stripe Webhooks anbinden
+7. Versand-/Fulfillment-Status einfuehren
+8. Shop final testen und dann live schalten
 
 ## Praktische Modulaufteilung
 
-Um die Arbeit sauber zu strukturieren, teilen wir sie in diese Module:
-
-### 1. Content-Modul
+### 1. Commerce-Data-Modul
 
 Verantwortung:
 
-- Reihen- und Buchdaten strukturieren
-- bestehende Inhalte migrieren
+- Produktfelder
+- Preislogik
+- Stripe-Referenzen
+- Verfuegbarkeit
 
-### 2. Routing-Modul
-
-Verantwortung:
-
-- dynamische Seiten fuer Reihen
-- dynamische Seiten fuer Buecher
-
-### 3. Catalog-Modul
+### 2. Checkout-Modul
 
 Verantwortung:
 
-- Programmseite
-- Buchkarten
-- Verlinkungen
-- Filter und Uebersichten
+- Stripe Session Creation
+- Kauf-CTA-Logik
+- Success-/Cancel-Pfade
 
-### 4. Newsletter-Modul
-
-Verantwortung:
-
-- Speicherung
-- Opt-in-Logik
-- Sprachsegmentierung
-- Form-Feedback
-
-### 5. Commerce-Modul
+### 3. Order-Modul
 
 Verantwortung:
 
-- Preise
-- Kauf-CTAs
-- spaeter Checkout
+- Order-Speicherung
+- Order-Items
+- Status-Updates
+- interne Nachvollziehbarkeit
 
-## Empfohlener naechster Sprint
+### 4. Webhook-Modul
 
-Wenn wir direkt loslegen, ist dieser Sprint die sinnvollste Startphase:
+Verantwortung:
 
-1. Reihendaten und Buchdaten als strukturierte Dateien anlegen
-2. Dynamische Buchseiten bauen
-3. Dynamische Reihenseiten bauen
-4. Startseite und Programmseite auf diese neuen Seiten verlinken
-5. Danach den Newsletter sauber nachziehen
+- Stripe Events
+- Zahlungsbestaetigung
+- Datenabgleich mit Supabase
 
-## Nächste konkrete Umsetzung
+### 5. Fulfillment-Modul
 
-Der erste technische Umsetzungsschritt ist:
+Verantwortung:
 
-1. Typen fuer Reihen und Buecher definieren
-2. Content-Struktur fuer beide Sprachen festlegen
-3. Erste Beispiel-Datensaetze fuer Reihen und Buecher anlegen
-4. Auf dieser Basis neue Seitenrouten bauen
+- Versandstatus
+- manuelle Bearbeitung
+- spaeter Versandbestaetigung
 
+## Was wir spaeter brauchen
+
+Wenn wir mit dieser finalen Phase starten, werden wir sehr wahrscheinlich brauchen:
+
+- Stripe Account
+- Stripe API Keys
+- Stripe Webhook Secret
+- Supabase Tabellen fuer Orders
+- evtl. zusaetzliche Env-Variablen fuer Checkout und Webhooks
+
+## Erster sinnvoller Sprint fuer den Shop
+
+Wenn wir den Shop-Block starten, ist das der sinnvollste erste Sprint:
+
+1. Buchmodell final fuer Verkauf erweitern
+2. Stripe Product-/Price-Referenzen vorbereiten
+3. Kauf-Buttons auf Buchseiten an echte Checkout-Logik anbinden
+4. Success- und Cancel-Seiten bauen
+
+## Abschlussziel
+
+Am Ende dieser Phase soll Negative Dialektik:
+
+- Buecher direkt ueber die Website verkaufen koennen
+- Zahlungen professionell ueber Stripe abwickeln
+- Bestellungen in Supabase nachvollziehen
+- Versand intern organisiert bearbeiten
+- die eigene verlegerische Identitaet auch im Shop bewahren

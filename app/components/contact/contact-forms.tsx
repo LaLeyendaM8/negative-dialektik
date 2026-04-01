@@ -35,6 +35,8 @@ type ContactFormsProps = {
   lang: string;
   contactForm: ContactFormLabels;
   newsletterForm: NewsletterFormLabels;
+  initialMessage?: string;
+  initialSubject?: string;
 };
 
 const initialState: FormActionState = {
@@ -93,6 +95,8 @@ export function ContactForms({
   lang,
   contactForm,
   newsletterForm,
+  initialMessage,
+  initialSubject,
 }: ContactFormsProps) {
   const [contactState, contactAction] = useActionState(
     submitContactForm,
@@ -114,6 +118,8 @@ export function ContactForms({
         </h2>
 
         <form action={contactAction} className="space-y-6">
+          <input type="hidden" name="subject" value={initialSubject ?? ""} />
+
           <div>
             <label
               htmlFor="name"
@@ -158,6 +164,7 @@ export function ContactForms({
               name="message"
               required
               rows={7}
+              defaultValue={initialMessage}
               className="w-full resize-none border border-[var(--color-border)] bg-transparent px-4 py-3 text-[16px] outline-none transition-colors focus:border-[var(--color-text)]"
             />
           </div>
