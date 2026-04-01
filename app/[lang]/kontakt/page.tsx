@@ -16,6 +16,7 @@ export default async function KontaktPage({
       <PageHero title={kontaktPage.title} lead={kontaktPage.lead} />
 
       <ContactForms
+        lang={lang}
         contactForm={kontaktPage.form}
         newsletterForm={kontaktPage.newsletter}
       />

@@ -1,6 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
+import { storeNewsletterSubscription } from "@/lib/newsletter";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -52,34 +53,72 @@ export async function subscribeNewsletter(
   _prevState: FormActionState,
   formData: FormData,
 ): Promise<FormActionState> {
-  const email = String(formData.get("email") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const language = formData.get("language") === "es" ? "es" : "de";
 
   if (!email) {
     return {
       status: "error",
-      message: "Bitte eine E-Mail-Adresse eingeben.",
+      message:
+        language === "es"
+          ? "Ingrese un correo electronico."
+          : "Bitte eine E-Mail-Adresse eingeben.",
     };
   }
 
-  try {
-    await resend.emails.send({
-      from:
-        process.env.RESEND_FROM_EMAIL ||
-        "Negative Dialektik <onboarding@resend.dev>",
-      to: process.env.CONTACT_RECEIVER_EMAIL || "info@negative-dialektik.com",
-      subject: "Neue Newsletter-Anmeldung",
-      text: `Neue Newsletter-Anmeldung: ${email}`,
-    });
+  const result = await storeNewsletterSubscription({ email, language });
+
+  if (result.status === "created") {
+    try {
+      await resend.emails.send({
+        from:
+          process.env.RESEND_FROM_EMAIL ||
+          "Negative Dialektik <onboarding@resend.dev>",
+        to: process.env.CONTACT_RECEIVER_EMAIL || "info@negative-dialektik.com",
+        subject:
+          language === "es"
+            ? "Nueva suscripcion al boletin"
+            : "Neue Newsletter-Anmeldung",
+        text: `Neue Newsletter-Anmeldung: ${email}\nSprache: ${language}`,
+      });
+    } catch {
+      // Keep the subscription success even if the internal notification mail fails.
+    }
 
     return {
       status: "success",
-      message: "Vielen Dank. Die Anmeldung wurde erfolgreich uebermittelt.",
+      message:
+        language === "es"
+          ? "Gracias. Su correo ha sido registrado para el boletin."
+          : "Vielen Dank. Ihre E-Mail wurde fuer den Newsletter gespeichert.",
     };
-  } catch {
+  }
+
+  if (result.status === "exists") {
+    return {
+      status: "success",
+      message:
+        language === "es"
+          ? "Este correo ya esta registrado en la lista."
+          : "Diese E-Mail-Adresse ist bereits in der Liste eingetragen.",
+    };
+  }
+
+  if (result.status === "not_configured") {
     return {
       status: "error",
       message:
-        "Die Anmeldung konnte im Moment nicht versendet werden. Bitte versuchen Sie es erneut.",
+        language === "es"
+          ? "La base de datos del boletin aun no esta configurada."
+          : "Die Newsletter-Datenbank ist noch nicht konfiguriert.",
     };
   }
+
+  return {
+    status: "error",
+    message:
+      language === "es"
+        ? "La suscripcion no pudo guardarse en este momento. Intente nuevamente."
+        : "Die Anmeldung konnte im Moment nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+  };
 }

@@ -32,6 +32,7 @@ type NewsletterFormLabels = {
 };
 
 type ContactFormsProps = {
+  lang: string;
   contactForm: ContactFormLabels;
   newsletterForm: NewsletterFormLabels;
 };
@@ -89,6 +90,7 @@ function FormMessage({
 }
 
 export function ContactForms({
+  lang,
   contactForm,
   newsletterForm,
 }: ContactFormsProps) {
@@ -187,6 +189,8 @@ export function ContactForms({
         </p>
 
         <form action={newsletterAction} className="space-y-6">
+          <input type="hidden" name="language" value={lang} />
+
           <div>
             <label
               htmlFor="newsletter-email"
