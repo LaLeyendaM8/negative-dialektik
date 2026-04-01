@@ -19,7 +19,6 @@ import {
   homeFocusItems as deHomeFocusItems,
   homeMission as deHomeMission,
   homeProgram as deHomeProgram,
-  homeBooks as deHomeBooks,
   homeAcademy as deHomeAcademy,
   homeStiftung as deHomeStiftung,
   homeClosing as deHomeClosing,
@@ -38,11 +37,29 @@ import {
   homeFocusItems as esHomeFocusItems,
   homeMission as esHomeMission,
   homeProgram as esHomeProgram,
-  homeBooks as esHomeBooks,
   homeAcademy as esHomeAcademy,
   homeStiftung as esHomeStiftung,
   homeClosing as esHomeClosing,
 } from "@/app/content/es/site/home";
+import { catalogContent as deCatalogContent } from "@/app/content/de/catalog";
+import { catalogContent as esCatalogContent } from "@/app/content/es/catalog";
+
+function getHomeBooksFromCatalog(
+  books: readonly {
+    slug: string;
+    title: string;
+    description: string;
+    coverImage: string;
+  }[],
+) {
+  return books.map((book) => ({
+    slug: book.slug,
+    title: book.title,
+    description: book.description,
+    coverTitle: book.title,
+    coverImage: book.coverImage,
+  }));
+}
 
 const content = {
   de: {
@@ -61,10 +78,11 @@ const content = {
     homeFocusItems: deHomeFocusItems,
     homeMission: deHomeMission,
     homeProgram: deHomeProgram,
-    homeBooks: deHomeBooks,
+    homeBooks: getHomeBooksFromCatalog(deCatalogContent.books),
     homeAcademy: deHomeAcademy,
     homeStiftung: deHomeStiftung,
     homeClosing: deHomeClosing,
+    catalogContent: deCatalogContent,
   },
   es: {
     navigation: esNavigation,
@@ -82,10 +100,11 @@ const content = {
     homeFocusItems: esHomeFocusItems,
     homeMission: esHomeMission,
     homeProgram: esHomeProgram,
-    homeBooks: esHomeBooks,
+    homeBooks: getHomeBooksFromCatalog(esCatalogContent.books),
     homeAcademy: esHomeAcademy,
     homeStiftung: esHomeStiftung,
     homeClosing: esHomeClosing,
+    catalogContent: esCatalogContent,
   },
 } as const;
 
