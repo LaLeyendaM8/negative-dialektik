@@ -5,11 +5,13 @@ import { PageHero } from "../../../components/shared/page-hero";
 import { PageShell } from "../../../components/shared/page-shell";
 import { RichText } from "../../../components/shared/rich-text";
 import { getBookBySlug, getCatalogContent, getSeriesBySlug } from "@/lib/getCatalog";
+import { getContent } from "@/lib/getContent";
 import {
   formatCatalogDate,
   formatCatalogStatus,
   formatStockStatus,
 } from "@/lib/catalog-ui";
+import { getBookInquiryHref } from "@/lib/commerce";
 
 export default async function BookPage({
   params,
@@ -27,92 +29,39 @@ export default async function BookPage({
   const relatedBooks = getCatalogContent(lang).books.filter(
     (entry) => entry.seriesSlug === book.seriesSlug && entry.slug !== book.slug,
   );
-  const contactQuery = `kind=order&book=${encodeURIComponent(book.title)}`;
+  const { bookDetailPage } = getContent(lang);
+
   const primaryAction =
     book.stockStatus === "bestellbar-manuell"
       ? {
-          href: `/${lang}/kontakt?${contactQuery}`,
+          href: getBookInquiryHref(lang, book),
           label: lang === "de" ? "Manuell bestellen" : "Pedir manualmente",
         }
       : book.stockStatus === "vorbestellung-manuell"
         ? {
-            href: `/${lang}/kontakt?${contactQuery}`,
+            href: getBookInquiryHref(lang, book),
             label: lang === "de" ? "Vorbestellung anfragen" : "Solicitar preventa",
           }
         : book.stockStatus === "auf-anfrage"
           ? {
-              href: `/${lang}/kontakt?${contactQuery}`,
+              href: getBookInquiryHref(lang, book),
               label: lang === "de" ? "Bestellung anfragen" : "Consultar pedido",
             }
           : {
-              href: `/${lang}/kontakt?kind=info&book=${encodeURIComponent(book.title)}`,
+              href: getBookInquiryHref(lang, book),
               label:
                 lang === "de"
-                  ? "Verfügbarkeit anfragen"
+                  ? "Verfuegbarkeit anfragen"
                   : "Consultar disponibilidad",
             };
-  const labels =
-    lang === "de"
-      ? {
-          eyebrow: "Buch",
-          inSeries: "In der Reihe",
-          metadata: "Bibliografische Daten",
-          description: "Beschreibung",
-          series: "Reihe",
-          author: "Autor",
-          translator: "Übersetzung",
-          editor: "Herausgeber",
-          pages: "Seiten",
-          format: "Format",
-          language: "Sprache",
-          publicationDate: "Erscheinung",
-          status: "Status",
-          price: "Preis",
-          stockStatus: "Bestellstatus",
-          ctaTitle: "Verfügbarkeit",
-          ctaText:
-            "Diese Buchseite ist bereits als künftige Produktseite angelegt. Im nächsten Ausbau folgen direkte Kaufoptionen, Vorbestellung oder Benachrichtigungen je nach Status des Titels.",
-          secondaryAction: "Reihe ansehen",
-          timelineTitle: "Publikationsrahmen",
-          timelineText:
-            "Die bibliografischen Angaben bilden die Grundlage für spätere Produkt-, Shop- und Verfügbarkeitslogik.",
-          sampleTitle: "Leseprobe",
-          sampleMissing: "Leseprobe folgt in einer späteren Ausbaustufe.",
-          relatedTitle: "Weitere Titel der Reihe",
-          orderNoteTitle: "Bestellweg",
-        }
-      : {
-          eyebrow: "Libro",
-          inSeries: "En la colección",
-          metadata: "Datos bibliograficos",
-          description: "Descripcion",
-          series: "Coleccion",
-          author: "Autor",
-          translator: "Traduccion",
-          editor: "Edicion",
-          pages: "Paginas",
-          format: "Formato",
-          language: "Idioma",
-          publicationDate: "Publicacion",
-          status: "Estado",
-          price: "Precio",
-          stockStatus: "Estado de pedido",
-          ctaTitle: "Disponibilidad",
-          ctaText:
-            "Esta pagina ya esta construida como futura pagina de producto. En la siguiente fase se integraran compra directa, preventa o notificaciones segun el estado del titulo.",
-          secondaryAction: "Ver coleccion",
-          timelineTitle: "Marco de publicacion",
-          timelineText:
-            "Los datos bibliograficos ya establecen la base para la futura logica de producto, tienda y disponibilidad.",
-          sampleTitle: "Muestra",
-          sampleMissing: "La muestra de lectura se incorporara en una fase posterior.",
-          relatedTitle: "Otros titulos de la coleccion",
-          orderNoteTitle: "Via de pedido",
-        };
 
   return (
     <PageShell>
-      <PageHero title={book.title} lead={book.subtitle} eyebrow={labels.eyebrow} />
+      <PageHero
+        title={book.title}
+        lead={book.subtitle}
+        eyebrow={bookDetailPage.eyebrow}
+      />
 
       <div className="grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:gap-16">
         <aside className="self-start xl:sticky xl:top-10">
@@ -130,30 +79,36 @@ export default async function BookPage({
 
           <div className="mt-6 border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.metadata}
+              {bookDetailPage.metadata}
             </p>
             <dl className="mt-5 space-y-4 text-[15px] leading-[1.6]">
               <div>
-                <dt className="text-[var(--color-text-secondary)]">{labels.author}</dt>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {bookDetailPage.author}
+                </dt>
                 <dd>{book.author}</dd>
               </div>
               {book.translator ? (
                 <div>
                   <dt className="text-[var(--color-text-secondary)]">
-                    {labels.translator}
+                    {bookDetailPage.translator}
                   </dt>
                   <dd>{book.translator}</dd>
                 </div>
               ) : null}
               {book.editor ? (
                 <div>
-                  <dt className="text-[var(--color-text-secondary)]">{labels.editor}</dt>
+                  <dt className="text-[var(--color-text-secondary)]">
+                    {bookDetailPage.editor}
+                  </dt>
                   <dd>{book.editor}</dd>
                 </div>
               ) : null}
               {series ? (
                 <div>
-                  <dt className="text-[var(--color-text-secondary)]">{labels.series}</dt>
+                  <dt className="text-[var(--color-text-secondary)]">
+                    {bookDetailPage.series}
+                  </dt>
                   <dd>
                     <Link
                       href={`/${lang}/reihen/${series.slug}`}
@@ -169,36 +124,46 @@ export default async function BookPage({
                 <dd>{book.isbn}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-text-secondary)]">{labels.pages}</dt>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {bookDetailPage.pages}
+                </dt>
                 <dd>{book.pages}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-text-secondary)]">{labels.format}</dt>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {bookDetailPage.format}
+                </dt>
                 <dd>{book.format}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-text-secondary)]">{labels.language}</dt>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {bookDetailPage.language}
+                </dt>
                 <dd>{book.language}</dd>
               </div>
               <div>
                 <dt className="text-[var(--color-text-secondary)]">
-                  {labels.publicationDate}
+                  {bookDetailPage.publicationDate}
                 </dt>
                 <dd>{formatCatalogDate(lang, book.publicationDate)}</dd>
               </div>
               <div>
-                <dt className="text-[var(--color-text-secondary)]">{labels.status}</dt>
+                <dt className="text-[var(--color-text-secondary)]">
+                  {bookDetailPage.status}
+                </dt>
                 <dd>{formatCatalogStatus(lang, book.status)}</dd>
               </div>
               <div>
                 <dt className="text-[var(--color-text-secondary)]">
-                  {labels.stockStatus}
+                  {bookDetailPage.stockStatus}
                 </dt>
                 <dd>{formatStockStatus(lang, book.stockStatus)}</dd>
               </div>
               {book.price ? (
                 <div>
-                  <dt className="text-[var(--color-text-secondary)]">{labels.price}</dt>
+                  <dt className="text-[var(--color-text-secondary)]">
+                    {bookDetailPage.price}
+                  </dt>
                   <dd>{book.price}</dd>
                 </div>
               ) : null}
@@ -214,7 +179,7 @@ export default async function BookPage({
                   href={`/${lang}/reihen/${series.slug}`}
                   className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
                 >
-                  {labels.inSeries}: {series.title}
+                  {bookDetailPage.inSeries}: {series.title}
                 </Link>
               ) : null}
               <span className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
@@ -222,7 +187,7 @@ export default async function BookPage({
               </span>
             </div>
             <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.description}
+              {bookDetailPage.description}
             </p>
             <RichText>
               <p>{book.description}</p>
@@ -242,10 +207,10 @@ export default async function BookPage({
 
           <section className="mt-14 border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.ctaTitle}
+              {bookDetailPage.ctaTitle}
             </p>
             <p className="mt-4 max-w-[56ch] text-[17px] leading-[1.75] text-[var(--color-text)]">
-              {labels.ctaText}
+              {bookDetailPage.ctaText}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
@@ -259,7 +224,7 @@ export default async function BookPage({
                   href={`/${lang}/reihen/${series.slug}`}
                   className="inline-flex border border-[var(--color-border)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-text)] hover:text-[var(--color-text)]"
                 >
-                  {labels.secondaryAction}
+                  {bookDetailPage.secondaryAction}
                 </Link>
               ) : null}
             </div>
@@ -272,16 +237,16 @@ export default async function BookPage({
 
           <section className="mt-14 border-t border-[var(--color-border)] pt-8">
             <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.timelineTitle}
+              {bookDetailPage.timelineTitle}
             </p>
             <p className="max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
-              {labels.timelineText}
+              {bookDetailPage.timelineText}
             </p>
           </section>
 
           <section className="mt-14">
             <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.sampleTitle}
+              {bookDetailPage.sampleTitle}
             </p>
             {book.samplePdf ? (
               <a
@@ -292,7 +257,7 @@ export default async function BookPage({
               </a>
             ) : (
               <p className="max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
-                {labels.sampleMissing}
+                {bookDetailPage.sampleMissing}
               </p>
             )}
           </section>
@@ -300,7 +265,7 @@ export default async function BookPage({
           {relatedBooks.length > 0 ? (
             <section className="mt-14 border-t border-[var(--color-border)] pt-8">
               <p className="mb-6 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-                {labels.relatedTitle}
+                {bookDetailPage.relatedTitle}
               </p>
               <div className="grid gap-5 md:grid-cols-2">
                 {relatedBooks.map((relatedBook) => (

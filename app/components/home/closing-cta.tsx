@@ -28,7 +28,7 @@ export function ClosingCta({ lang, closing }: ClosingCtaProps) {
           {closing.paragraphs?.map((paragraph, index) => (
             <p
               key={index}
-              className="mb-6 text-[16px] leading-[1.7] text-[var(--color-text-secondary)]"
+              className="mb-6 text-[18px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[21px]"
             >
               {paragraph}
             </p>

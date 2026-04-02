@@ -1,12 +1,93 @@
+import Image from "next/image";
+import Link from "next/link";
 import { PageHero } from "../../components/shared/page-hero";
 import { PageShell } from "../../components/shared/page-shell";
 import { RichText } from "../../components/shared/rich-text";
 import { SectionHeading } from "../../components/ui/section-heading";
-import Image from "next/image";
-import Link from "next/link";
 import { getContent } from "@/lib/getContent";
 import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
-import { getBookInquiryHref } from "@/lib/commerce";
+
+function ProgramBookGrid({
+  books,
+  lang,
+  openLabel,
+  orderLabel,
+}: {
+  books: {
+    slug: string;
+    title: string;
+    description: string;
+    coverImage: string;
+    status: "in-vorbereitung" | "angekuendigt" | "vorbestellbar" | "lieferbar" | "vergriffen";
+    stockStatus:
+      | "nicht-verfuegbar"
+      | "auf-anfrage"
+      | "vorbestellung-manuell"
+      | "bestellbar-manuell";
+  }[];
+  lang: string;
+  openLabel: string;
+  orderLabel: string;
+}) {
+  return (
+    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-3">
+      {books.map((book) => (
+        <article key={book.slug} className="group">
+          <Link
+            href={`/${lang}/buecher/${book.slug}`}
+            className="block overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]"
+          >
+            <div className="relative aspect-[4/5] w-full bg-[var(--color-surface)]">
+              <Image
+                src={book.coverImage}
+                alt={book.title}
+                fill
+                className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              />
+            </div>
+          </Link>
+
+          <div className="mt-6">
+            <Link href={`/${lang}/buecher/${book.slug}`} className="block">
+              <p
+                className="text-[36px] leading-[1.02] text-[var(--color-text)] md:text-[42px]"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                {book.title}
+              </p>
+            </Link>
+
+            <p className="mt-3 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+              {formatCatalogStatus(lang, book.status)}
+            </p>
+            <p className="mt-2 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+              {formatStockStatus(lang, book.stockStatus)}
+            </p>
+            <p className="mt-5 max-w-[28ch] text-[17px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[18px]">
+              {book.description}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-6">
+              <Link
+                href={`/${lang}/buecher/${book.slug}`}
+                className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+              >
+                {openLabel}
+              </Link>
+              <Link
+                href={`/${lang}/kontakt?kind=order&book=${encodeURIComponent(book.title)}`}
+                className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+              >
+                {orderLabel}
+              </Link>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
 
 export default async function ProgramPage({
   params,
@@ -14,59 +95,13 @@ export default async function ProgramPage({
   params: Promise<{ lang: string }>;
 }) {
   const { lang } = await params;
-  const { programmPage, catalogContent } = getContent(lang);
+  const { programmPage, catalogContent, programUi } = getContent(lang);
   const announcedBooks = catalogContent.books.filter(
     (book) => book.status === "angekuendigt" || book.status === "vorbestellbar",
   );
   const upcomingBooks = catalogContent.books.filter(
     (book) => book.status === "in-vorbereitung",
   );
-  const manuallyRequestableBooks = catalogContent.books.filter(
-    (book) => book.stockStatus !== "nicht-verfuegbar",
-  );
-
-  const labels =
-    lang === "de"
-      ? {
-          overviewTitle: "Katalogstruktur",
-          overviewText:
-            "Das Programm wird Schritt fuer Schritt als navigierbarer Katalog und spaetere Shop-Grundlage aufgebaut. Reihen und Titel sind bereits als eigenstaendige Seitentypen angelegt und koennen in den naechsten Schritten um Checkout-Logik erweitert werden.",
-          quickViewTitle: "Programm auf einen Blick",
-          quickViewSeries: "Reihen",
-          quickViewBooks: "Titel",
-          quickViewAnnounced: "Angekuendigt",
-          quickViewUpcoming: "Demnaechst",
-          quickViewOrderable: "Manuell anfragbar",
-          openSeries: "Reihenseite oeffnen",
-          openBook: "Buchseite oeffnen",
-          orderPath: "Bestellweg",
-          announcedTitle: "Neuerscheinungen und Ankuendigungen",
-          announcedSubtitle:
-            "Titel, die bereits editorisch sichtbar gemacht werden und als erste Bezugspunkte des Programms nach aussen treten.",
-          upcomingTitle: "Demnaechst",
-          upcomingSubtitle:
-            "Titel in Vorbereitung, die das kuenftige Wachstum des Programms bereits inhaltlich markieren.",
-        }
-      : {
-          overviewTitle: "Estructura del catalogo",
-          overviewText:
-            "El programa se esta convirtiendo paso a paso en un catalogo navegable y en la base de una futura tienda propia. Las colecciones y los titulos ya existen como tipos de pagina propios y podran ampliarse despues con checkout y pago.",
-          quickViewTitle: "Vista general del programa",
-          quickViewSeries: "Colecciones",
-          quickViewBooks: "Titulos",
-          quickViewAnnounced: "Anunciados",
-          quickViewUpcoming: "Proximamente",
-          quickViewOrderable: "Consulta manual",
-          openSeries: "Abrir pagina de la coleccion",
-          openBook: "Abrir pagina del libro",
-          orderPath: "Via de pedido",
-          announcedTitle: "Novedades y anuncios",
-          announcedSubtitle:
-            "Titulos que ya adquieren visibilidad editorial y funcionan como primeros puntos de referencia del programa.",
-          upcomingTitle: "Proximamente",
-          upcomingSubtitle:
-            "Titulos en preparacion que ya permiten reconocer el crecimiento futuro del programa.",
-        };
 
   return (
     <PageShell>
@@ -78,293 +113,27 @@ export default async function ProgramPage({
         ))}
       </RichText>
 
-      <section className="mt-16 border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-10">
-        <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-          {labels.overviewTitle}
-        </p>
-        <p className="mt-5 max-w-[60ch] text-[17px] leading-[1.75] text-[var(--color-text)] md:text-[18px]">
-          {labels.overviewText}
-        </p>
-      </section>
-
-      <section className="mt-16">
-        <SectionHeading title={labels.quickViewTitle} />
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
-          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.quickViewSeries}
-            </p>
-            <p
-              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {catalogContent.series.length}
-            </p>
-          </div>
-
-          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.quickViewBooks}
-            </p>
-            <p
-              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {catalogContent.books.length}
-            </p>
-          </div>
-
-          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.quickViewAnnounced}
-            </p>
-            <p
-              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {announcedBooks.length}
-            </p>
-          </div>
-
-          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.quickViewUpcoming}
-            </p>
-            <p
-              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {upcomingBooks.length}
-            </p>
-          </div>
-
-          <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
-            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {labels.quickViewOrderable}
-            </p>
-            <p
-              className="mt-4 text-[44px] leading-none text-[var(--color-text)]"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              {manuallyRequestableBooks.length}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {programmPage.sections.map((section) => (
-        <section key={section.title} className="mt-16">
-          <SectionHeading title={section.title} subtitle={section.subtitle} />
-
-          <RichText>
-            {"blocks" in section &&
-              section.blocks &&
-              section.blocks.map((block) => (
-                <div key={block.title} className="mb-10 last:mb-0">
-                  <h3>{block.title}</h3>
-                  {block.paragraphs.map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
-                </div>
-              ))}
-
-            {"paragraphs" in section &&
-              section.paragraphs &&
-              section.paragraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-          </RichText>
-        </section>
-      ))}
-
-      <section className="mt-16">
-        <SectionHeading
-          title={catalogContent.overview.seriesTitle}
-          subtitle={catalogContent.overview.seriesSubtitle}
-        />
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {catalogContent.series.map((series) => (
-            <Link
-              key={series.slug}
-              href={`/${lang}/reihen/${series.slug}`}
-              className="block border border-[var(--color-border)] bg-[var(--color-card)] p-6 transition-opacity hover:opacity-80"
-            >
-              <div className="relative mb-6 aspect-[5/3] w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-                <Image
-                  src={series.coverImage}
-                  alt={series.title}
-                  fill
-                  className="object-contain p-4"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-              <p
-                className="text-[28px] leading-[1.08] text-[var(--color-text)]"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {series.title}
-              </p>
-              <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                {formatCatalogStatus(lang, series.status)}
-              </p>
-              <p className="mt-3 text-[15px] leading-[1.7] text-[var(--color-text-secondary)]">
-                {series.description}
-              </p>
-              <p className="mt-6 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                {labels.openSeries}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-16">
-        <SectionHeading
-          title={catalogContent.overview.booksTitle}
-          subtitle={catalogContent.overview.booksSubtitle}
-        />
-
-        <div className="grid gap-6 md:grid-cols-2">
-          {catalogContent.books.map((book) => (
-            <Link
-              key={book.slug}
-              href={`/${lang}/buecher/${book.slug}`}
-              className="block border border-[var(--color-border)] bg-[var(--color-card)] p-6 transition-opacity hover:opacity-80"
-            >
-              <div className="grid gap-5 sm:grid-cols-[132px_1fr] sm:items-start">
-                <div className="relative aspect-[4/5] w-[132px] max-w-full overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)]">
-                  <Image
-                    src={book.coverImage}
-                    alt={book.title}
-                    fill
-                    className="object-contain p-2"
-                    sizes="132px"
-                  />
-                </div>
-                <div>
-                  <p
-                    className="text-[28px] leading-[1.08] text-[var(--color-text)]"
-                    style={{ fontFamily: "var(--font-serif)" }}
-                  >
-                    {book.title}
-                  </p>
-                  <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                    {formatCatalogStatus(lang, book.status)}
-                  </p>
-                  <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                    {formatStockStatus(lang, book.stockStatus)}
-                  </p>
-                  <p className="mt-3 text-[15px] leading-[1.7] text-[var(--color-text-secondary)]">
-                    {book.description}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-4">
-                <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                  {labels.openBook}
-                </p>
-                <Link
-                  href={getBookInquiryHref(lang, book)}
-                  className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
-                >
-                  {labels.orderPath}
-                </Link>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {announcedBooks.length > 0 ? (
-        <section className="mt-16">
-          <SectionHeading
-            title={labels.announcedTitle}
-            subtitle={labels.announcedSubtitle}
+        <section className="mt-20">
+          <SectionHeading title={programUi.announcedTitle} />
+          <ProgramBookGrid
+            books={announcedBooks}
+            lang={lang}
+            openLabel={programUi.openBook}
+            orderLabel={programUi.orderPath}
           />
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {announcedBooks.map((book) => (
-              <Link
-                key={book.slug}
-                href={`/${lang}/buecher/${book.slug}`}
-                className="block border border-[var(--color-border)] bg-[var(--color-card)] p-6 transition-opacity hover:opacity-80"
-              >
-                <p
-                  className="text-[30px] leading-[1.06] text-[var(--color-text)]"
-                  style={{ fontFamily: "var(--font-serif)" }}
-                >
-                  {book.title}
-                </p>
-                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                  {formatCatalogStatus(lang, book.status)}
-                </p>
-                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                  {formatStockStatus(lang, book.stockStatus)}
-                </p>
-                <p className="mt-4 text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
-                  {book.description}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                    {labels.openBook}
-                  </p>
-                  <Link
-                    href={getBookInquiryHref(lang, book)}
-                    className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
-                  >
-                    {labels.orderPath}
-                  </Link>
-                </div>
-              </Link>
-            ))}
-          </div>
         </section>
       ) : null}
 
       {upcomingBooks.length > 0 ? (
-        <section className="mt-16">
-          <SectionHeading
-            title={labels.upcomingTitle}
-            subtitle={labels.upcomingSubtitle}
+        <section className="mt-20">
+          <SectionHeading title={programUi.upcomingTitle} />
+          <ProgramBookGrid
+            books={upcomingBooks}
+            lang={lang}
+            openLabel={programUi.openBook}
+            orderLabel={programUi.orderPath}
           />
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {upcomingBooks.map((book) => (
-              <Link
-                key={book.slug}
-                href={`/${lang}/buecher/${book.slug}`}
-                className="block border border-[var(--color-border)] bg-[var(--color-surface)] p-6 transition-opacity hover:opacity-80"
-              >
-                <p
-                  className="text-[28px] leading-[1.08] text-[var(--color-text)]"
-                  style={{ fontFamily: "var(--font-serif)" }}
-                >
-                  {book.title}
-                </p>
-                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                  {formatCatalogStatus(lang, book.status)}
-                </p>
-                <p className="mt-2 text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
-                  {formatStockStatus(lang, book.stockStatus)}
-                </p>
-                <p className="mt-4 text-[15px] leading-[1.75] text-[var(--color-text-secondary)]">
-                  {book.description}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-4">
-                  <p className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4">
-                    {labels.openBook}
-                  </p>
-                  <Link
-                    href={getBookInquiryHref(lang, book)}
-                    className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
-                  >
-                    {labels.orderPath}
-                  </Link>
-                </div>
-              </Link>
-            ))}
-          </div>
         </section>
       ) : null}
     </PageShell>

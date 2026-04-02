@@ -5,13 +5,13 @@ export function formatCatalogStatus(lang: string, status: BookStatus) {
     lang === "de"
       ? {
           "in-vorbereitung": "In Vorbereitung",
-          angekuendigt: "Angekuendigt",
+          angekuendigt: "Angekündigt",
           vorbestellbar: "Vorbestellbar",
           lieferbar: "Lieferbar",
           vergriffen: "Vergriffen",
         }
       : {
-          "in-vorbereitung": "En preparacion",
+          "in-vorbereitung": "En preparación",
           angekuendigt: "Anunciado",
           vorbestellbar: "Preventa",
           lieferbar: "Disponible",
@@ -41,7 +41,7 @@ export function formatStockStatus(lang: string, status: StockStatus) {
           "bestellbar-manuell": "Manuell bestellbar",
         }
       : {
-          "nicht-verfuegbar": "Aun no disponible",
+          "nicht-verfuegbar": "Aún no disponible",
           "auf-anfrage": "Pedido por consulta",
           "vorbestellung-manuell": "Preventa por consulta",
           "bestellbar-manuell": "Pedido manual disponible",
