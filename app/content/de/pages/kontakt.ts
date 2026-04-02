@@ -24,7 +24,7 @@ export const kontaktPage = {
     submitLabel: "Abonnieren",
     sendingLabel: "Wird gesendet",
     successMessage:
-      "Vielen Dank. Ihre Newsletter-Anfrage wurde erfolgreich uebermittelt.",
+      "Vielen Dank. Ihre Newsletter-Anfrage wurde erfolgreich übermittelt.",
     errorMessage:
       "Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es erneut.",
   },
@@ -33,7 +33,7 @@ export const kontaktPage = {
     title: "Institut",
     lines: [
       "Negative Dialektik",
-      "Institut fuer deutsche Philosophie",
+      "Institut für deutsche Philosophie",
       "Tunja, Kolumbien",
     ],
     email: "info@negative-dialektik.com",

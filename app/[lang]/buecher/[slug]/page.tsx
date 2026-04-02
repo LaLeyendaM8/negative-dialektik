@@ -48,7 +48,7 @@ export default async function BookPage({
               href: `/${lang}/kontakt?kind=info&book=${encodeURIComponent(book.title)}`,
               label:
                 lang === "de"
-                  ? "Verfuegbarkeit anfragen"
+                  ? "Verfügbarkeit anfragen"
                   : "Consultar disponibilidad",
             };
   const labels =
@@ -60,7 +60,7 @@ export default async function BookPage({
           description: "Beschreibung",
           series: "Reihe",
           author: "Autor",
-          translator: "Uebersetzung",
+          translator: "Übersetzung",
           editor: "Herausgeber",
           pages: "Seiten",
           format: "Format",
@@ -69,21 +69,21 @@ export default async function BookPage({
           status: "Status",
           price: "Preis",
           stockStatus: "Bestellstatus",
-          ctaTitle: "Verfuegbarkeit",
+          ctaTitle: "Verfügbarkeit",
           ctaText:
-            "Diese Buchseite ist bereits als kuenftige Produktseite angelegt. Im naechsten Ausbau folgen direkte Kaufoptionen, Vorbestellung oder Benachrichtigungen je nach Status des Titels.",
+            "Diese Buchseite ist bereits als künftige Produktseite angelegt. Im nächsten Ausbau folgen direkte Kaufoptionen, Vorbestellung oder Benachrichtigungen je nach Status des Titels.",
           secondaryAction: "Reihe ansehen",
           timelineTitle: "Publikationsrahmen",
           timelineText:
-            "Die bibliografischen Angaben bilden die Grundlage fuer spaetere Produkt-, Shop- und Verfuegbarkeitslogik.",
+            "Die bibliografischen Angaben bilden die Grundlage für spätere Produkt-, Shop- und Verfügbarkeitslogik.",
           sampleTitle: "Leseprobe",
-          sampleMissing: "Leseprobe folgt in einer spaeteren Ausbaustufe.",
+          sampleMissing: "Leseprobe folgt in einer späteren Ausbaustufe.",
           relatedTitle: "Weitere Titel der Reihe",
           orderNoteTitle: "Bestellweg",
         }
       : {
           eyebrow: "Libro",
-          inSeries: "En la coleccion",
+          inSeries: "En la colección",
           metadata: "Datos bibliograficos",
           description: "Descripcion",
           series: "Coleccion",

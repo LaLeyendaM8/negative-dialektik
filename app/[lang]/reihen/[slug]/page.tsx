@@ -31,8 +31,8 @@ export default async function SeriesPage({
           status: "Status",
           titles: "Titel der Reihe",
           titlesLead:
-            "Die Reihe ist als editorischer Zusammenhang angelegt und bildet bereits die Grundlage fuer kuenftige Detailseiten und spaetere Kaufoptionen.",
-          openBook: "Buchseite oeffnen",
+            "Die Reihe ist als editorischer Zusammenhang angelegt und bildet bereits die Grundlage fuer künftige Detailseiten und spätere Kaufoptionen.",
+          openBook: "Buchseite öffnen",
           orderPath: "Bestellweg",
         }
       : {
@@ -41,7 +41,7 @@ export default async function SeriesPage({
           status: "Estado",
           titles: "Titulos de la coleccion",
           titlesLead:
-            "La coleccion esta concebida como un conjunto editorial y ya sirve de base para futuras paginas de detalle y opciones de compra.",
+            "La colección esta concebida como un conjunto editorial y ya sirve de base para futuras paginas de detalle y opciones de compra.",
           openBook: "Abrir pagina del libro",
           orderPath: "Via de pedido",
         };
