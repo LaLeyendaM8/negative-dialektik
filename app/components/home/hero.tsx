@@ -34,7 +34,7 @@ export function Hero({ lang, hero, focusItems }: HeroProps) {
             </p>
 
             <h1
-              className="mb-8 text-[20px] leading-[1.25] tracking-[-0.01em] text-[var(--color-text-secondary)] sm:text-[22px] md:text-[26px]"
+              className="mb-8 text-[24px] leading-[1.2] tracking-[0.08em] text-[var(--color-text-secondary)] uppercase sm:text-[26px] md:text-[32px]"
               style={{ fontFamily: "var(--font-serif)" }}
             >
               {hero.title}

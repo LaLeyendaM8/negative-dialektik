@@ -1,0 +1,27 @@
+export const bookDetailPage = {
+  eyebrow: "Libro",
+  inSeries: "En la colección",
+  metadata: "Datos bibliográficos",
+  description: "Descripción",
+  series: "Colección",
+  author: "Autor",
+  translator: "Traducción",
+  editor: "Edición",
+  pages: "Páginas",
+  format: "Formato",
+  language: "Idioma",
+  publicationDate: "Publicación",
+  status: "Estado",
+  price: "Precio",
+  stockStatus: "Estado de pedido",
+  ctaTitle: "Disponibilidad",
+  ctaText:
+    "Esta página ya está construida como futura página de producto. En la siguiente fase se integrarán compra directa, preventa o notificaciones según el estado del título.",
+  secondaryAction: "Ver colección",
+  timelineTitle: "Marco de publicación",
+  timelineText:
+    "Los datos bibliográficos ya establecen la base para la futura lógica de producto, tienda y disponibilidad.",
+  sampleTitle: "Muestra",
+  sampleMissing: "La muestra de lectura se incorporará en una fase posterior.",
+  relatedTitle: "Otros títulos de la colección",
+};

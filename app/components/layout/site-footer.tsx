@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./container";
 
@@ -17,22 +18,18 @@ export function SiteFooter({ lang, links, brand, rights }: SiteFooterProps) {
   return (
     <footer className="border-t border-[var(--color-border)] py-14">
       <Container>
-        <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
-          <div>
-            <Link href={`/${lang}`} className="mb-3 block shrink-0">
-              <img
-                src="/logo/logo.svg"
-                alt="Negative Dialektik"
-                className="h-auto w-[56px] dark:invert"
-              />
-            </Link>
+        <div className="flex flex-col items-center gap-8">
+          <Link href={`/${lang}`} className="block shrink-0">
+            <Image
+              src="/logo/logo.svg"
+              alt="Negative Dialektik"
+              width={92}
+              height={56}
+              className="mx-auto h-auto w-[78px] dark:invert md:w-[92px]"
+            />
+          </Link>
 
-            <p className="text-[14px] text-[var(--color-text-secondary)]">
-              {brand}
-            </p>
-          </div>
-
-          <nav className="flex flex-wrap gap-6 md:gap-8">
+          <nav className="flex flex-wrap justify-center gap-6 md:gap-8">
             {links.map((item) => (
               <Link
                 key={item.href}

@@ -31,7 +31,7 @@ export function NewReleases({ lang, books, title }: NewReleasesProps) {
           {books.map((book) => (
             <Link
               key={book.slug}
-              href={`/${lang}/programm`}
+              href={`/${lang}/buecher/${book.slug}`}
               className="group block"
             >
               <div className="mb-6 overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]">

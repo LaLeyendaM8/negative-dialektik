@@ -9,6 +9,9 @@ import { uiText as esUiText } from "@/app/content/es/site/ui";
 import { institutPage as deInstitutPage } from "@/app/content/de/pages/institut";
 import { verlagPage as deVerlagPage } from "@/app/content/de/pages/verlag";
 import { programmPage as deProgrammPage } from "@/app/content/de/pages/programm";
+import { programUi as deProgramUi } from "@/app/content/de/pages/program-ui";
+import { bookDetailPage as deBookDetailPage } from "@/app/content/de/pages/book-detail";
+import { seriesDetailPage as deSeriesDetailPage } from "@/app/content/de/pages/series-detail";
 import { akademiePage as deAkademiePage } from "@/app/content/de/pages/akademie";
 import { stiftungPage as deStiftungPage } from "@/app/content/de/pages/stiftung";
 import { kontaktPage as deKontaktPage } from "@/app/content/de/pages/kontakt";
@@ -19,7 +22,6 @@ import {
   homeFocusItems as deHomeFocusItems,
   homeMission as deHomeMission,
   homeProgram as deHomeProgram,
-  homeBooks as deHomeBooks,
   homeAcademy as deHomeAcademy,
   homeStiftung as deHomeStiftung,
   homeClosing as deHomeClosing,
@@ -28,6 +30,9 @@ import {
 import { institutPage as esInstitutPage } from "@/app/content/es/pages/institut";
 import { verlagPage as esVerlagPage } from "@/app/content/es/pages/verlag";
 import { programmPage as esProgrammPage } from "@/app/content/es/pages/programm";
+import { programUi as esProgramUi } from "@/app/content/es/pages/program-ui";
+import { bookDetailPage as esBookDetailPage } from "@/app/content/es/pages/book-detail";
+import { seriesDetailPage as esSeriesDetailPage } from "@/app/content/es/pages/series-detail";
 import { akademiePage as esAkademiePage } from "@/app/content/es/pages/akademie";
 import { stiftungPage as esStiftungPage } from "@/app/content/es/pages/stiftung";
 import { kontaktPage as esKontaktPage } from "@/app/content/es/pages/kontakt";
@@ -38,11 +43,29 @@ import {
   homeFocusItems as esHomeFocusItems,
   homeMission as esHomeMission,
   homeProgram as esHomeProgram,
-  homeBooks as esHomeBooks,
   homeAcademy as esHomeAcademy,
   homeStiftung as esHomeStiftung,
   homeClosing as esHomeClosing,
 } from "@/app/content/es/site/home";
+import { catalogContent as deCatalogContent } from "@/app/content/de/catalog";
+import { catalogContent as esCatalogContent } from "@/app/content/es/catalog";
+
+function getHomeBooksFromCatalog(
+  books: readonly {
+    slug: string;
+    title: string;
+    description: string;
+    coverImage: string;
+  }[],
+) {
+  return books.map((book) => ({
+    slug: book.slug,
+    title: book.title,
+    description: book.description,
+    coverTitle: book.title,
+    coverImage: book.coverImage,
+  }));
+}
 
 const content = {
   de: {
@@ -52,6 +75,9 @@ const content = {
     institutPage: deInstitutPage,
     verlagPage: deVerlagPage,
     programmPage: deProgrammPage,
+    programUi: deProgramUi,
+    bookDetailPage: deBookDetailPage,
+    seriesDetailPage: deSeriesDetailPage,
     akademiePage: deAkademiePage,
     stiftungPage: deStiftungPage,
     kontaktPage: deKontaktPage,
@@ -61,10 +87,11 @@ const content = {
     homeFocusItems: deHomeFocusItems,
     homeMission: deHomeMission,
     homeProgram: deHomeProgram,
-    homeBooks: deHomeBooks,
+    homeBooks: getHomeBooksFromCatalog(deCatalogContent.books),
     homeAcademy: deHomeAcademy,
     homeStiftung: deHomeStiftung,
     homeClosing: deHomeClosing,
+    catalogContent: deCatalogContent,
   },
   es: {
     navigation: esNavigation,
@@ -73,6 +100,9 @@ const content = {
     institutPage: esInstitutPage,
     verlagPage: esVerlagPage,
     programmPage: esProgrammPage,
+    programUi: esProgramUi,
+    bookDetailPage: esBookDetailPage,
+    seriesDetailPage: esSeriesDetailPage,
     akademiePage: esAkademiePage,
     stiftungPage: esStiftungPage,
     kontaktPage: esKontaktPage,
@@ -82,10 +112,11 @@ const content = {
     homeFocusItems: esHomeFocusItems,
     homeMission: esHomeMission,
     homeProgram: esHomeProgram,
-    homeBooks: esHomeBooks,
+    homeBooks: getHomeBooksFromCatalog(esCatalogContent.books),
     homeAcademy: esHomeAcademy,
     homeStiftung: esHomeStiftung,
     homeClosing: esHomeClosing,
+    catalogContent: esCatalogContent,
   },
 } as const;
 

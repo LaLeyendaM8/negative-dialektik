@@ -1,0 +1,27 @@
+export const bookDetailPage = {
+  eyebrow: "Buch",
+  inSeries: "In der Reihe",
+  metadata: "Bibliografische Daten",
+  description: "Beschreibung",
+  series: "Reihe",
+  author: "Autor",
+  translator: "Übersetzung",
+  editor: "Herausgeber",
+  pages: "Seiten",
+  format: "Format",
+  language: "Sprache",
+  publicationDate: "Erscheinung",
+  status: "Status",
+  price: "Preis",
+  stockStatus: "Bestellstatus",
+  ctaTitle: "Verfügbarkeit",
+  ctaText:
+    "Diese Buchseite ist bereits als künftige Produktseite angelegt. Im nächsten Ausbau folgen direkte Kaufoptionen, Vorbestellung oder Benachrichtigungen je nach Status des Titels.",
+  secondaryAction: "Reihe ansehen",
+  timelineTitle: "Publikationsrahmen",
+  timelineText:
+    "Die bibliografischen Angaben bilden die Grundlage für spätere Produkt-, Shop- und Verfügbarkeitslogik.",
+  sampleTitle: "Leseprobe",
+  sampleMissing: "Leseprobe folgt in einer späteren Ausbaustufe.",
+  relatedTitle: "Weitere Titel der Reihe",
+};
