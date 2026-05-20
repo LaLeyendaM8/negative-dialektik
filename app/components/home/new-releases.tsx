@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "../layout/container";
+import { BookMedia } from "../shared/book-media";
 
 type Book = {
   slug: string;
@@ -36,12 +36,11 @@ export function NewReleases({ lang, books, title }: NewReleasesProps) {
             >
               <div className="mb-6 overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]">
                 <div className="relative aspect-[4/5] w-full bg-[var(--color-card)]">
-                  <Image
+                  <BookMedia
                     src={book.coverImage}
                     alt={book.title}
-                    fill
-                    className="object-contain transition-transform duration-500 group-hover:scale-[1.015]"
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                    imageClassName="object-contain transition-transform duration-500 group-hover:scale-[1.015]"
                   />
                 </div>
               </div>

@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../../../components/shared/page-hero";
 import { PageShell } from "../../../components/shared/page-shell";
@@ -12,6 +11,7 @@ import {
   formatStockStatus,
 } from "@/lib/catalog-ui";
 import { getBookInquiryHref } from "@/lib/commerce";
+import { BookMedia } from "../../../components/shared/book-media";
 
 export default async function BookPage({
   params,
@@ -75,15 +75,27 @@ export default async function BookPage({
         <aside className="self-start xl:sticky xl:top-10">
           <div className="border border-[var(--color-border)] bg-[var(--color-card)] p-6">
             <div className="relative mx-auto aspect-[4/5] w-full max-w-[360px]">
-              <Image
+              <BookMedia
                 src={book.coverImage}
                 alt={book.title}
-                fill
-                className="object-contain"
                 sizes="(max-width: 1280px) 100vw, 360px"
+                imageClassName="object-contain"
               />
             </div>
           </div>
+
+          {book.coverImage.toLowerCase().endsWith(".pdf") ? (
+            <div className="mt-4">
+              <a
+                href={book.coverImage}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
+              >
+                {lang === "de" ? "Portada ansehen (PDF)" : "Ver portada (PDF)"}
+              </a>
+            </div>
+          ) : null}
 
           <div className="mt-6 border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">

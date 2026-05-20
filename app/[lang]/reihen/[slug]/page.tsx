@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "../../../components/shared/page-hero";
@@ -8,6 +7,8 @@ import { getCatalogContent, getSeriesBySlug } from "@/lib/getCatalog";
 import { getContent } from "@/lib/getContent";
 import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
 import { getBookInquiryHref } from "@/lib/commerce";
+import { BookMedia } from "../../../components/shared/book-media";
+import Image from "next/image";
 
 export default async function SeriesPage({
   params,
@@ -85,12 +86,11 @@ export default async function SeriesPage({
                     className="block overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]"
                   >
                     <div className="relative aspect-[4/5] w-full bg-[var(--color-surface)]">
-                      <Image
+                      <BookMedia
                         src={book.coverImage}
                         alt={book.title}
-                        fill
-                        className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        imageClassName="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                   </Link>

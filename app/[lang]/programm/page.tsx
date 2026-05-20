@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../../components/shared/page-hero";
 import { PageShell } from "../../components/shared/page-shell";
@@ -6,6 +5,7 @@ import { RichText } from "../../components/shared/rich-text";
 import { SectionHeading } from "../../components/ui/section-heading";
 import { getContent } from "@/lib/getContent";
 import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
+import { BookMedia } from "../../components/shared/book-media";
 
 function ProgramBookGrid({
   books,
@@ -38,12 +38,11 @@ function ProgramBookGrid({
             className="block overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)]"
           >
             <div className="relative aspect-[4/5] w-full bg-[var(--color-surface)]">
-              <Image
+              <BookMedia
                 src={book.coverImage}
                 alt={book.title}
-                fill
-                className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                imageClassName="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </div>
           </Link>
