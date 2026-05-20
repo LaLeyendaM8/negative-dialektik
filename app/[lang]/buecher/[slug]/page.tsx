@@ -30,8 +30,16 @@ export default async function BookPage({
     (entry) => entry.seriesSlug === book.seriesSlug && entry.slug !== book.slug,
   );
   const { bookDetailPage } = getContent(lang);
+  const hasCheckout = Boolean(book.checkoutEnabled && book.price && book.currency);
+  const checkoutHref = `/api/mercadopago/checkout?lang=${lang}&slug=${encodeURIComponent(book.slug)}`;
 
   const primaryAction =
+    hasCheckout
+      ? {
+          href: checkoutHref,
+          label: lang === "de" ? "Jetzt kaufen" : "Comprar ahora",
+        }
+      :
     book.stockStatus === "bestellbar-manuell"
       ? {
           href: getBookInquiryHref(lang, book),
@@ -213,12 +221,21 @@ export default async function BookPage({
               {bookDetailPage.ctaText}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                href={primaryAction.href}
-                className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
-              >
-                {primaryAction.label}
-              </Link>
+              {hasCheckout ? (
+                <a
+                  href={primaryAction.href}
+                  className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
+                >
+                  {primaryAction.label}
+                </a>
+              ) : (
+                <Link
+                  href={primaryAction.href}
+                  className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
+                >
+                  {primaryAction.label}
+                </Link>
+              )}
               {series ? (
                 <Link
                   href={`/${lang}/reihen/${series.slug}`}
@@ -251,9 +268,11 @@ export default async function BookPage({
             {book.samplePdf ? (
               <a
                 href={book.samplePdf}
+                target="_blank"
+                rel="noreferrer"
                 className="text-[16px] leading-[1.75] text-[var(--color-text-secondary)] underline underline-offset-4"
               >
-                {book.samplePdf}
+                {lang === "de" ? "Leseprobe herunterladen (PDF)" : "Descargar muestra (PDF)"}
               </a>
             ) : (
               <p className="max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">

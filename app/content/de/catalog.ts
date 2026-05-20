@@ -10,7 +10,7 @@ export const catalogContent: CatalogContent = {
       "Die editorischen Linien des Verlags ordnen das Programm nach philosophischen Feldern und Traditionszusammenhaengen.",
     booksTitle: "Titel",
     booksSubtitle:
-      "Die ersten Buchdatensätze schaffen die Grundlage fuer künftige Detailseiten, Vorbestellungen und spätere Shop-Funktionen.",
+      "Die ersten Buchdatensaetze schaffen die Grundlage fuer kuenftige Detailseiten, Vorbestellungen und spaetere Shop-Funktionen.",
   },
   series: [
     {
@@ -32,31 +32,31 @@ export const catalogContent: CatalogContent = {
     {
       slug: "bildung",
       title: "Bildung",
-      subtitle: "Einführungen in zentrale Begriffe, Autoren und Problemfelder.",
+      subtitle: "Einfuehrungen in zentrale Begriffe, Autoren und Problemfelder.",
       description:
-        "Die Reihe bietet systematische Zugaenge zu grundlegenden Begriffen und Autoren der deutschen und europäischen Tradition.",
+        "Die Reihe bietet systematische Zugaenge zu grundlegenden Begriffen und Autoren der deutschen und europaeischen Tradition.",
       theme:
-        "Einordnung, Begriffsklärung und Vermittlung fuer Studium und Lehre.",
+        "Einordnung, Begriffsklaerung und Vermittlung fuer Studium und Lehre.",
       coverImage: "/images/books/bildung.jpeg",
       status: "in-vorbereitung",
       featuredBooks: ["bildung"],
       seoTitle: "Bildung | Negative Dialektik",
       seoDescription:
-        "Reihe fuer systematische Einführungen in zentrale Autoren und Begriffe.",
+        "Reihe fuer systematische Einfuehrungen in zentrale Autoren und Begriffe.",
     },
     {
       slug: "rose",
       title: "Rose",
-      subtitle: "Ästhetik, Kunstphilosophie und deutsche Romantik.",
+      subtitle: "Aesthetik, Kunstphilosophie und deutsche Romantik.",
       description:
         "Hier erscheinen Texte, in denen Kunst, Schoenheit, Form und Erfahrung im Zentrum philosophischer Reflexion stehen.",
-      theme: "Ästhetik, Kunst, Romantik und ihre begrifflichen Konstellationen.",
+      theme: "Aesthetik, Kunst, Romantik und ihre begrifflichen Konstellationen.",
       coverImage: "/images/books/rose.jpeg",
       status: "in-vorbereitung",
       featuredBooks: ["rose"],
       seoTitle: "Rose | Negative Dialektik",
       seoDescription:
-        "Reihe fuer Ästhetik, Kunstphilosophie und deutsche Romantik.",
+        "Reihe fuer Aesthetik, Kunstphilosophie und deutsche Romantik.",
     },
     {
       slug: "schriften-des-instituts",
@@ -70,21 +70,22 @@ export const catalogContent: CatalogContent = {
       featuredBooks: ["schriften-des-instituts"],
       seoTitle: "Schriften des Instituts | Negative Dialektik",
       seoDescription:
-        "Reihe für eigene Forschungsarbeiten, Vorlesungen und programmatische Texte.",
+        "Reihe fuer eigene Forschungsarbeiten, Vorlesungen und programmatische Texte.",
     },
   ],
   books: [
     {
       slug: "geist",
       title: "GEIST",
-      subtitle: "Reihe fÜr Gegenwartsphilosophie und Kritische Theorie",
+      subtitle: "Reihe fuer Gegenwartsphilosophie und Kritische Theorie",
       author: "Negative Dialektik",
+      translator: "Alina Layenda",
       editor: "Negative Dialektik",
       seriesSlug: "geist",
       description:
         "Massgebliche Arbeiten der Gegenwartsphilosophie, Kritischen Theorie sowie der Sozial- und Politischen Philosophie.",
       longDescription: [
-        "GEIST bündelt die editorische Linie für philosophische Texte, die in aktuellen Debatten orientierend wirken und zentrale Problemstellungen der deutschen Tradition weiterfuehren.",
+        "GEIST buendelt die editorische Linie fuer philosophische Texte, die in aktuellen Debatten orientierend wirken und zentrale Problemstellungen der deutschen Tradition weiterfuehren.",
         "Die Reihe ist als Referenzraum fuer Titel angelegt, die Theorieproduktion, Gesellschaftsanalyse und politische Reflexion miteinander verbinden.",
       ],
       quote: {
@@ -92,19 +93,22 @@ export const catalogContent: CatalogContent = {
         text: "Die Reihe versteht philosophische Edition nicht als Archivierung, sondern als Eingriff in gegenwaertige Debatten.",
       },
       coverImage: "/images/books/geist.jpeg",
-      isbn: "978-0-00-000001-1",
-      pages: 240,
-      format: "Paperback",
+      isbn: "978-3-9827438-0-1",
+      pages: 264,
+      format: "Paperback, 14 x 21 cm",
       language: "Spanisch",
       publicationDate: "2026-09-01",
-      status: "angekuendigt",
-      stockStatus: "vorbestellung-manuell",
-      price: "In Vorbereitung",
+      status: "vorbestellbar",
+      stockStatus: "bestellbar-manuell",
+      price: "69000",
+      currency: "COP",
+      checkoutEnabled: true,
       manualOrderNote:
-        "Bestellungen und Vorbestellungen werden in der aktuellen Ausbaustufe direkt ueber das Institut koordiniert.",
+        "Versand und Fulfillment werden in dieser Shop-Vorstufe intern manuell koordiniert.",
+      samplePdf: "/samples/geist-leseprobe.pdf",
       seoTitle: "GEIST | Negative Dialektik",
       seoDescription:
-        "Editorische Linie für Gegenwartsphilosophie, Kritische Theorie und Sozialphilosophie.",
+        "Editorische Linie fuer Gegenwartsphilosophie, Kritische Theorie und Sozialphilosophie.",
     },
     {
       slug: "bildung",
@@ -114,14 +118,14 @@ export const catalogContent: CatalogContent = {
       editor: "Negative Dialektik",
       seriesSlug: "bildung",
       description:
-        "Systematische Einführungen in zentrale Begriffe, Autoren und Problemfelder der deutschen und europäischen Tradition.",
+        "Systematische Einfuehrungen in zentrale Begriffe, Autoren und Problemfelder der deutschen und europaeischen Tradition.",
       longDescription: [
         "BILDUNG richtet sich an Leserinnen und Leser, die einen konzentrierten Zugang zu klassischen und modernen Problemfeldern suchen.",
-        "Die Reihe verbindet editorische Sorgfalt mit didaktischer Klarheit und ist besonders für Studium, Lehre und akademische Orientierung geeignet.",
+        "Die Reihe verbindet editorische Sorgfalt mit didaktischer Klarheit und ist besonders fuer Studium, Lehre und akademische Orientierung geeignet.",
       ],
       quote: {
         source: "Editorische Notiz",
-        text: "Begriffliche Einführung und philologische Genauigkeit werden hier bewusst zusammengeführt.",
+        text: "Begriffliche Einfuehrung und philologische Genauigkeit werden hier bewusst zusammengefuehrt.",
       },
       coverImage: "/images/books/bildung.jpeg",
       isbn: "978-0-00-000002-8",
@@ -132,28 +136,28 @@ export const catalogContent: CatalogContent = {
       status: "in-vorbereitung",
       stockStatus: "nicht-verfuegbar",
       price: "In Vorbereitung",
+      samplePdf: "/samples/bildung-leseprobe.pdf",
       manualOrderNote:
-        "Für diesen Titel nehmen wir derzeit noch keine Bestellungen entgegen, informieren aber gern über den Erscheinungsstand.",
+        "Fuer diesen Titel nehmen wir derzeit noch keine Bestellungen entgegen, informieren aber gern ueber den Erscheinungsstand.",
       seoTitle: "BILDUNG | Negative Dialektik",
       seoDescription:
-        "Reihe für systematische Einführungen in Begriffe, Autoren und Problemfelder.",
+        "Reihe fuer systematische Einfuehrungen in Begriffe, Autoren und Problemfelder.",
     },
     {
       slug: "rose",
       title: "ROSE",
-      subtitle: "Reihe für Ästhetik und deutsche Romantik",
+      subtitle: "Reihe fuer Aesthetik und deutsche Romantik",
       author: "Negative Dialektik",
       editor: "Negative Dialektik",
       seriesSlug: "rose",
-      description:
-        "Arbeiten zur Ästhetik, Kunstphilosophie und zur deutschen Romantik.",
+      description: "Arbeiten zur Aesthetik, Kunstphilosophie und zur deutschen Romantik.",
       longDescription: [
-        "ROSE versammelt Texte, in denen Ästhetik nicht als Randgebiet, sondern als eigenständiger philosophischer Denkraum erscheint.",
+        "ROSE versammelt Texte, in denen Aesthetik nicht als Randgebiet, sondern als eigenstaendiger philosophischer Denkraum erscheint.",
         "Die Reihe stellt Verbindungen zwischen Kunstphilosophie, Erfahrung, Form und romantischer Tradition her.",
       ],
       quote: {
         source: "Editorische Notiz",
-        text: "Ästhetik erscheint hier als Theorieform, in der Erfahrung, Form und Kritik aufeinandertreffen.",
+        text: "Aesthetik erscheint hier als Theorieform, in der Erfahrung, Form und Kritik aufeinandertreffen.",
       },
       coverImage: "/images/books/rose.jpeg",
       isbn: "978-0-00-000003-5",
@@ -164,11 +168,11 @@ export const catalogContent: CatalogContent = {
       status: "in-vorbereitung",
       stockStatus: "nicht-verfuegbar",
       price: "In Vorbereitung",
+      samplePdf: "/samples/rose-leseprobe.pdf",
       manualOrderNote:
-        "Der Titel befindet sich noch in Vorbereitung. Bei Interesse können Sie bereits eine Nachricht an das Institut senden.",
+        "Der Titel befindet sich noch in Vorbereitung. Bei Interesse koennen Sie bereits eine Nachricht an das Institut senden.",
       seoTitle: "ROSE | Negative Dialektik",
-      seoDescription:
-        "Reihe für Ästhetik, Kunstphilosophie und deutsche Romantik.",
+      seoDescription: "Reihe fuer Aesthetik, Kunstphilosophie und deutsche Romantik.",
     },
     {
       slug: "schriften-des-instituts",
@@ -178,10 +182,10 @@ export const catalogContent: CatalogContent = {
       editor: "Negative Dialektik",
       seriesSlug: "schriften-des-instituts",
       description:
-        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beiträge von Negative Dialektik.",
+        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beitraege von Negative Dialektik.",
       longDescription: [
         "Die Schriften des Instituts dokumentieren die eigene theoretische und institutionelle Arbeit von Negative Dialektik.",
-        "Hier erscheinen Texte, die Forschung, Lehre und editorisches Selbstverständnis in verdichteter Form sichtbar machen.",
+        "Hier erscheinen Texte, die Forschung, Lehre und editorisches Selbstverstaendnis in verdichteter Form sichtbar machen.",
       ],
       quote: {
         source: "Editorische Notiz",
@@ -196,11 +200,12 @@ export const catalogContent: CatalogContent = {
       status: "in-vorbereitung",
       stockStatus: "auf-anfrage",
       price: "In Vorbereitung",
+      samplePdf: "/samples/schriften-des-instituts-leseprobe.pdf",
       manualOrderNote:
-        "Anfragen zu institutionellen Bestellungen oder späteren Vorbestellungen können bereits jetzt an das Institut gerichtet werden.",
+        "Anfragen zu institutionellen Bestellungen oder spaeteren Vorbestellungen koennen bereits jetzt an das Institut gerichtet werden.",
       seoTitle: "Schriften des Instituts | Negative Dialektik",
       seoDescription:
-        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beiträge des Instituts.",
+        "Eigene Forschungsarbeiten, Vorlesungen und programmatische Beitraege des Instituts.",
     },
   ],
 };

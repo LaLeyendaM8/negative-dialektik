@@ -51,6 +51,7 @@ export type CatalogBook = {
   currency?: string;
   stockStatus: StockStatus;
   buyLink?: string;
+  checkoutEnabled?: boolean;
   manualOrderNote?: string;
   samplePdf?: string;
   seoTitle: string;
