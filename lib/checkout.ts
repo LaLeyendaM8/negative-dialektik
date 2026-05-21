@@ -66,10 +66,8 @@ export async function createCheckoutSession(params: {
   const notificationUrl =
     `${baseUrl}/api/mercadopago/webhook` +
     (webhookSecret ? `?secret=${encodeURIComponent(webhookSecret)}` : "");
-  const normalizedPrice = Number(
-    String(result.book.price).replace(/[^0-9,.-]/g, "").replace(",", "."),
-  );
-  const unitPrice = Number.isFinite(normalizedPrice) ? normalizedPrice : null;
+  const priceDigits = String(result.book.price).replace(/[^\d]/g, "");
+  const unitPrice = priceDigits ? Number(priceDigits) : null;
 
   if (!unitPrice) {
     throw new Error("Invalid unit price for checkout.");

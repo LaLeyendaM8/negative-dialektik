@@ -34,6 +34,7 @@ export type CatalogBook = {
   translator?: string;
   editor?: string;
   seriesSlug: string;
+  seriesDisplayLabel?: string;
   description: string;
   longDescription: string[];
   quote?: {

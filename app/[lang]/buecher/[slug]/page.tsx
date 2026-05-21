@@ -32,6 +32,7 @@ export default async function BookPage({
   const { bookDetailPage } = getContent(lang);
   const hasCheckout = Boolean(book.checkoutEnabled && book.price && book.currency);
   const checkoutHref = `/api/mercadopago/checkout?lang=${lang}&slug=${encodeURIComponent(book.slug)}`;
+  const seriesLabel = book.seriesDisplayLabel || series?.title;
 
   const primaryAction =
     hasCheckout
@@ -84,19 +85,6 @@ export default async function BookPage({
             </div>
           </div>
 
-          {book.coverImage.toLowerCase().endsWith(".pdf") ? (
-            <div className="mt-4">
-              <a
-                href={book.coverImage}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
-              >
-                {lang === "de" ? "Portada ansehen (PDF)" : "Ver portada (PDF)"}
-              </a>
-            </div>
-          ) : null}
-
           <div className="mt-6 border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {bookDetailPage.metadata}
@@ -134,7 +122,7 @@ export default async function BookPage({
                       href={`/${lang}/reihen/${series.slug}`}
                       className="underline underline-offset-4"
                     >
-                      {series.title}
+                      {seriesLabel}
                     </Link>
                   </dd>
                 </div>
@@ -199,7 +187,7 @@ export default async function BookPage({
                   href={`/${lang}/reihen/${series.slug}`}
                   className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
                 >
-                  {bookDetailPage.inSeries}: {series.title}
+                  {bookDetailPage.inSeries}: {seriesLabel}
                 </Link>
               ) : null}
               <span className="text-[13px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)]">
@@ -219,19 +207,40 @@ export default async function BookPage({
               {book.quote ? (
                 <blockquote>
                   <p>{book.quote.text}</p>
-                  <footer>{book.quote.source}</footer>
+                  {book.quote.source ? <footer>{book.quote.source}</footer> : null}
                 </blockquote>
               ) : null}
             </RichText>
           </section>
 
+          <section className="mt-10 border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
+            <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+              {bookDetailPage.sampleTitle}
+            </p>
+            {book.samplePdf ? (
+              <a
+                href={book.samplePdf}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
+              >
+                {bookDetailPage.sampleAction}
+              </a>
+            ) : (
+              <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
+                {bookDetailPage.sampleMissing}
+              </p>
+            )}
+          </section>
+
           <section className="mt-14 border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {bookDetailPage.ctaTitle}
+              {bookDetailPage.availabilityTitle}
             </p>
-            <p className="mt-4 max-w-[56ch] text-[17px] leading-[1.75] text-[var(--color-text)]">
-              {bookDetailPage.ctaText}
-            </p>
+            <div className="mt-4 flex items-center gap-3 text-[16px] text-[var(--color-text)]">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#41b757]" />
+              <span>{bookDetailPage.availabilityReady}</span>
+            </div>
             <div className="mt-8 flex flex-wrap gap-4">
               {hasCheckout ? (
                 <a
@@ -262,35 +271,6 @@ export default async function BookPage({
                 {book.manualOrderNote}
               </p>
             ) : null}
-          </section>
-
-          <section className="mt-14 border-t border-[var(--color-border)] pt-8">
-            <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {bookDetailPage.timelineTitle}
-            </p>
-            <p className="max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
-              {bookDetailPage.timelineText}
-            </p>
-          </section>
-
-          <section className="mt-14">
-            <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {bookDetailPage.sampleTitle}
-            </p>
-            {book.samplePdf ? (
-              <a
-                href={book.samplePdf}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[16px] leading-[1.75] text-[var(--color-text-secondary)] underline underline-offset-4"
-              >
-                {lang === "de" ? "Leseprobe herunterladen (PDF)" : "Descargar muestra (PDF)"}
-              </a>
-            ) : (
-              <p className="max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
-                {bookDetailPage.sampleMissing}
-              </p>
-            )}
           </section>
 
           {relatedBooks.length > 0 ? (

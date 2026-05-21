@@ -80,6 +80,7 @@ export const catalogContent: CatalogContent = {
       author: "Christoph Menke",
       editor: "Negative Dialektik",
       seriesSlug: "geist",
+      seriesDisplayLabel: "Geist 1",
       description:
         "Seis estudios en los que Christoph Menke relee a Hegel para pensar la autonomia y la libertad como procesos de liberacion.",
       longDescription: [
@@ -87,10 +88,11 @@ export const catalogContent: CatalogContent = {
         "El volumen trabaja conceptos decisivos como libertad, segunda naturaleza, derecho y emancipacion desde una lectura sistematica de Hegel.",
       ],
       quote: {
-        source: "Nota editorial",
-        text: "Autonomia y liberacion interroga la libertad no como abstraccion, sino como proceso historico y social de emancipacion.",
+        source: "",
+        text:
+          "»El humano también muere por costumbre.« (Rph, § 151 N, p. 302) La segunda naturaleza establecida por el espíritu es la muerte del espíritu a través del espíritu en el espíritu: »un lugar de cráneos de interioridades putrefactas«.",
       },
-      coverImage: "/images/books/autonomia-y-liberacion-portada.pdf",
+      coverImage: "/images/books/autonomia-y-liberacion-portada.png",
       isbn: "978-628-97478-0-5",
       pages: 276,
       format: "Edicion de bolsillo",
@@ -98,7 +100,7 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-08-27",
       status: "lieferbar",
       stockStatus: "bestellbar-manuell",
-      price: "99000",
+      price: "99.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
