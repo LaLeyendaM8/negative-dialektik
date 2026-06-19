@@ -31,7 +31,7 @@ export default async function BookPage({
   );
   const { bookDetailPage } = getContent(lang);
   const hasCheckout = Boolean(book.checkoutEnabled && book.price && book.currency);
-  const checkoutHref = `/api/mercadopago/checkout?lang=${lang}&slug=${encodeURIComponent(book.slug)}`;
+  const checkoutHref = `/api/wompi/checkout?lang=${lang}&slug=${encodeURIComponent(book.slug)}`;
   const seriesLabel = book.seriesDisplayLabel || series?.title;
 
   const primaryAction =
@@ -60,7 +60,7 @@ export default async function BookPage({
               href: getBookInquiryHref(lang, book),
               label:
                 lang === "de"
-                  ? "Verfuegbarkeit anfragen"
+                  ? "Verfügbarkeit anfragen"
                   : "Consultar disponibilidad",
             };
 
@@ -215,22 +215,35 @@ export default async function BookPage({
 
           <section className="mt-10 border border-[var(--color-border)] bg-[var(--color-surface)] p-8">
             <p className="text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {bookDetailPage.sampleTitle}
+              {bookDetailPage.documentsTitle}
             </p>
-            {book.samplePdf ? (
-              <a
-                href={book.samplePdf}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
-              >
-                {bookDetailPage.sampleAction}
-              </a>
-            ) : (
+            <div className="mt-5 flex flex-wrap gap-4">
+              {book.samplePdf ? (
+                <a
+                  href={book.samplePdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
+                >
+                  {bookDetailPage.sampleAction}
+                </a>
+              ) : null}
+              {book.editorialSheetPdf ? (
+                <a
+                  href={book.editorialSheetPdf}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex border border-[var(--color-border)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-text)] hover:text-[var(--color-text)]"
+                >
+                  {bookDetailPage.editorialSheetAction}
+                </a>
+              ) : null}
+            </div>
+            {!book.samplePdf && !book.editorialSheetPdf ? (
               <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
                 {bookDetailPage.sampleMissing}
               </p>
-            )}
+            ) : null}
           </section>
 
           <section className="mt-14 border border-[var(--color-border)] bg-[var(--color-surface)] p-8">

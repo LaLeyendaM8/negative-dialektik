@@ -14,29 +14,27 @@ export const programmPage = {
         {
           title: "Geist",
           paragraphs: [
-            "Filosofía alemana en sentido estricto: idealismo, dialéctica, teoría crítica y debates contemporáneos. Esta colección reúne obras que orientan discusiones, establecen problemas y determinan arquitecturas centrales dentro de la tradición alemana y europea.",
+            "Teoría crítica, filosofía social y diagnóstico del presente en sentido estricto.",
+          ],
+        },
+        {
+          title: "Bildung",
+          paragraphs: [
+            "Introducciones sistemáticas a autores, conceptos y problemas centrales.",
           ],
         },
         {
           title: "Rose",
           paragraphs: [
-            "Estética, arte y romanticismo alemán. Aquí aparecen textos en los que la reflexión sobre la belleza, la forma, la experiencia y el arte ocupa un lugar central.",
+            "Estética, filosofía del arte, tradiciones románticas y teoría de la experiencia.",
           ],
         },
         {
-          title: "Ursprung",
+          title: "Escritos del Instituto",
           paragraphs: [
-            "Fuentes, genealogías y textos fundamentales de la tradición intelectual europea. Esta colección se concentra en obras cuyo alcance conceptual ha permitido fundar modos de pensamiento, estructurar saberes y releer contextos históricos.",
+            "Trabajos propios, conferencias y textos programáticos de Negative Dialektik.",
           ],
         },
-      ],
-    },
-    {
-      title: "Forma de publicación",
-      subtitle:
-        "Los títulos aparecen como ediciones preparadas con precisión, cuya forma editorial puede crecer a largo plazo junto con el sello.",
-      paragraphs: [
-        "En una primera etapa, el programa se ampliará gradualmente con nuevas publicaciones, panoramas de colecciones y futuras páginas detalladas para títulos individuales. Su estructura ya está concebida para incorporar publicaciones futuras de manera clara y consistente.",
       ],
     },
   ],

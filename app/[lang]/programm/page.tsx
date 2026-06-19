@@ -75,7 +75,7 @@ function ProgramBookGrid({
                 {openLabel}
               </Link>
               <Link
-                href={`/${lang}/kontakt?kind=order&book=${encodeURIComponent(book.title)}`}
+                href={`/${lang}/buecher/${book.slug}`}
                 className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
               >
                 {orderLabel}
@@ -95,7 +95,10 @@ export default async function ProgramPage({
 }) {
   const { lang } = await params;
   const { programmPage, catalogContent, programUi } = getContent(lang);
-  const announcedBooks = catalogContent.books.filter(
+  const availableBooks = catalogContent.books.filter(
+    (book) => book.status === "lieferbar",
+  );
+  const preorderBooks = catalogContent.books.filter(
     (book) => book.status === "angekuendigt" || book.status === "vorbestellbar",
   );
   const upcomingBooks = catalogContent.books.filter(
@@ -112,11 +115,29 @@ export default async function ProgramPage({
         ))}
       </RichText>
 
-      {announcedBooks.length > 0 ? (
+      {availableBooks.length > 0 ? (
         <section className="mt-20">
-          <SectionHeading title={programUi.announcedTitle} />
+          <SectionHeading
+            title={programUi.availableTitle}
+            subtitle={programUi.availableSubtitle}
+          />
           <ProgramBookGrid
-            books={announcedBooks}
+            books={availableBooks}
+            lang={lang}
+            openLabel={programUi.openBook}
+            orderLabel={programUi.orderPath}
+          />
+        </section>
+      ) : null}
+
+      {preorderBooks.length > 0 ? (
+        <section className="mt-20">
+          <SectionHeading
+            title={programUi.preorderTitle}
+            subtitle={programUi.preorderSubtitle}
+          />
+          <ProgramBookGrid
+            books={preorderBooks}
             lang={lang}
             openLabel={programUi.openBook}
             orderLabel={programUi.orderPath}
@@ -126,7 +147,10 @@ export default async function ProgramPage({
 
       {upcomingBooks.length > 0 ? (
         <section className="mt-20">
-          <SectionHeading title={programUi.upcomingTitle} />
+          <SectionHeading
+            title={programUi.upcomingTitle}
+            subtitle={programUi.upcomingSubtitle}
+          />
           <ProgramBookGrid
             books={upcomingBooks}
             lang={lang}

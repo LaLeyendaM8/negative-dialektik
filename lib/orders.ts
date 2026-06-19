@@ -1,13 +1,17 @@
 import { Resend } from "resend";
 
 type CreateOrderInput = {
-  stripeCheckoutSessionId: string;
-  stripePaymentIntentId?: string | null;
+  paymentProvider: string;
+  providerReference: string;
+  providerTransactionId?: string | null;
   customerEmail?: string | null;
   customerName?: string | null;
   amountTotal?: number | null;
   currency?: string | null;
   paymentStatus: string;
+  paymentMethodType?: string | null;
+  shippingAddress?: Record<string, unknown> | null;
+  providerPayload?: unknown;
   lang: string;
   bookSlug: string;
   bookTitle: string;
@@ -34,6 +38,18 @@ function getResendClient() {
   return new Resend(apiKey);
 }
 
+function formatAmount(amountInCents?: number | null, currency?: string | null) {
+  if (typeof amountInCents !== "number" || !currency) {
+    return "-";
+  }
+
+  return new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency,
+    maximumFractionDigits: 0,
+  }).format(amountInCents / 100);
+}
+
 async function insertOrder(input: CreateOrderInput) {
   const config = getSupabaseConfig();
 
@@ -42,28 +58,35 @@ async function insertOrder(input: CreateOrderInput) {
   }
 
   const orderPayload = {
-    stripe_checkout_session_id: input.stripeCheckoutSessionId,
-    stripe_payment_intent_id: input.stripePaymentIntentId ?? null,
+    payment_provider: input.paymentProvider,
+    provider_reference: input.providerReference,
+    provider_transaction_id: input.providerTransactionId ?? null,
     customer_email: input.customerEmail ?? null,
     customer_name: input.customerName ?? null,
     amount_total: input.amountTotal ?? null,
     currency: input.currency ?? null,
     payment_status: input.paymentStatus,
+    payment_method_type: input.paymentMethodType ?? null,
+    shipping_address: input.shippingAddress ?? null,
+    provider_payload: input.providerPayload ?? null,
     order_status: "paid",
     locale: input.lang,
   };
 
-  const orderInsertResponse = await fetch(`${config.url}/rest/v1/orders`, {
-    method: "POST",
-    headers: {
-      apikey: config.serviceRoleKey,
-      Authorization: `Bearer ${config.serviceRoleKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=representation,resolution=ignore-duplicates",
+  const orderInsertResponse = await fetch(
+    `${config.url}/rest/v1/orders?on_conflict=provider_reference`,
+    {
+      method: "POST",
+      headers: {
+        apikey: config.serviceRoleKey,
+        Authorization: `Bearer ${config.serviceRoleKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=representation,resolution=ignore-duplicates",
+      },
+      body: JSON.stringify([orderPayload]),
+      cache: "no-store",
     },
-    body: JSON.stringify([orderPayload]),
-    cache: "no-store",
-  });
+  );
 
   if (!orderInsertResponse.ok) {
     return null;
@@ -77,8 +100,8 @@ async function insertOrder(input: CreateOrderInput) {
 
   if (!orderId) {
     const lookupResponse = await fetch(
-      `${config.url}/rest/v1/orders?select=id&stripe_checkout_session_id=eq.${encodeURIComponent(
-        input.stripeCheckoutSessionId,
+      `${config.url}/rest/v1/orders?select=id&provider_reference=eq.${encodeURIComponent(
+        input.providerReference,
       )}`,
       {
         headers: {
@@ -115,17 +138,20 @@ async function insertOrderItem(orderId: number, input: CreateOrderInput) {
     currency: input.currency ?? null,
   };
 
-  await fetch(`${config.url}/rest/v1/order_items`, {
-    method: "POST",
-    headers: {
-      apikey: config.serviceRoleKey,
-      Authorization: `Bearer ${config.serviceRoleKey}`,
-      "Content-Type": "application/json",
-      Prefer: "return=minimal,resolution=ignore-duplicates",
+  await fetch(
+    `${config.url}/rest/v1/order_items?on_conflict=order_id,book_slug`,
+    {
+      method: "POST",
+      headers: {
+        apikey: config.serviceRoleKey,
+        Authorization: `Bearer ${config.serviceRoleKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal,resolution=ignore-duplicates",
+      },
+      body: JSON.stringify([itemPayload]),
+      cache: "no-store",
     },
-    body: JSON.stringify([itemPayload]),
-    cache: "no-store",
-  });
+  );
 }
 
 async function sendInternalOrderMail(input: CreateOrderInput) {
@@ -140,7 +166,7 @@ async function sendInternalOrderMail(input: CreateOrderInput) {
         process.env.RESEND_FROM_EMAIL ||
         "Negative Dialektik <onboarding@resend.dev>",
       to: process.env.CONTACT_RECEIVER_EMAIL || "info@negative-dialektik.com",
-      subject: `Neue Bestellung (Checkout): ${input.bookTitle}`,
+      subject: `Neue Bestellung (${input.paymentProvider}): ${input.bookTitle}`,
       text:
         `Neue Checkout-Bestellung eingegangen.\n\n` +
         `Titel: ${input.bookTitle}\n` +
@@ -148,10 +174,12 @@ async function sendInternalOrderMail(input: CreateOrderInput) {
         `Katalogsprache: ${input.lang}\n` +
         `Kundin/Kunde: ${input.customerName ?? "-"}\n` +
         `E-Mail: ${input.customerEmail ?? "-"}\n` +
-        `Betrag: ${input.amountTotal ?? "-"} ${input.currency ?? ""}\n` +
+        `Betrag: ${formatAmount(input.amountTotal, input.currency)}\n` +
+        `Zahlungsanbieter: ${input.paymentProvider}\n` +
+        `Zahlungsart: ${input.paymentMethodType ?? "-"}\n` +
         `Zahlungsstatus: ${input.paymentStatus}\n` +
-        `Provider Session/Payment ID: ${input.stripeCheckoutSessionId}\n` +
-        `Provider Order/Intent ID: ${input.stripePaymentIntentId ?? "-"}`,
+        `Provider Reference: ${input.providerReference}\n` +
+        `Provider Transaction ID: ${input.providerTransactionId ?? "-"}`,
     });
   } catch {
     // Keep the checkout pipeline resilient even if mail fails.

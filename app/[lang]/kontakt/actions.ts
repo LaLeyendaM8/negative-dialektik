@@ -78,7 +78,7 @@ export async function subscribeNewsletter(
         to: process.env.CONTACT_RECEIVER_EMAIL || "info@negative-dialektik.com",
         subject:
           language === "es"
-            ? "Nueva suscripcion al boletin"
+            ? "Nueva suscripción al boletín"
             : "Neue Newsletter-Anmeldung",
         text: `Neue Newsletter-Anmeldung: ${email}\nSprache: ${language}`,
       });
@@ -90,8 +90,8 @@ export async function subscribeNewsletter(
       status: "success",
       message:
         language === "es"
-          ? "Gracias. Su correo ha sido registrado para el boletin."
-          : "Vielen Dank. Ihre E-Mail wurde fuer den Newsletter gespeichert.",
+          ? "Gracias. Su correo ha sido registrado para el boletín."
+          : "Vielen Dank. Ihre E-Mail wurde für den Newsletter gespeichert.",
     };
   }
 
@@ -100,7 +100,7 @@ export async function subscribeNewsletter(
       status: "success",
       message:
         language === "es"
-          ? "Este correo ya esta registrado en la lista."
+          ? "Este correo ya está registrado en la lista."
           : "Diese E-Mail-Adresse ist bereits in der Liste eingetragen.",
     };
   }
@@ -110,7 +110,7 @@ export async function subscribeNewsletter(
       status: "error",
       message:
         language === "es"
-          ? "La base de datos del boletin aun no esta configurada."
+          ? "La base de datos del boletín aún no está configurada."
           : "Die Newsletter-Datenbank ist noch nicht konfiguriert.",
     };
   }

@@ -1,13 +1,23 @@
+import { createHash, randomUUID } from "crypto";
 import { getBookBySlug } from "@/lib/getCatalog";
 
-type MercadoPagoPreferenceResponse = {
-  id: string;
-  init_point?: string;
-  sandbox_init_point?: string;
+export type WompiCheckoutSession = {
+  reference: string;
+  url: string;
 };
 
-function getMercadoPagoAccessToken() {
-  return process.env.MERCADO_PAGO_ACCESS_TOKEN;
+function getWompiConfig() {
+  const publicKey = process.env.WOMPI_PUBLIC_KEY;
+  const integritySecret = process.env.WOMPI_INTEGRITY_SECRET;
+
+  if (!publicKey || !integritySecret) {
+    return null;
+  }
+
+  return {
+    publicKey,
+    integritySecret,
+  };
 }
 
 function getBaseUrl() {
@@ -22,6 +32,21 @@ function getBaseUrl() {
   }
 
   return null;
+}
+
+function sha256(value: string) {
+  return createHash("sha256").update(value).digest("hex");
+}
+
+export function parseCatalogPriceToPesos(price: string | undefined) {
+  if (!price) {
+    return null;
+  }
+
+  const digits = price.replace(/[^\d]/g, "");
+  const pesos = digits ? Number(digits) : null;
+
+  return pesos && Number.isFinite(pesos) ? pesos : null;
 }
 
 export function isBookCheckoutEnabled(lang: string, slug: string) {
@@ -43,15 +68,44 @@ export function isBookCheckoutEnabled(lang: string, slug: string) {
   };
 }
 
+export function createWompiReference(lang: string, slug: string) {
+  const safeLang = lang === "es" ? "es" : "de";
+  const safeSlug = slug.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
+  const timestamp = Date.now().toString(36);
+  const suffix = randomUUID().replace(/-/g, "").slice(0, 10);
+
+  return `nd_${safeLang}_${safeSlug}_${timestamp}_${suffix}`;
+}
+
+export function parseWompiReference(reference: string | undefined) {
+  if (!reference) {
+    return null;
+  }
+
+  const parts = reference.split("_");
+  if (parts.length < 5 || parts[0] !== "nd") {
+    return null;
+  }
+
+  const lang = parts[1] === "es" ? "es" : "de";
+  const slug = parts.slice(2, -2).join("_");
+
+  if (!slug) {
+    return null;
+  }
+
+  return { lang, slug };
+}
+
 export async function createCheckoutSession(params: {
   lang: string;
   slug: string;
-}) {
-  const mercadoPagoAccessToken = getMercadoPagoAccessToken();
+}): Promise<WompiCheckoutSession> {
+  const wompiConfig = getWompiConfig();
   const baseUrl = getBaseUrl();
 
-  if (!mercadoPagoAccessToken || !baseUrl) {
-    throw new Error("Mercado Pago or site configuration is missing.");
+  if (!wompiConfig || !baseUrl) {
+    throw new Error("Wompi or site configuration is missing.");
   }
 
   const result = isBookCheckoutEnabled(params.lang, params.slug);
@@ -60,86 +114,89 @@ export async function createCheckoutSession(params: {
     throw new Error("Checkout is not enabled for this book.");
   }
 
-  const successUrl = `${baseUrl}/${params.lang}/checkout/success`;
-  const cancelUrl = `${baseUrl}/${params.lang}/checkout/cancel?slug=${encodeURIComponent(result.book.slug)}`;
-  const webhookSecret = process.env.MERCADO_PAGO_WEBHOOK_SECRET || "";
-  const notificationUrl =
-    `${baseUrl}/api/mercadopago/webhook` +
-    (webhookSecret ? `?secret=${encodeURIComponent(webhookSecret)}` : "");
-  const priceDigits = String(result.book.price).replace(/[^\d]/g, "");
-  const unitPrice = priceDigits ? Number(priceDigits) : null;
-
-  if (!unitPrice) {
+  const pesos = parseCatalogPriceToPesos(result.book.price);
+  if (!pesos) {
     throw new Error("Invalid unit price for checkout.");
   }
 
-  const payload = {
-    items: [
-      {
-        title: result.book.title,
-        quantity: 1,
-        currency_id: result.book.currency.toUpperCase(),
-        unit_price: unitPrice,
-      },
-    ],
-    back_urls: {
-      success: successUrl,
-      failure: cancelUrl,
-      pending: cancelUrl,
-    },
-    auto_return: "approved",
-    external_reference: `${params.lang}:${result.book.slug}`,
-    notification_url: notificationUrl,
-  };
+  const amountInCents = pesos * 100;
+  const currency = result.book.currency.toUpperCase();
+  const reference = createWompiReference(params.lang, result.book.slug);
+  const integritySignature = sha256(
+    `${reference}${amountInCents}${currency}${wompiConfig.integritySecret}`,
+  );
+  const redirectUrl = new URL(`/${params.lang}/checkout/success`, baseUrl);
+  redirectUrl.searchParams.set("slug", result.book.slug);
+  redirectUrl.searchParams.set("reference", reference);
 
-  const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${mercadoPagoAccessToken}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Mercado Pago preference creation failed: ${errorBody}`);
-  }
-
-  const data = (await response.json()) as MercadoPagoPreferenceResponse;
-  const checkoutUrl = data.init_point || data.sandbox_init_point;
-
-  if (!checkoutUrl) {
-    throw new Error("Mercado Pago did not return a checkout URL.");
-  }
+  const checkoutUrl = new URL("https://checkout.wompi.co/p/");
+  checkoutUrl.searchParams.set("public-key", wompiConfig.publicKey);
+  checkoutUrl.searchParams.set("currency", currency);
+  checkoutUrl.searchParams.set("amount-in-cents", String(amountInCents));
+  checkoutUrl.searchParams.set("reference", reference);
+  checkoutUrl.searchParams.set("signature:integrity", integritySignature);
+  checkoutUrl.searchParams.set("redirect-url", redirectUrl.toString());
 
   return {
-    url: checkoutUrl,
+    reference,
+    url: checkoutUrl.toString(),
   };
 }
 
-export async function retrieveMercadoPagoPayment(paymentId: string | number) {
-  const mercadoPagoAccessToken = getMercadoPagoAccessToken();
+export function verifyWompiEventSignature(body: unknown) {
+  const eventSecret = process.env.WOMPI_EVENTS_SECRET;
 
-  if (!mercadoPagoAccessToken) {
-    throw new Error("Mercado Pago configuration missing.");
+  if (!eventSecret) {
+    return process.env.NODE_ENV !== "production";
   }
 
-  const response = await fetch(
-    `https://api.mercadopago.com/v1/payments/${paymentId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${mercadoPagoAccessToken}`,
-      },
-      cache: "no-store",
-    },
+  const payload = body as {
+    signature?: {
+      checksum?: string;
+      properties?: string[];
+    };
+    timestamp?: string | number;
+    data?: unknown;
+  };
+  const checksum = payload.signature?.checksum;
+  const properties = payload.signature?.properties;
+  const timestamp = payload.timestamp;
+
+  if (!checksum || !properties?.length || !timestamp) {
+    return false;
+  }
+
+  const values = properties.map((property) =>
+    getWompiSignaturePropertyValue(payload, property),
   );
+  const expected = sha256(`${values.join("")}${timestamp}${eventSecret}`);
 
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Mercado Pago payment retrieval failed: ${errorBody}`);
+  return expected === checksum;
+}
+
+function getWompiSignaturePropertyValue(
+  payload: { data?: unknown } & Record<string, unknown>,
+  property: string,
+) {
+  const fromRoot = getNestedValue(payload, property);
+  if (fromRoot !== undefined && fromRoot !== null) {
+    return String(fromRoot);
   }
 
-  return (await response.json()) as Record<string, unknown>;
+  const fromData = getNestedValue(payload.data, property);
+  if (fromData !== undefined && fromData !== null) {
+    return String(fromData);
+  }
+
+  return "";
+}
+
+function getNestedValue(source: unknown, path: string) {
+  return path.split(".").reduce<unknown>((current, key) => {
+    if (!current || typeof current !== "object") {
+      return undefined;
+    }
+
+    return (current as Record<string, unknown>)[key];
+  }, source);
 }

@@ -55,6 +55,7 @@ export type CatalogBook = {
   checkoutEnabled?: boolean;
   manualOrderNote?: string;
   samplePdf?: string;
+  editorialSheetPdf?: string;
   seoTitle: string;
   seoDescription: string;
 };

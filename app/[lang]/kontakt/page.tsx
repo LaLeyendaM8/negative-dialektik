@@ -10,17 +10,17 @@ function buildInitialMessage(lang: string, kind?: string, book?: string) {
 
   if (lang === "es") {
     if (kind === "order") {
-      return `Hola,\n\nquisiera consultar una reserva o pedido manual para el titulo "${book}".\n\nGracias.`;
+      return `Hola,\n\nquisiera consultar una reserva o compra del título "${book}".\n\nGracias.`;
     }
 
-    return `Hola,\n\nquisiera recibir mas informacion sobre el titulo "${book}".\n\nGracias.`;
+    return `Hola,\n\nquisiera recibir más información sobre el título "${book}".\n\nGracias.`;
   }
 
   if (kind === "order") {
-    return `Guten Tag,\n\nich moechte eine Vorbestellung oder manuelle Bestellung fuer den Titel "${book}" anfragen.\n\nVielen Dank.`;
+    return `Guten Tag,\n\nich möchte eine Bestellung oder Vorbestellung für den Titel "${book}" anfragen.\n\nVielen Dank.`;
   }
 
-  return `Guten Tag,\n\nich moechte weitere Informationen zum Titel "${book}" erhalten.\n\nVielen Dank.`;
+  return `Guten Tag,\n\nich möchte weitere Informationen zum Titel "${book}" erhalten.\n\nVielen Dank.`;
 }
 
 function buildInitialSubject(lang: string, kind?: string, book?: string) {
@@ -31,7 +31,7 @@ function buildInitialSubject(lang: string, kind?: string, book?: string) {
   if (lang === "es") {
     return kind === "order"
       ? `Consulta de pedido: ${book}`
-      : `Consulta sobre el titulo: ${book}`;
+      : `Consulta sobre el título: ${book}`;
   }
 
   return kind === "order"

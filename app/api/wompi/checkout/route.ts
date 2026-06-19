@@ -16,7 +16,10 @@ export async function GET(request: Request) {
     return NextResponse.redirect(url);
   } catch {
     return NextResponse.redirect(
-      new URL(`/${lang}/checkout/cancel?slug=${encodeURIComponent(slug)}`, request.url),
+      new URL(
+        `/${lang}/checkout/cancel?slug=${encodeURIComponent(slug)}`,
+        request.url,
+      ),
     );
   }
 }

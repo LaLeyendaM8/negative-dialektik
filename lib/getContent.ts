@@ -15,6 +15,7 @@ import { seriesDetailPage as deSeriesDetailPage } from "@/app/content/de/pages/s
 import { akademiePage as deAkademiePage } from "@/app/content/de/pages/akademie";
 import { stiftungPage as deStiftungPage } from "@/app/content/de/pages/stiftung";
 import { kontaktPage as deKontaktPage } from "@/app/content/de/pages/kontakt";
+import { checkoutPage as deCheckoutPage } from "@/app/content/de/pages/checkout";
 import { impressumPage as deImpressumPage } from "@/app/content/de/pages/impressum";
 import { datenschutzPage as deDatenschutzPage } from "@/app/content/de/pages/datenschutz";
 import {
@@ -36,6 +37,7 @@ import { seriesDetailPage as esSeriesDetailPage } from "@/app/content/es/pages/s
 import { akademiePage as esAkademiePage } from "@/app/content/es/pages/akademie";
 import { stiftungPage as esStiftungPage } from "@/app/content/es/pages/stiftung";
 import { kontaktPage as esKontaktPage } from "@/app/content/es/pages/kontakt";
+import { checkoutPage as esCheckoutPage } from "@/app/content/es/pages/checkout";
 import { impressumPage as esImpressumPage } from "@/app/content/es/pages/impressum";
 import { datenschutzPage as esDatenschutzPage } from "@/app/content/es/pages/datenschutz";
 import {
@@ -81,6 +83,7 @@ const content = {
     akademiePage: deAkademiePage,
     stiftungPage: deStiftungPage,
     kontaktPage: deKontaktPage,
+    checkoutPage: deCheckoutPage,
     impressumPage: deImpressumPage,
     datenschutzPage: deDatenschutzPage,
     homeHero: deHomeHero,
@@ -106,6 +109,7 @@ const content = {
     akademiePage: esAkademiePage,
     stiftungPage: esStiftungPage,
     kontaktPage: esKontaktPage,
+    checkoutPage: esCheckoutPage,
     impressumPage: esImpressumPage,
     datenschutzPage: esDatenschutzPage,
     homeHero: esHomeHero,
