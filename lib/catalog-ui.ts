@@ -37,14 +37,33 @@ export function formatStockStatus(lang: string, status: StockStatus) {
       ? {
           "nicht-verfuegbar": "Noch nicht bestellbar",
           "auf-anfrage": "Bestellung auf Anfrage",
-          "vorbestellung-manuell": "Vorbestellung per Anfrage",
+          "vorbestellung-manuell": "Vorbestellung verfügbar",
           "bestellbar-manuell": "Direkt bestellbar",
         }
       : {
           "nicht-verfuegbar": "Aún no disponible",
           "auf-anfrage": "Pedido por consulta",
-          "vorbestellung-manuell": "Preventa por consulta",
+          "vorbestellung-manuell": "Preventa disponible",
           "bestellbar-manuell": "Compra directa disponible",
+        };
+
+  return labels[status];
+}
+
+export function formatOrderActionLabel(lang: string, status: StockStatus) {
+  const labels =
+    lang === "de"
+      ? {
+          "nicht-verfuegbar": "Details",
+          "auf-anfrage": "Anfragen",
+          "vorbestellung-manuell": "Vorbestellen",
+          "bestellbar-manuell": "Kaufen",
+        }
+      : {
+          "nicht-verfuegbar": "Detalles",
+          "auf-anfrage": "Consultar",
+          "vorbestellung-manuell": "Reservar",
+          "bestellbar-manuell": "Comprar",
         };
 
   return labels[status];

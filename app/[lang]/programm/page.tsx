@@ -4,14 +4,17 @@ import { PageShell } from "../../components/shared/page-shell";
 import { RichText } from "../../components/shared/rich-text";
 import { SectionHeading } from "../../components/ui/section-heading";
 import { getContent } from "@/lib/getContent";
-import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
+import {
+  formatCatalogStatus,
+  formatOrderActionLabel,
+  formatStockStatus,
+} from "@/lib/catalog-ui";
 import { BookMedia } from "../../components/shared/book-media";
 
 function ProgramBookGrid({
   books,
   lang,
   openLabel,
-  orderLabel,
 }: {
   books: {
     slug: string;
@@ -27,7 +30,6 @@ function ProgramBookGrid({
   }[];
   lang: string;
   openLabel: string;
-  orderLabel: string;
 }) {
   return (
     <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-3">
@@ -78,7 +80,7 @@ function ProgramBookGrid({
                 href={`/${lang}/buecher/${book.slug}`}
                 className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
               >
-                {orderLabel}
+                {formatOrderActionLabel(lang, book.stockStatus)}
               </Link>
             </div>
           </div>
@@ -125,7 +127,6 @@ export default async function ProgramPage({
             books={availableBooks}
             lang={lang}
             openLabel={programUi.openBook}
-            orderLabel={programUi.orderPath}
           />
         </section>
       ) : null}
@@ -140,7 +141,6 @@ export default async function ProgramPage({
             books={preorderBooks}
             lang={lang}
             openLabel={programUi.openBook}
-            orderLabel={programUi.orderPath}
           />
         </section>
       ) : null}
@@ -155,7 +155,6 @@ export default async function ProgramPage({
             books={upcomingBooks}
             lang={lang}
             openLabel={programUi.openBook}
-            orderLabel={programUi.orderPath}
           />
         </section>
       ) : null}

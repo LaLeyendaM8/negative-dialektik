@@ -10,7 +10,7 @@ export const catalogContent: CatalogContent = {
       "Die editorischen Linien des Verlags ordnen das Programm nach philosophischen Feldern und Traditionszusammenhängen.",
     booksTitle: "Titel",
     booksSubtitle:
-      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit Buchseiten, Leseproben, Ficha editorial und direkter Kaufmöglichkeit.",
+      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit lieferbaren Titeln, Vorbestellungen, Leseproben und Ficha editorial.",
   },
   series: [
     {
@@ -57,7 +57,7 @@ export const catalogContent: CatalogContent = {
       theme:
         "Ästhetik, Kunst, Romantik und ihre begrifflichen Konstellationen.",
       coverImage: "/images/books/alta-rosa-espigada.jpeg",
-      status: "lieferbar",
+      status: "vorbestellbar",
       featuredBooks: [
         "alta-rosa-espigada",
         "lo-culminado-en-si-mismo",
@@ -74,7 +74,7 @@ export const catalogContent: CatalogContent = {
         "Die Reihe versammelt Vorlesungen, Forschungstexte und editorische Positionsbestimmungen von Negative Dialektik.",
       theme: "Eigene Publikationen des Instituts und programmatische Texte.",
       coverImage: "/images/books/formas-de-vida-y-critica-social.jpeg",
-      status: "lieferbar",
+      status: "vorbestellbar",
       featuredBooks: ["formas-de-vida-y-critica-social"],
       seoTitle: "Schriften des Instituts | Negative Dialektik",
       seoDescription:
@@ -150,12 +150,12 @@ export const catalogContent: CatalogContent = {
       language: "Spanisch",
       publicationDate: "2026-07-16",
       status: "vorbestellbar",
-      stockStatus: "bestellbar-manuell",
-      price: "99.000 COP",
+      stockStatus: "vorbestellung-manuell",
+      price: "89.100 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -192,13 +192,13 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-06-17",
-      status: "lieferbar",
-      stockStatus: "bestellbar-manuell",
-      price: "79.000 COP",
+      status: "vorbestellbar",
+      stockStatus: "vorbestellung-manuell",
+      price: "71.100 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
@@ -232,13 +232,13 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-06-17",
-      status: "lieferbar",
-      stockStatus: "bestellbar-manuell",
-      price: "69.000 COP",
+      status: "vorbestellbar",
+      stockStatus: "vorbestellung-manuell",
+      price: "62.100 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -274,13 +274,11 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-09-13",
-      status: "vorbestellbar",
-      stockStatus: "bestellbar-manuell",
-      price: "99.000 COP",
-      currency: "COP",
-      checkoutEnabled: true,
+      status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
+      checkoutEnabled: false,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Dieser Titel ist in Arbeit und noch nicht bestellbar.",
       samplePdf: "/samples/anarquismo-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/anarquismo-ficha-editorial.pdf",
       seoTitle: "Anarquismo | Daniel Loick | Negative Dialektik",
@@ -313,13 +311,11 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-09-13",
-      status: "vorbestellbar",
-      stockStatus: "bestellbar-manuell",
-      price: "79.000 COP",
-      currency: "COP",
-      checkoutEnabled: true,
+      status: "in-vorbereitung",
+      stockStatus: "nicht-verfuegbar",
+      checkoutEnabled: false,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Dieser Titel ist in Arbeit und noch nicht bestellbar.",
       samplePdf:
         "/samples/lo-culminado-en-si-mismo-lectura-de-prueba.pdf",
       editorialSheetPdf:

@@ -5,7 +5,11 @@ import { PageShell } from "../../../components/shared/page-shell";
 import { RichText } from "../../../components/shared/rich-text";
 import { getCatalogContent, getSeriesBySlug } from "@/lib/getCatalog";
 import { getContent } from "@/lib/getContent";
-import { formatCatalogStatus, formatStockStatus } from "@/lib/catalog-ui";
+import {
+  formatCatalogStatus,
+  formatOrderActionLabel,
+  formatStockStatus,
+} from "@/lib/catalog-ui";
 import { BookMedia } from "../../../components/shared/book-media";
 import Image from "next/image";
 
@@ -120,7 +124,7 @@ export default async function SeriesPage({
                         href={`/${lang}/buecher/${book.slug}`}
                         className="text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] underline underline-offset-4"
                       >
-                        {seriesDetailPage.orderPath}
+                        {formatOrderActionLabel(lang, book.stockStatus)}
                       </Link>
                     </div>
                   </div>

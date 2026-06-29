@@ -30,15 +30,34 @@ export default async function BookPage({
     (entry) => entry.seriesSlug === book.seriesSlug && entry.slug !== book.slug,
   );
   const { bookDetailPage } = getContent(lang);
-  const hasCheckout = Boolean(book.checkoutEnabled && book.price && book.currency);
+  const hasCheckout = Boolean(
+    book.checkoutEnabled &&
+      book.price &&
+      book.currency &&
+      book.stockStatus !== "nicht-verfuegbar",
+  );
   const checkoutHref = `/api/wompi/checkout?lang=${lang}&slug=${encodeURIComponent(book.slug)}`;
   const seriesLabel = book.seriesDisplayLabel || series?.title;
+  const checkoutActionLabel =
+    book.stockStatus === "vorbestellung-manuell"
+      ? lang === "de"
+        ? "Jetzt vorbestellen"
+        : "Reservar ahora"
+      : lang === "de"
+        ? "Jetzt kaufen"
+        : "Comprar ahora";
+  const availabilityDotClass =
+    book.stockStatus === "nicht-verfuegbar"
+      ? "bg-[var(--color-text-secondary)]"
+      : book.stockStatus === "vorbestellung-manuell"
+        ? "bg-[#d7a642]"
+        : "bg-[#41b757]";
 
   const primaryAction =
     hasCheckout
       ? {
           href: checkoutHref,
-          label: lang === "de" ? "Jetzt kaufen" : "Comprar ahora",
+          label: checkoutActionLabel,
         }
       :
     book.stockStatus === "bestellbar-manuell"
@@ -251,8 +270,8 @@ export default async function BookPage({
               {bookDetailPage.availabilityTitle}
             </p>
             <div className="mt-4 flex items-center gap-3 text-[16px] text-[var(--color-text)]">
-              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[#41b757]" />
-              <span>{bookDetailPage.availabilityReady}</span>
+              <span className={`inline-block h-2.5 w-2.5 rounded-full ${availabilityDotClass}`} />
+              <span>{formatStockStatus(lang, book.stockStatus)}</span>
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
               {hasCheckout ? (
