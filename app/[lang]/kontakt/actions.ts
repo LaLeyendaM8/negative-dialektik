@@ -55,7 +55,7 @@ export async function subscribeNewsletter(
   formData: FormData,
 ): Promise<FormActionState> {
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
-  const language = formData.get("language") === "es" ? "es" : "de";
+  const language = formData.get("language") === "de" ? "de" : "es";
 
   if (!email) {
     return {

@@ -12,7 +12,7 @@ const catalogByLanguage = {
 } as const satisfies Record<string, CatalogContent>;
 
 export function getCatalogContent(lang: string): CatalogContent {
-  return catalogByLanguage[lang as "de" | "es"] ?? catalogByLanguage.de;
+  return catalogByLanguage[lang as "de" | "es"] ?? catalogByLanguage.es;
 }
 
 export function getSeriesBySlug(

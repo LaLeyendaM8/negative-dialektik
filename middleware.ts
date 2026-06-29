@@ -18,7 +18,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  return NextResponse.redirect(new URL(`/de${pathname}`, request.url));
+  return NextResponse.redirect(new URL(`/es${pathname}`, request.url));
 }
 
 export const config = {

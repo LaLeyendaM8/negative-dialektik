@@ -69,7 +69,7 @@ export function isBookCheckoutEnabled(lang: string, slug: string) {
 }
 
 export function createWompiReference(lang: string, slug: string) {
-  const safeLang = lang === "es" ? "es" : "de";
+  const safeLang = lang === "de" ? "de" : "es";
   const safeSlug = slug.replace(/[^a-z0-9-]/gi, "-").toLowerCase();
   const timestamp = Date.now().toString(36);
   const suffix = randomUUID().replace(/-/g, "").slice(0, 10);
@@ -87,7 +87,7 @@ export function parseWompiReference(reference: string | undefined) {
     return null;
   }
 
-  const lang = parts[1] === "es" ? "es" : "de";
+  const lang = parts[1] === "de" ? "de" : "es";
   const slug = parts.slice(2, -2).join("_");
 
   if (!slug) {

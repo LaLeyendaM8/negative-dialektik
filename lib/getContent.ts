@@ -125,5 +125,5 @@ const content = {
 } as const;
 
 export function getContent(lang: string) {
-  return content[lang as "de" | "es"] ?? content.de;
+  return content[lang as "de" | "es"] ?? content.es;
 }

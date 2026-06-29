@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const langParam = searchParams.get("lang");
   const slug = searchParams.get("slug");
-  const lang = langParam === "es" ? "es" : "de";
+  const lang = langParam === "de" ? "de" : "es";
 
   if (!slug) {
     return NextResponse.redirect(new URL(`/${lang}/programm`, request.url));
