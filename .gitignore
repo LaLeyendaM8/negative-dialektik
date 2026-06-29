@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+richtige buch daten/
 
 # debug
 npm-debug.log*
