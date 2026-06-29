@@ -50,6 +50,17 @@ function formatAmount(amountInCents?: number | null, currency?: string | null) {
   }).format(amountInCents / 100);
 }
 
+function formatShippingAddress(address?: Record<string, unknown> | null) {
+  if (!address) {
+    return "-";
+  }
+
+  return Object.entries(address)
+    .filter(([, value]) => value !== undefined && value !== null && value !== "")
+    .map(([key, value]) => `${key}: ${String(value)}`)
+    .join("\n");
+}
+
 async function insertOrder(input: CreateOrderInput) {
   const config = getSupabaseConfig();
 
@@ -175,14 +186,15 @@ async function sendInternalOrderMail(input: CreateOrderInput) {
         `Kundin/Kunde: ${input.customerName ?? "-"}\n` +
         `E-Mail: ${input.customerEmail ?? "-"}\n` +
         `Betrag: ${formatAmount(input.amountTotal, input.currency)}\n` +
+        `Versanddaten:\n${formatShippingAddress(input.shippingAddress)}\n` +
         `Zahlungsanbieter: ${input.paymentProvider}\n` +
         `Zahlungsart: ${input.paymentMethodType ?? "-"}\n` +
         `Zahlungsstatus: ${input.paymentStatus}\n` +
         `Provider Reference: ${input.providerReference}\n` +
         `Provider Transaction ID: ${input.providerTransactionId ?? "-"}`,
     });
-  } catch {
-    // Keep the checkout pipeline resilient even if mail fails.
+  } catch (error) {
+    console.error("Order notification mail failed", error);
   }
 }
 

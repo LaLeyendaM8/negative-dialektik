@@ -136,6 +136,7 @@ export async function createCheckoutSession(params: {
   checkoutUrl.searchParams.set("reference", reference);
   checkoutUrl.searchParams.set("signature:integrity", integritySignature);
   checkoutUrl.searchParams.set("redirect-url", redirectUrl.toString());
+  checkoutUrl.searchParams.set("collect-shipping", "true");
 
   return {
     reference,
