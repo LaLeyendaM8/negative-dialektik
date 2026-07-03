@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "../layout/container";
 import { BookMedia } from "../shared/book-media";
+import { PriceDisplay } from "../shared/price-display";
 
 type Book = {
   slug: string;
@@ -8,6 +9,9 @@ type Book = {
   description: string;
   coverTitle: string;
   coverImage: string;
+  price?: string;
+  originalPrice?: string;
+  discountLabel?: string;
 };
 
 type NewReleasesProps = {
@@ -55,6 +59,15 @@ export function NewReleases({ lang, books, title }: NewReleasesProps) {
               <p className="max-w-[28ch] text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">
                 {book.description}
               </p>
+              {book.price ? (
+                <div className="mt-4">
+                  <PriceDisplay
+                    price={book.price}
+                    originalPrice={book.originalPrice}
+                    discountLabel={book.discountLabel}
+                  />
+                </div>
+              ) : null}
             </Link>
           ))}
         </div>

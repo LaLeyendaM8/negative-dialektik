@@ -58,6 +58,9 @@ function getHomeBooksFromCatalog(
     title: string;
     description: string;
     coverImage: string;
+    price?: string;
+    originalPrice?: string;
+    discountLabel?: string;
   }[],
 ) {
   return books.map((book) => ({
@@ -66,6 +69,9 @@ function getHomeBooksFromCatalog(
     description: book.description,
     coverTitle: book.title,
     coverImage: book.coverImage,
+    price: book.price,
+    originalPrice: book.originalPrice,
+    discountLabel: book.discountLabel,
   }));
 }
 

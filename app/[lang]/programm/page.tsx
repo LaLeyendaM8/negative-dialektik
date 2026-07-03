@@ -10,6 +10,7 @@ import {
   formatStockStatus,
 } from "@/lib/catalog-ui";
 import { BookMedia } from "../../components/shared/book-media";
+import { PriceDisplay } from "../../components/shared/price-display";
 
 function ProgramBookGrid({
   books,
@@ -21,6 +22,9 @@ function ProgramBookGrid({
     title: string;
     description: string;
     coverImage: string;
+    price?: string;
+    originalPrice?: string;
+    discountLabel?: string;
     status: "in-vorbereitung" | "angekuendigt" | "vorbestellbar" | "lieferbar" | "vergriffen";
     stockStatus:
       | "nicht-verfuegbar"
@@ -65,6 +69,15 @@ function ProgramBookGrid({
             <p className="mt-2 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {formatStockStatus(lang, book.stockStatus)}
             </p>
+            {book.price ? (
+              <div className="mt-4">
+                <PriceDisplay
+                  price={book.price}
+                  originalPrice={book.originalPrice}
+                  discountLabel={book.discountLabel}
+                />
+              </div>
+            ) : null}
             <p className="mt-5 max-w-[28ch] text-[17px] leading-[1.7] text-[var(--color-text-secondary)] md:text-[18px]">
               {book.description}
             </p>

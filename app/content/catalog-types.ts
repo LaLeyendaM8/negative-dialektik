@@ -49,6 +49,8 @@ export type CatalogBook = {
   publicationDate: string;
   status: BookStatus;
   price?: string;
+  originalPrice?: string;
+  discountLabel?: string;
   currency?: string;
   stockStatus: StockStatus;
   buyLink?: string;

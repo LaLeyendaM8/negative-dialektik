@@ -12,6 +12,7 @@ import {
 } from "@/lib/catalog-ui";
 import { getBookInquiryHref } from "@/lib/commerce";
 import { BookMedia } from "../../../components/shared/book-media";
+import { PriceDisplay } from "../../../components/shared/price-display";
 
 export default async function BookPage({
   params,
@@ -191,7 +192,14 @@ export default async function BookPage({
                   <dt className="text-[var(--color-text-secondary)]">
                     {bookDetailPage.price}
                   </dt>
-                  <dd>{book.price}</dd>
+                  <dd>
+                    <PriceDisplay
+                      price={book.price}
+                      originalPrice={book.originalPrice}
+                      discountLabel={book.discountLabel}
+                      size="small"
+                    />
+                  </dd>
                 </div>
               ) : null}
             </dl>
@@ -273,6 +281,16 @@ export default async function BookPage({
               <span className={`inline-block h-2.5 w-2.5 rounded-full ${availabilityDotClass}`} />
               <span>{formatStockStatus(lang, book.stockStatus)}</span>
             </div>
+            {book.price ? (
+              <div className="mt-6 border border-[var(--color-border)] bg-[var(--color-card)] p-5">
+                <PriceDisplay
+                  price={book.price}
+                  originalPrice={book.originalPrice}
+                  discountLabel={book.discountLabel}
+                  size="large"
+                />
+              </div>
+            ) : null}
             <div className="mt-8 flex flex-wrap gap-4">
               {hasCheckout ? (
                 <a

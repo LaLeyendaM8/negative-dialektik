@@ -152,6 +152,8 @@ export const catalogContent: CatalogContent = {
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
       price: "89.100 COP",
+      originalPrice: "99.000 COP",
+      discountLabel: "10% Vorbestellrabatt",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
@@ -195,6 +197,8 @@ export const catalogContent: CatalogContent = {
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
       price: "71.100 COP",
+      originalPrice: "79.000 COP",
+      discountLabel: "10% Vorbestellrabatt",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
@@ -235,6 +239,8 @@ export const catalogContent: CatalogContent = {
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
       price: "62.100 COP",
+      originalPrice: "69.000 COP",
+      discountLabel: "10% Vorbestellrabatt",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:

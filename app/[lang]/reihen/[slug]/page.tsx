@@ -11,6 +11,7 @@ import {
   formatStockStatus,
 } from "@/lib/catalog-ui";
 import { BookMedia } from "../../../components/shared/book-media";
+import { PriceDisplay } from "../../../components/shared/price-display";
 import Image from "next/image";
 
 export default async function SeriesPage({
@@ -113,6 +114,15 @@ export default async function SeriesPage({
                     <p className="mt-2 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
                       {formatStockStatus(lang, book.stockStatus)}
                     </p>
+                    {book.price ? (
+                      <div className="mt-4">
+                        <PriceDisplay
+                          price={book.price}
+                          originalPrice={book.originalPrice}
+                          discountLabel={book.discountLabel}
+                        />
+                      </div>
+                    ) : null}
                     <div className="mt-5 flex flex-wrap gap-4">
                       <Link
                         href={`/${lang}/buecher/${book.slug}`}
