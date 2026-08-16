@@ -28,6 +28,19 @@ export const homeFocusItems = [
   },
 ];
 
+export const homeReliefNotice = {
+  eyebrow: "Agosto de 2026",
+  title: "Apoyo a las personas damnificadas",
+  paragraphs: [
+    "Ante las graves consecuencias del terremoto que ha afectado a Colombia, NEGATIVE DIALEKTIK – Instituto de Filosofía Alemana destinará el 100 % de los ingresos correspondientes al Instituto por las ventas de sus libros durante el mes de agosto de 2026 al apoyo de las personas damnificadas.",
+  ],
+  signature: [
+    "NEGATIVE DIALEKTIK",
+    "Instituto de Filosofía Alemana",
+    "Tunja, Colombia · Agosto de 2026",
+  ],
+};
+
 export const homeMission = {
   title: "Editorial",
   paragraphs: [

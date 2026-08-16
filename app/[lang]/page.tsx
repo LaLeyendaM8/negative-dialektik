@@ -3,6 +3,7 @@ import { ClosingCta } from "../components/home/closing-cta";
 import { Hero } from "../components/home/hero";
 import { Mission } from "../components/home/mission";
 import { NewReleases } from "../components/home/new-releases";
+import { ReliefNotice } from "../components/home/relief-notice";
 import { StiftungPreview } from "../components/home/stiftung-preview";
 import { getContent } from "@/lib/getContent";
 
@@ -21,12 +22,14 @@ export default async function HomePage({
     homeFocusItems,
     homeHero,
     homeMission,
+    homeReliefNotice,
     homeStiftung,
   } = getContent(lang);
 
   return (
     <main>
       <Hero lang={lang} hero={homeHero} focusItems={homeFocusItems} />
+      <ReliefNotice notice={homeReliefNotice} />
       <Mission lang={lang} mission={homeMission} />
       <NewReleases lang={lang} books={homeBooks} title={homeProgram.title} />
       <AcademyPreview lang={lang} academy={homeAcademy} />

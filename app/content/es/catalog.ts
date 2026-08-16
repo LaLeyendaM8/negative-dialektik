@@ -148,13 +148,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-07-16",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "89.100 COP",
-      originalPrice: "99.000 COP",
-      discountLabel: "10% de descuento en preventa",
+      price: "99.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa con 10% de descuento. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -193,13 +191,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-06-17",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "71.100 COP",
-      originalPrice: "79.000 COP",
-      discountLabel: "10% de descuento en preventa",
+      price: "79.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa con 10% de descuento. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
@@ -235,13 +231,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-06-17",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "62.100 COP",
-      originalPrice: "69.000 COP",
-      discountLabel: "10% de descuento en preventa",
+      price: "69.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa con 10% de descuento. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
       editorialSheetPdf:

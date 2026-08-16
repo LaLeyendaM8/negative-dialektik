@@ -21,6 +21,7 @@ import { datenschutzPage as deDatenschutzPage } from "@/app/content/de/pages/dat
 import {
   homeHero as deHomeHero,
   homeFocusItems as deHomeFocusItems,
+  homeReliefNotice as deHomeReliefNotice,
   homeMission as deHomeMission,
   homeProgram as deHomeProgram,
   homeAcademy as deHomeAcademy,
@@ -43,6 +44,7 @@ import { datenschutzPage as esDatenschutzPage } from "@/app/content/es/pages/dat
 import {
   homeHero as esHomeHero,
   homeFocusItems as esHomeFocusItems,
+  homeReliefNotice as esHomeReliefNotice,
   homeMission as esHomeMission,
   homeProgram as esHomeProgram,
   homeAcademy as esHomeAcademy,
@@ -94,6 +96,7 @@ const content = {
     datenschutzPage: deDatenschutzPage,
     homeHero: deHomeHero,
     homeFocusItems: deHomeFocusItems,
+    homeReliefNotice: deHomeReliefNotice,
     homeMission: deHomeMission,
     homeProgram: deHomeProgram,
     homeBooks: getHomeBooksFromCatalog(deCatalogContent.books),
@@ -120,6 +123,7 @@ const content = {
     datenschutzPage: esDatenschutzPage,
     homeHero: esHomeHero,
     homeFocusItems: esHomeFocusItems,
+    homeReliefNotice: esHomeReliefNotice,
     homeMission: esHomeMission,
     homeProgram: esHomeProgram,
     homeBooks: getHomeBooksFromCatalog(esCatalogContent.books),

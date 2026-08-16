@@ -151,13 +151,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-07-16",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "89.100 COP",
-      originalPrice: "99.000 COP",
-      discountLabel: "10% Vorbestellrabatt",
+      price: "99.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -196,13 +194,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-06-17",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "71.100 COP",
-      originalPrice: "79.000 COP",
-      discountLabel: "10% Vorbestellrabatt",
+      price: "79.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
@@ -238,13 +234,11 @@ export const catalogContent: CatalogContent = {
       publicationDate: "2026-06-17",
       status: "vorbestellbar",
       stockStatus: "vorbestellung-manuell",
-      price: "62.100 COP",
-      originalPrice: "69.000 COP",
-      discountLabel: "10% Vorbestellrabatt",
+      price: "69.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Vorbestellbar mit 10% Rabatt. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
       editorialSheetPdf:

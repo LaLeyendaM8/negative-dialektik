@@ -28,6 +28,19 @@ export const homeFocusItems = [
   },
 ];
 
+export const homeReliefNotice = {
+  eyebrow: "August 2026",
+  title: "Unterstützung für die betroffenen Menschen",
+  paragraphs: [
+    "Angesichts der schweren Folgen des Erdbebens, das Kolumbien getroffen hat, wird NEGATIVE DIALEKTIK – Institut für deutsche Philosophie im August 2026 100 % der dem Institut zustehenden Einnahmen aus dem Verkauf seiner Bücher zur Unterstützung der betroffenen Personen bereitstellen.",
+  ],
+  signature: [
+    "NEGATIVE DIALEKTIK",
+    "Institut für deutsche Philosophie",
+    "Tunja, Kolumbien · August 2026",
+  ],
+};
+
 export const homeMission = {
   title: "Verlag",
   paragraphs: [
