@@ -10,7 +10,7 @@ export const catalogContent: CatalogContent = {
       "Las líneas editoriales de la casa organizan el programa según campos filosóficos y contextos de tradición.",
     booksTitle: "Títulos",
     booksSubtitle:
-      "Los seis primeros libros forman el catálogo operativo de la editorial: títulos disponibles, preventas, muestras de lectura y ficha editorial.",
+      "Los seis primeros libros forman el catálogo operativo de la editorial: títulos disponibles, títulos en preparación, muestras de lectura y ficha editorial.",
   },
   series: [
     {
@@ -37,7 +37,7 @@ export const catalogContent: CatalogContent = {
       theme:
         "Orientación, claridad conceptual y mediación académica para estudio y docencia.",
       coverImage: "/images/books/theodor-w-adorno-introduccion.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: [
         "theodor-w-adorno-introduccion",
         "anarquismo",
@@ -54,7 +54,7 @@ export const catalogContent: CatalogContent = {
         "Aquí aparecen textos en los que el arte, la belleza, la forma y la experiencia ocupan un lugar central.",
       theme: "Estética, arte, romanticismo y sus constelaciones conceptuales.",
       coverImage: "/images/books/alta-rosa-espigada.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: [
         "alta-rosa-espigada",
         "lo-culminado-en-si-mismo",
@@ -71,7 +71,7 @@ export const catalogContent: CatalogContent = {
         "La colección reúne conferencias, investigaciones y definiciones editoriales de Negative Dialektik.",
       theme: "Publicaciones propias del instituto y elaboraciones programáticas.",
       coverImage: "/images/books/formas-de-vida-y-critica-social.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: ["formas-de-vida-y-critica-social"],
       seoTitle: "Escritos del Instituto | Negative Dialektik",
       seoDescription:
@@ -146,13 +146,13 @@ export const catalogContent: CatalogContent = {
       format: "Edición de bolsillo",
       language: "Español",
       publicationDate: "2026-07-16",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "99.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible directamente a través de Negative Dialektik. El envío se coordina manualmente después de la confirmación del pago.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -189,13 +189,13 @@ export const catalogContent: CatalogContent = {
       format: "Edición de bolsillo",
       language: "Español",
       publicationDate: "2026-06-17",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "79.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible directamente a través de Negative Dialektik. El envío se coordina manualmente después de la confirmación del pago.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
@@ -229,13 +229,13 @@ export const catalogContent: CatalogContent = {
       format: "Edición de bolsillo",
       language: "Español",
       publicationDate: "2026-06-17",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "69.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Disponible en preventa directa a través de Negative Dialektik. El envío se coordina manualmente cuando el libro esté disponible.",
+        "Disponible directamente a través de Negative Dialektik. El envío se coordina manualmente después de la confirmación del pago.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
       editorialSheetPdf:

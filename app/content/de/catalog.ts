@@ -10,7 +10,7 @@ export const catalogContent: CatalogContent = {
       "Die editorischen Linien des Verlags ordnen das Programm nach philosophischen Feldern und Traditionszusammenhängen.",
     booksTitle: "Titel",
     booksSubtitle:
-      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit lieferbaren Titeln, Vorbestellungen, Leseproben und Ficha editorial.",
+      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit lieferbaren Titeln, Titeln in Vorbereitung, Leseproben und Ficha editorial.",
   },
   series: [
     {
@@ -39,7 +39,7 @@ export const catalogContent: CatalogContent = {
       theme:
         "Einordnung, Begriffsklärung und Vermittlung für Studium und Lehre.",
       coverImage: "/images/books/theodor-w-adorno-introduccion.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: [
         "theodor-w-adorno-introduccion",
         "anarquismo",
@@ -57,7 +57,7 @@ export const catalogContent: CatalogContent = {
       theme:
         "Ästhetik, Kunst, Romantik und ihre begrifflichen Konstellationen.",
       coverImage: "/images/books/alta-rosa-espigada.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: [
         "alta-rosa-espigada",
         "lo-culminado-en-si-mismo",
@@ -74,7 +74,7 @@ export const catalogContent: CatalogContent = {
         "Die Reihe versammelt Vorlesungen, Forschungstexte und editorische Positionsbestimmungen von Negative Dialektik.",
       theme: "Eigene Publikationen des Instituts und programmatische Texte.",
       coverImage: "/images/books/formas-de-vida-y-critica-social.jpeg",
-      status: "vorbestellbar",
+      status: "lieferbar",
       featuredBooks: ["formas-de-vida-y-critica-social"],
       seoTitle: "Schriften des Instituts | Negative Dialektik",
       seoDescription:
@@ -149,13 +149,13 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-07-16",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "99.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
       editorialSheetPdf:
@@ -192,13 +192,13 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-06-17",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "79.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
       editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
@@ -232,13 +232,13 @@ export const catalogContent: CatalogContent = {
       format: "Taschenbuch",
       language: "Spanisch",
       publicationDate: "2026-06-17",
-      status: "vorbestellbar",
-      stockStatus: "vorbestellung-manuell",
+      status: "lieferbar",
+      stockStatus: "bestellbar-manuell",
       price: "69.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik vorbestellbar. Der Versand wird nach Verfügbarkeit manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
       editorialSheetPdf:
