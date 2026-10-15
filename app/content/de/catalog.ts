@@ -10,18 +10,16 @@ export const catalogContent: CatalogContent = {
       "Die editorischen Linien des Verlags ordnen das Programm nach philosophischen Feldern und Traditionszusammenhängen.",
     booksTitle: "Titel",
     booksSubtitle:
-      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit lieferbaren Titeln, Titeln in Vorbereitung, Leseproben und Ficha editorial.",
+      "Die ersten sechs Bände bilden den operativen Katalog des Verlags: mit lieferbaren Titeln, Titeln in Vorbereitung und Leseproben.",
   },
   series: [
     {
       slug: "geist",
       title: "Geist",
       subtitle:
-        "Kritische Theorie, Sozialphilosophie und zeitgenössische Debatten.",
-      description:
-        "Die Reihe versammelt Arbeiten der Gegenwartsphilosophie, der Kritischen Theorie sowie der Sozial- und Politischen Philosophie.",
-      theme:
-        "Philosophie im engeren Sinne: Dialektik, Theorie, Gegenwartsdiagnose.",
+        "Philosophie im engeren Sinne. Die Reihe versammelt grundlegende Arbeiten der zeitgenössischen Philosophie, der Kritischen Theorie sowie der Sozial- und Politischen Philosophie.",
+      description: "",
+      theme: "",
       coverImage: "/images/books/autonomia-y-liberacion.jpeg",
       status: "lieferbar",
       featuredBooks: ["autonomia-y-liberacion"],
@@ -33,11 +31,9 @@ export const catalogContent: CatalogContent = {
       slug: "bildung",
       title: "Bildung",
       subtitle:
-        "Einführungen in zentrale Begriffe, Autoren und Problemfelder.",
-      description:
-        "Die Reihe bietet systematische Zugänge zu grundlegenden Begriffen und Autoren der deutschen und europäischen Tradition.",
-      theme:
-        "Einordnung, Begriffsklärung und Vermittlung für Studium und Lehre.",
+        "Die Reihe bietet systematische Zugänge zu grundlegenden Begriffen und Autoren der deutschen und europäischen Tradition. Orientierung, begriffliche Klarheit und akademische Vermittlung für Studium und Lehre.",
+      description: "",
+      theme: "",
       coverImage: "/images/books/theodor-w-adorno-introduccion.jpeg",
       status: "lieferbar",
       featuredBooks: [
@@ -56,7 +52,7 @@ export const catalogContent: CatalogContent = {
         "Hier erscheinen Texte, in denen Kunst, Schönheit, Form und Erfahrung im Zentrum philosophischer Reflexion stehen.",
       theme:
         "Ästhetik, Kunst, Romantik und ihre begrifflichen Konstellationen.",
-      coverImage: "/images/books/alta-rosa-espigada.jpeg",
+      coverImage: "/images/books/alta-rosa-espigada.jpg",
       status: "lieferbar",
       featuredBooks: [
         "alta-rosa-espigada",
@@ -99,7 +95,6 @@ export const catalogContent: CatalogContent = {
         "Christoph Menke gehört zu den einflussreichsten Gegenwartsphilosophen in Kritischer Theorie, Ästhetik und politischer Philosophie.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Primera edición en español, traducción especializada y académica, edición crítica, diseño premium.",
       },
@@ -115,9 +110,8 @@ export const catalogContent: CatalogContent = {
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich.",
       samplePdf: "/samples/autonomia-y-liberacion-lectura-de-prueba.pdf",
-      editorialSheetPdf: "/fichas/autonomia-y-liberacion-ficha-editorial.pdf",
       seoTitle:
         "Autonomía y liberación | Christoph Menke | Negative Dialektik",
       seoDescription:
@@ -139,7 +133,6 @@ export const catalogContent: CatalogContent = {
         "Gerhard Schweppenhäuser ist Philosoph und einer der wichtigsten zeitgenössischen Spezialisten für Kritische Theorie und Frankfurter Schule.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Una de las introducciones más reconocidas sobre el pensamiento de Adorno publicadas en alemán.",
       },
@@ -155,11 +148,9 @@ export const catalogContent: CatalogContent = {
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich.",
       samplePdf:
         "/samples/theodor-w-adorno-introduccion-lectura-de-prueba.pdf",
-      editorialSheetPdf:
-        "/fichas/theodor-w-adorno-introduccion-ficha-editorial.pdf",
       seoTitle:
         "Theodor W. Adorno. Introducción | Gerhard Schweppenhäuser | Negative Dialektik",
       seoDescription:
@@ -177,30 +168,27 @@ export const catalogContent: CatalogContent = {
       description:
         "Eine philosophische Meditation über die Rose als ästhetisches, geistiges und symbolisches Motiv.",
       longDescription: [
-        "Josef Hackspacher verbindet romantische Tradition, Kritische Theorie und gegenwärtige Erfahrung zu einer Reflexion über Liebe, Kunst, Sprache und innere Bildung.",
         "Das Buch richtet sich an Leserinnen und Leser, die eine zugleich anspruchsvolle und klare ästhetische Erfahrung suchen.",
         "Josef Hackspacher studierte Ästhetik an der Goethe-Universität Frankfurt bei Christoph Menke und arbeitet zu deutscher Philosophie und Kritischer Theorie.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Articula la tradición de la estética con la Teoría Crítica a partir de un único motivo simbólico: la rosa.",
       },
-      coverImage: "/images/books/alta-rosa-espigada.jpeg",
+      coverImage: "/images/books/alta-rosa-espigada.jpg",
       isbn: "ISBN folgt",
       pages: 114,
       format: "Taschenbuch",
       language: "Spanisch",
-      publicationDate: "2026-06-17",
+      publicationDate: "2026-07-16",
       status: "lieferbar",
       stockStatus: "bestellbar-manuell",
       price: "79.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich.",
       samplePdf: "/samples/alta-rosa-espigada-lectura-de-prueba.pdf",
-      editorialSheetPdf: "/fichas/alta-rosa-espigada-ficha-editorial.pdf",
       seoTitle:
         "Alta rosa espigada | Josef Hackspacher | Negative Dialektik",
       seoDescription:
@@ -222,7 +210,6 @@ export const catalogContent: CatalogContent = {
         "Josef Hackspacher ist Dozent, Übersetzer und Herausgeber. Seine Arbeit konzentriert sich auf deutsche Philosophie und Kritische Theorie.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Combina claridad expositiva y rigor conceptual.",
       },
@@ -231,18 +218,16 @@ export const catalogContent: CatalogContent = {
       pages: 92,
       format: "Taschenbuch",
       language: "Spanisch",
-      publicationDate: "2026-06-17",
+      publicationDate: "2026-07-16",
       status: "lieferbar",
       stockStatus: "bestellbar-manuell",
       price: "69.000 COP",
       currency: "COP",
       checkoutEnabled: true,
       manualOrderNote:
-        "Direkt über Negative Dialektik erhältlich. Der Versand wird nach bestätigter Zahlung manuell koordiniert.",
+        "Direkt über Negative Dialektik erhältlich.",
       samplePdf:
         "/samples/formas-de-vida-y-critica-social-lectura-de-prueba.pdf",
-      editorialSheetPdf:
-        "/fichas/formas-de-vida-y-critica-social-ficha-editorial.pdf",
       seoTitle:
         "Formas de vida y crítica social | Josef Hackspacher | Negative Dialektik",
       seoDescription:
@@ -253,6 +238,7 @@ export const catalogContent: CatalogContent = {
       title: "Anarquismo",
       subtitle: "Introducción",
       author: "Daniel Loick",
+      translator: "Michael Francisco Eraso Horn",
       editor: "Negative Dialektik",
       seriesSlug: "bildung",
       seriesDisplayLabel: "Bildung 4",
@@ -264,23 +250,21 @@ export const catalogContent: CatalogContent = {
         "Daniel Loick ist Philosoph an der Goethe-Universität Frankfurt und arbeitet zu Kritischer Theorie, politischer Philosophie und Rechtstheorie.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Presenta el anarquismo como una tradición intelectual compleja.",
       },
-      coverImage: "/images/books/anarquismo.jpeg",
+      coverImage: "/images/books/anarquismo.jpg",
       isbn: "ISBN folgt",
       pages: 258,
       format: "Taschenbuch",
       language: "Spanisch",
-      publicationDate: "2026-09-13",
+      publicationDate: "2026-12-01",
       status: "in-vorbereitung",
       stockStatus: "nicht-verfuegbar",
       checkoutEnabled: false,
       manualOrderNote:
         "Dieser Titel ist in Arbeit und noch nicht bestellbar.",
       samplePdf: "/samples/anarquismo-lectura-de-prueba.pdf",
-      editorialSheetPdf: "/fichas/anarquismo-ficha-editorial.pdf",
       seoTitle: "Anarquismo | Daniel Loick | Negative Dialektik",
       seoDescription:
         "Daniel Loicks Einführung in den Anarchismus: Staat, Herrschaft, Demokratie, Politik und Kritische Theorie.",
@@ -294,23 +278,21 @@ export const catalogContent: CatalogContent = {
       seriesSlug: "rose",
       seriesDisplayLabel: "Rose 2",
       description:
-        "Eine spanische Ausgabe zentraler ästhetischer Schriften von Karl Philipp Moritz.",
+        "Eine bisher unveröffentlichte spanische Ausgabe der wichtigsten ästhetischen Schriften von Karl Philipp Moritz.",
       longDescription: [
-        "Die Texte formulieren eine der Grundideen der Moderne: das Kunstwerk als autonome, in sich vollendete Totalität.",
-        "Der Band ist ein wichtiger Zugang zur Entstehung der modernen Ästhetik und zur Geschichte der Kunstphilosophie.",
-        "Karl Philipp Moritz war Schriftsteller, Philosoph und einer der Begründer der modernen Ästhetik. Sein Denken beeinflusste Kant, die deutsche Romantik und die spätere ästhetische Theorie.",
+        "In diesen Texten formuliert Moritz eine der Grundideen der Moderne: das Verständnis des Kunstwerks als autonome Totalität.",
+        "Der Band ist unverzichtbar für das Verständnis der Entstehung der modernen Ästhetik und der Geschichte der Kunstphilosophie.",
       ],
       quote: {
-        source: "Ficha editorial",
         text:
           "Permite acceder directamente a la formulación original de la idea moderna de la autonomía del arte.",
       },
-      coverImage: "/images/books/lo-culminado-en-si-mismo.jpeg",
+      coverImage: "/images/books/lo-culminado-en-si-mismo.jpg",
       isbn: "ISBN folgt",
       pages: 118,
       format: "Taschenbuch",
       language: "Spanisch",
-      publicationDate: "2026-09-13",
+      publicationDate: "2026-12-01",
       status: "in-vorbereitung",
       stockStatus: "nicht-verfuegbar",
       checkoutEnabled: false,
@@ -318,8 +300,6 @@ export const catalogContent: CatalogContent = {
         "Dieser Titel ist in Arbeit und noch nicht bestellbar.",
       samplePdf:
         "/samples/lo-culminado-en-si-mismo-lectura-de-prueba.pdf",
-      editorialSheetPdf:
-        "/fichas/lo-culminado-en-si-mismo-ficha-editorial.pdf",
       seoTitle:
         "Lo culminado en sí mismo | Karl Philipp Moritz | Negative Dialektik",
       seoDescription:

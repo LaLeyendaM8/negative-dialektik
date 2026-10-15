@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "./container";
@@ -46,10 +47,14 @@ export function SiteHeader({ lang, navigation, uiText }: SiteHeaderProps) {
       <Container>
         <div className="flex items-center justify-between py-6 md:py-8">
           <Link href={`/${lang}`} className="shrink-0 text-[var(--color-text)]">
-            <img
+            <Image
               src="/logo/logo.svg"
               alt="Negative Dialektik"
-              className="h-auto w-[56px] md:w-[64px] dark:invert"
+              width={64}
+              height={39}
+              priority
+              unoptimized
+              className="h-auto w-[56px] dark:invert md:w-[64px]"
             />
           </Link>
 

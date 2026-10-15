@@ -1,5 +1,4 @@
 export const bookDetailPage = {
-  eyebrow: "Buch",
   inSeries: "In der Reihe",
   metadata: "Bibliografische Daten",
   description: "Beschreibung",
@@ -21,7 +20,5 @@ export const bookDetailPage = {
   sampleTitle: "Leseprobe",
   sampleAction: "Leseprobe herunterladen (PDF)",
   sampleMissing: "Leseprobe folgt in einer späteren Ausbaustufe.",
-  editorialSheetTitle: "Ficha editorial",
-  editorialSheetAction: "Ficha editorial herunterladen (PDF)",
   relatedTitle: "Weitere Titel der Reihe",
 };

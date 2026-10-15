@@ -30,9 +30,8 @@ export const kontaktPage = {
   },
 
   institute: {
-    title: "Institut",
+    title: "NEGATIVE DIALEKTIK",
     lines: [
-      "Negative Dialektik",
       "Institut für deutsche Philosophie",
       "Tunja, Kolumbien",
     ],

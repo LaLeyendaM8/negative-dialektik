@@ -5,7 +5,6 @@ import { RichText } from "../../components/shared/rich-text";
 import { SectionHeading } from "../../components/ui/section-heading";
 import { getContent } from "@/lib/getContent";
 import {
-  formatCatalogStatus,
   formatOrderActionLabel,
   formatStockStatus,
 } from "@/lib/catalog-ui";
@@ -64,9 +63,6 @@ function ProgramBookGrid({
             </Link>
 
             <p className="mt-3 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {formatCatalogStatus(lang, book.status)}
-            </p>
-            <p className="mt-2 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
               {formatStockStatus(lang, book.stockStatus)}
             </p>
             {book.price ? (

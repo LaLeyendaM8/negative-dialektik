@@ -86,11 +86,7 @@ export default async function BookPage({
 
   return (
     <PageShell>
-      <PageHero
-        title={book.title}
-        lead={book.subtitle}
-        eyebrow={bookDetailPage.eyebrow}
-      />
+      <PageHero title={book.title} lead={book.subtitle} />
 
       <div className="grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:gap-16">
         <aside className="self-start xl:sticky xl:top-10">
@@ -255,18 +251,8 @@ export default async function BookPage({
                   {bookDetailPage.sampleAction}
                 </a>
               ) : null}
-              {book.editorialSheetPdf ? (
-                <a
-                  href={book.editorialSheetPdf}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex border border-[var(--color-border)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-text)] hover:text-[var(--color-text)]"
-                >
-                  {bookDetailPage.editorialSheetAction}
-                </a>
-              ) : null}
             </div>
-            {!book.samplePdf && !book.editorialSheetPdf ? (
+            {!book.samplePdf ? (
               <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">
                 {bookDetailPage.sampleMissing}
               </p>

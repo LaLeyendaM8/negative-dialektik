@@ -30,6 +30,7 @@ export default async function SeriesPage({
     (book) => book.seriesSlug === series.slug,
   );
   const { seriesDetailPage } = getContent(lang);
+  const hasProfile = Boolean(series.description || series.theme);
 
   return (
     <PageShell>
@@ -64,17 +65,19 @@ export default async function SeriesPage({
         </aside>
 
         <div>
-          <section className="border-t border-[var(--color-border)] pt-8">
-            <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
-              {seriesDetailPage.profile}
-            </p>
-            <RichText>
-              <p>{series.description}</p>
-              <p>{series.theme}</p>
-            </RichText>
-          </section>
+          {hasProfile ? (
+            <section className="border-t border-[var(--color-border)] pt-8">
+              <p className="mb-4 text-[12px] uppercase tracking-[0.12em] text-[var(--color-text-secondary)]">
+                {seriesDetailPage.profile}
+              </p>
+              <RichText>
+                <p>{series.description}</p>
+                <p>{series.theme}</p>
+              </RichText>
+            </section>
+          ) : null}
 
-          <section className="mt-14 border-t border-[var(--color-border)] pt-8">
+          <section className={`${hasProfile ? "mt-14" : ""} border-t border-[var(--color-border)] pt-8`}>
             <h2
               className="text-[34px] leading-[1.06] text-[var(--color-text)] sm:text-[40px] md:text-[48px]"
               style={{ fontFamily: "var(--font-serif)" }}

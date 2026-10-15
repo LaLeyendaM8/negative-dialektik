@@ -64,7 +64,7 @@ export default async function KontaktPage({
 
       <section className="mt-16 border-t border-[var(--color-border)] pt-10">
         <h2
-          className="mb-8 text-[34px] leading-[1.1] md:text-[40px]"
+          className="mb-8 text-[42px] leading-[1.02] tracking-[-0.03em] md:text-[56px]"
           style={{ fontFamily: "var(--font-serif)" }}
         >
           {kontaktPage.institute.title}

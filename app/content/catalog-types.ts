@@ -38,7 +38,7 @@ export type CatalogBook = {
   description: string;
   longDescription: string[];
   quote?: {
-    source: string;
+    source?: string;
     text: string;
   };
   coverImage: string;
@@ -57,7 +57,6 @@ export type CatalogBook = {
   checkoutEnabled?: boolean;
   manualOrderNote?: string;
   samplePdf?: string;
-  editorialSheetPdf?: string;
   seoTitle: string;
   seoDescription: string;
 };

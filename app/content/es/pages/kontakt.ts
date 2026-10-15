@@ -1,7 +1,7 @@
 export const kontaktPage = {
   title: "Contacto",
   lead:
-    "Informacion sobre novedades editoriales, eventos y programas academicos.",
+    "Información sobre novedades editoriales, eventos y programas académicos.",
   form: {
     title: "Ponerse en contacto",
     fields: {
@@ -27,10 +27,9 @@ export const kontaktPage = {
       "Hubo un problema con la suscripcion. Intente nuevamente.",
   },
   institute: {
-    title: "Instituto",
+    title: "NEGATIVE DIALEKTIK",
     lines: [
-      "Negative Dialektik",
-      "Instituto de Filosofia Alemana",
+      "Instituto de Filosofía Alemana",
       "Tunja, Colombia",
     ],
     email: "info@negative-dialektik.com",
