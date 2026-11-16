@@ -20,6 +20,10 @@ Lokal in `.env.local` und in Vercel setzen:
 - `CONTACT_RECEIVER_EMAIL`
 - `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID` (optional; aktiviert consent-basiertes GA4)
 
+In Vercel Preview bleibt `NEXT_PUBLIC_SITE_URL` auf der kanonischen
+Produktionsdomain. Der Checkout verwendet dort automatisch `VERCEL_URL` als
+Rücksprungziel, sodass Sandbox-Zahlungen in der Preview enden.
+
 `WOMPI_ENVIRONMENT` ist aktuell nur eine Betriebsmarkierung. Die Checkout-URL
 läuft über Wompis Web Checkout; Sandbox oder Produktion ergeben sich über die
 verwendeten Wompi-Keys.

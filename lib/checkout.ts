@@ -22,6 +22,11 @@ function getWompiConfig() {
 }
 
 function getBaseUrl() {
+  const vercelUrl = process.env.VERCEL_URL;
+  if (process.env.VERCEL_ENV === "preview" && vercelUrl) {
+    return `https://${vercelUrl.replace(/\/$/, "")}`;
+  }
+
   const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL;
   if (configuredUrl) {
     try {
@@ -35,7 +40,6 @@ function getBaseUrl() {
     }
   }
 
-  const vercelUrl = process.env.VERCEL_URL;
   if (vercelUrl) {
     return `https://${vercelUrl.replace(/\/$/, "")}`;
   }
