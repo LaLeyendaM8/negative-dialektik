@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { getBookBySlug } from "@/lib/getCatalog";
 import {
-  parseWompiReference,
+  validateWompiTransaction,
   verifyWompiEventSignature,
 } from "@/lib/checkout";
 import { persistOrderAndNotify } from "@/lib/orders";
@@ -50,15 +49,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ received: true });
   }
 
-  const reference = parseWompiReference(transaction.reference);
-  if (!reference) {
+  const validation = validateWompiTransaction({
+    reference: transaction.reference,
+    amountInCents: transaction.amount_in_cents,
+    currency: transaction.currency,
+  });
+  if (!validation.valid) {
+    console.warn("Ignored invalid Wompi transaction", {
+      transactionId: transaction.id,
+      reason: validation.reason,
+    });
     return NextResponse.json({ received: true });
   }
 
-  const book = getBookBySlug(reference.lang, reference.slug);
-  if (!book) {
-    return NextResponse.json({ received: true });
-  }
+  const { book, reference } = validation;
 
   await persistOrderAndNotify({
     paymentProvider: "wompi",
@@ -68,7 +72,7 @@ export async function POST(request: Request) {
       typeof transaction.amount_in_cents === "number"
         ? transaction.amount_in_cents
         : null,
-    currency: transaction.currency ?? book.currency ?? "COP",
+    currency: validation.expectedCurrency,
     paymentStatus: transaction.status,
     paymentMethodType: transaction.payment_method_type ?? null,
     customerEmail:
@@ -79,10 +83,7 @@ export async function POST(request: Request) {
     bookSlug: book.slug,
     bookTitle: book.title,
     lang: reference.lang,
-    unitPrice:
-      typeof transaction.amount_in_cents === "number"
-        ? transaction.amount_in_cents
-        : null,
+    unitPrice: validation.expectedAmountInCents,
   });
 
   return NextResponse.json({ received: true });

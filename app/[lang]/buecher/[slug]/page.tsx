@@ -13,6 +13,41 @@ import {
 import { getBookInquiryHref } from "@/lib/commerce";
 import { BookMedia } from "../../../components/shared/book-media";
 import { PriceDisplay } from "../../../components/shared/price-display";
+import type { Metadata } from "next";
+import { absoluteUrl, getLocalizedAlternates, isSupportedLanguage } from "@/lib/site";
+import { parseCatalogPriceToPesos } from "@/lib/checkout";
+import { TrackedCheckoutLink } from "../../../components/analytics/tracked-checkout-link";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>;
+}): Promise<Metadata> {
+  const { lang: langParam, slug } = await params;
+  const lang = isSupportedLanguage(langParam) ? langParam : "es";
+  const book = getBookBySlug(lang, slug);
+  if (!book) return {};
+
+  const path = `buecher/${book.slug}`;
+  return {
+    title: book.seoTitle,
+    description: book.seoDescription,
+    alternates: getLocalizedAlternates(lang, path),
+    openGraph: {
+      type: "book",
+      title: book.seoTitle,
+      description: book.seoDescription,
+      url: `/${lang}/${path}`,
+      images: [{ url: book.coverImage, alt: `${book.title} – ${book.author}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: book.seoTitle,
+      description: book.seoDescription,
+      images: [book.coverImage],
+    },
+  };
+}
 
 export default async function BookPage({
   params,
@@ -54,6 +89,43 @@ export default async function BookPage({
         ? "bg-[#d7a642]"
         : "bg-[#41b757]";
 
+  const price = parseCatalogPriceToPesos(book.price);
+  const bookJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    name: book.title,
+    description: book.seoDescription,
+    url: absoluteUrl(`/${lang}/buecher/${book.slug}`),
+    image: absoluteUrl(book.coverImage),
+    isbn: book.isbn.replace(/-/g, ""),
+    author: { "@type": "Person", name: book.author },
+    inLanguage: lang,
+    numberOfPages: book.pages,
+    bookFormat: book.format,
+    datePublished: book.publicationDate,
+    publisher: { "@type": "Organization", name: "Negative Dialektik" },
+    ...(price && book.currency
+      ? {
+          offers: {
+            "@type": "Offer",
+            price,
+            priceCurrency: book.currency.toUpperCase(),
+            availability:
+              book.stockStatus === "nicht-verfuegbar"
+                ? "https://schema.org/OutOfStock"
+                : book.status === "vorbestellbar"
+                  ? "https://schema.org/PreOrder"
+                  : "https://schema.org/InStock",
+            url: absoluteUrl(`/${lang}/buecher/${book.slug}`),
+          },
+        }
+      : {}),
+  };
+  const serializedBookJsonLd = JSON.stringify(bookJsonLd).replace(
+    /</g,
+    "\\u003c",
+  );
+
   const primaryAction =
     hasCheckout
       ? {
@@ -86,6 +158,10 @@ export default async function BookPage({
 
   return (
     <PageShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializedBookJsonLd }}
+      />
       <PageHero title={book.title} lead={book.subtitle} />
 
       <div className="grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:gap-16">
@@ -279,12 +355,13 @@ export default async function BookPage({
             ) : null}
             <div className="mt-8 flex flex-wrap gap-4">
               {hasCheckout ? (
-                <a
+                <TrackedCheckoutLink
                   href={primaryAction.href}
-                  className="inline-flex border border-[var(--color-text)] px-6 py-3 text-[14px] uppercase tracking-[0.08em] transition-colors hover:bg-[var(--color-text)] hover:text-[var(--color-background)]"
-                >
-                  {primaryAction.label}
-                </a>
+                  label={primaryAction.label}
+                  book={{ slug: book.slug, title: book.title }}
+                  price={price}
+                  currency={book.currency}
+                />
               ) : (
                 <Link
                   href={primaryAction.href}
