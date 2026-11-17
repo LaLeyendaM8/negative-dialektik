@@ -10,6 +10,29 @@ import {
 } from "@/lib/catalog-ui";
 import { BookMedia } from "../../components/shared/book-media";
 import { PriceDisplay } from "../../components/shared/price-display";
+import type { Metadata } from "next";
+import { getLocalizedAlternates, isSupportedLanguage } from "@/lib/site";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang: langParam } = await params;
+  const lang = isSupportedLanguage(langParam) ? langParam : "es";
+  const { catalogContent } = getContent(lang);
+
+  return {
+    title: catalogContent.overview.title,
+    description: catalogContent.overview.lead,
+    alternates: getLocalizedAlternates(lang, "programm"),
+    openGraph: {
+      title: catalogContent.overview.title,
+      description: catalogContent.overview.lead,
+      url: `/${lang}/programm`,
+    },
+  };
+}
 
 function ProgramBookGrid({
   books,
