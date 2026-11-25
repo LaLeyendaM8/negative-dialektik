@@ -48,6 +48,7 @@ Inhaltliche Schwerpunkte sind Kritische Theorie, Sozialphilosophie und Ästhetik
 | Inhalte unter `app/content/de` und `app/content/es`, Darstellung separat in Seiten und Komponenten | Redaktionelle Inhalte bleiben von Layout und Logik getrennt und zweisprachig wartbar. |
 | Spanisch als Standardsprache und `x-default` | Hauptmarkt und institutioneller Auftrag liegen im spanischsprachigen Raum. |
 | Wompi Web Checkout ohne Warenkorb, ein Titel und Menge 1 | Bewusst schlanker MVP mit geringerer technischer und operativer Komplexität. |
+| Neutrale Rückmeldung nach Wompi-Checkout in DE und ES | Die Rückkehrseite zeigt den Weg zum Zahlungsstatus bei Wompi. Die Bestellverarbeitung beginnt nach dem bestätigten Zahlungsereignis. |
 | Versanddaten über Wompi erfassen; Fulfillment bleibt manuell | Verkauf ist möglich, ohne vorzeitig ein vollständiges Shop- und Logistiksystem aufzubauen. |
 | Supabase für Bestellungen, Resend für interne Benachrichtigungen | Bestehender schlanker Betriebsprozess; keine zweite Shop-Plattform. |
 | Webhook prüft Signatur, Referenz, Betrag und Währung; Speicherung und Mail sind idempotent | Schutz vor manipulierten oder doppelten Zahlungsereignissen. |
