@@ -6,6 +6,29 @@ import { NewReleases } from "../components/home/new-releases";
 import { ReliefNotice } from "../components/home/relief-notice";
 import { StiftungPreview } from "../components/home/stiftung-preview";
 import { getContent } from "@/lib/getContent";
+import type { Metadata } from "next";
+import { getLocalizedAlternates, isSupportedLanguage } from "@/lib/site";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang: langParam } = await params;
+  const lang = isSupportedLanguage(langParam) ? langParam : "es";
+  const { homeHero } = getContent(lang);
+
+  return {
+    title: { absolute: "Negative Dialektik" },
+    description: homeHero.lead,
+    alternates: getLocalizedAlternates(lang),
+    openGraph: {
+      title: "Negative Dialektik",
+      description: homeHero.lead,
+      url: `/${lang}`,
+    },
+  };
+}
 
 export default async function HomePage({
   params,

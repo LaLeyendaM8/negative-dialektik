@@ -128,10 +128,13 @@ async function insertOrder(input: CreateOrderInput) {
     }
 
     const rows = (await lookupResponse.json()) as Array<{ id: number }>;
-    return rows[0]?.id ?? null;
+    const existingOrderId = rows[0]?.id;
+    return existingOrderId
+      ? { id: existingOrderId, created: false as const }
+      : null;
   }
 
-  return orderId;
+  return { id: orderId, created: true as const };
 }
 
 async function insertOrderItem(orderId: number, input: CreateOrderInput) {
@@ -199,11 +202,13 @@ async function sendInternalOrderMail(input: CreateOrderInput) {
 }
 
 export async function persistOrderAndNotify(input: CreateOrderInput) {
-  const orderId = await insertOrder(input);
+  const order = await insertOrder(input);
 
-  if (orderId) {
-    await insertOrderItem(orderId, input);
+  if (order) {
+    await insertOrderItem(order.id, input);
   }
 
-  await sendInternalOrderMail(input);
+  if (!order || order.created) {
+    await sendInternalOrderMail(input);
+  }
 }

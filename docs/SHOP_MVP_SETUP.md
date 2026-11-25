@@ -18,6 +18,11 @@ Lokal in `.env.local` und in Vercel setzen:
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
 - `CONTACT_RECEIVER_EMAIL`
+- `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID` (optional; aktiviert consent-basiertes GA4)
+
+In Vercel Preview bleibt `NEXT_PUBLIC_SITE_URL` auf der kanonischen
+Produktionsdomain. Der Checkout verwendet dort automatisch `VERCEL_URL` als
+Rücksprungziel, sodass Sandbox-Zahlungen in der Preview enden.
 
 `WOMPI_ENVIRONMENT` ist aktuell nur eine Betriebsmarkierung. Die Checkout-URL
 läuft über Wompis Web Checkout; Sandbox oder Produktion ergeben sich über die
@@ -83,6 +88,10 @@ ausgegeben.
    - Falls keine Mail ankommt, Vercel Function Logs prüfen:
      `Order notification mail failed`
 7. Abgebrochene Zahlung über Cancel-Flow testen.
+
+Der Webhook verarbeitet eine genehmigte Zahlung nur, wenn Referenz, Betrag und
+Währung exakt zu einem aktuell kaufbaren Katalogtitel passen. Wiederholte Events
+bleiben idempotent und lösen keine zweite Bestellmail aus.
 
 ## 6) Was außerhalb des Codes erledigt werden muss
 

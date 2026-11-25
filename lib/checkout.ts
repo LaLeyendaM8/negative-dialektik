@@ -1,5 +1,6 @@
-import { createHash, randomUUID } from "crypto";
+import { createHash, randomUUID, timingSafeEqual } from "crypto";
 import { getBookBySlug } from "@/lib/getCatalog";
+import { isSupportedLanguage } from "@/lib/site";
 
 export type WompiCheckoutSession = {
   reference: string;
@@ -21,12 +22,24 @@ function getWompiConfig() {
 }
 
 function getBaseUrl() {
-  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL;
-  if (configuredUrl) {
-    return configuredUrl.replace(/\/$/, "");
+  const vercelUrl = process.env.VERCEL_URL;
+  if (process.env.VERCEL_ENV === "preview" && vercelUrl) {
+    return `https://${vercelUrl.replace(/\/$/, "")}`;
   }
 
-  const vercelUrl = process.env.VERCEL_URL;
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (configuredUrl) {
+    try {
+      const url = new URL(configuredUrl);
+      if (process.env.NODE_ENV === "production" && url.protocol !== "https:") {
+        return null;
+      }
+      return url.origin;
+    } catch {
+      return null;
+    }
+  }
+
   if (vercelUrl) {
     return `https://${vercelUrl.replace(/\/$/, "")}`;
   }
@@ -82,19 +95,64 @@ export function parseWompiReference(reference: string | undefined) {
     return null;
   }
 
-  const parts = reference.split("_");
-  if (parts.length < 5 || parts[0] !== "nd") {
+  const match = reference.match(
+    /^nd_(de|es)_([a-z0-9-]+)_([a-z0-9]+)_([a-f0-9]{10})$/,
+  );
+  if (!match) {
     return null;
   }
 
-  const lang = parts[1] === "de" ? "de" : "es";
-  const slug = parts.slice(2, -2).join("_");
-
-  if (!slug) {
+  const [, lang, slug] = match;
+  if (!isSupportedLanguage(lang)) {
     return null;
   }
 
   return { lang, slug };
+}
+
+export function validateWompiTransaction(params: {
+  reference?: string;
+  amountInCents?: number;
+  currency?: string;
+}) {
+  const parsedReference = parseWompiReference(params.reference);
+  if (!parsedReference) {
+    return { valid: false as const, reason: "invalid_reference" as const };
+  }
+
+  const checkout = isBookCheckoutEnabled(
+    parsedReference.lang,
+    parsedReference.slug,
+  );
+  if (!checkout.enabled || !checkout.book?.price || !checkout.book.currency) {
+    return { valid: false as const, reason: "checkout_disabled" as const };
+  }
+
+  const expectedPesos = parseCatalogPriceToPesos(checkout.book.price);
+  if (!expectedPesos) {
+    return { valid: false as const, reason: "invalid_catalog_price" as const };
+  }
+
+  const expectedAmountInCents = expectedPesos * 100;
+  const expectedCurrency = checkout.book.currency.toUpperCase();
+  if (
+    !Number.isSafeInteger(params.amountInCents) ||
+    params.amountInCents !== expectedAmountInCents
+  ) {
+    return { valid: false as const, reason: "amount_mismatch" as const };
+  }
+
+  if (params.currency?.toUpperCase() !== expectedCurrency) {
+    return { valid: false as const, reason: "currency_mismatch" as const };
+  }
+
+  return {
+    valid: true as const,
+    reference: parsedReference,
+    book: checkout.book,
+    expectedAmountInCents,
+    expectedCurrency,
+  };
 }
 
 export async function createCheckoutSession(params: {
@@ -172,7 +230,13 @@ export function verifyWompiEventSignature(body: unknown) {
   );
   const expected = sha256(`${values.join("")}${timestamp}${eventSecret}`);
 
-  return expected === checksum;
+  const expectedBuffer = Buffer.from(expected, "hex");
+  const checksumBuffer = Buffer.from(checksum, "hex");
+
+  return (
+    expectedBuffer.length === checksumBuffer.length &&
+    timingSafeEqual(expectedBuffer, checksumBuffer)
+  );
 }
 
 function getWompiSignaturePropertyValue(

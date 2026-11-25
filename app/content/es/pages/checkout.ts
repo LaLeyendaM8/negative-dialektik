@@ -1,14 +1,14 @@
 export const checkoutPage = {
-  successTitle: "Pedido recibido",
+  successTitle: "Estado del pago en Wompi",
   successLead:
-    "Gracias. La compra fue enviada a Wompi y será procesada por Negative Dialektik.",
+    "Consulta el resultado de tu pago en el mensaje de Wompi.",
   successText:
-    "Cuando el pago quede confirmado, registraremos el pedido internamente y coordinaremos el envío o la entrega manualmente por correo.",
+    "Si el pago se confirma, te contactaremos por correo para coordinar el envío o la entrega. Si tienes dudas sobre el estado del pago, escríbenos antes de volver a pagar.",
   successProgram: "Volver al programa",
   successContact: "Contacto",
   cancelTitle: "Pago cancelado",
   cancelLead:
-    "No se realizó ningún cargo. Puedes intentarlo de nuevo cuando quieras.",
+    "Consulta el estado del pago en Wompi antes de iniciar un nuevo intento.",
   cancelBook: "Volver al título",
   cancelContact: "Contacto",
 };

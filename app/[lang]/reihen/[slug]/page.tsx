@@ -13,6 +13,32 @@ import {
 import { BookMedia } from "../../../components/shared/book-media";
 import { PriceDisplay } from "../../../components/shared/price-display";
 import Image from "next/image";
+import type { Metadata } from "next";
+import { getLocalizedAlternates, isSupportedLanguage } from "@/lib/site";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; slug: string }>;
+}): Promise<Metadata> {
+  const { lang: langParam, slug } = await params;
+  const lang = isSupportedLanguage(langParam) ? langParam : "es";
+  const series = getSeriesBySlug(lang, slug);
+  if (!series) return {};
+
+  const path = `reihen/${series.slug}`;
+  return {
+    title: series.seoTitle,
+    description: series.seoDescription,
+    alternates: getLocalizedAlternates(lang, path),
+    openGraph: {
+      title: series.seoTitle,
+      description: series.seoDescription,
+      url: `/${lang}/${path}`,
+      images: [{ url: series.coverImage, alt: series.title }],
+    },
+  };
+}
 
 export default async function SeriesPage({
   params,

@@ -1,14 +1,14 @@
 export const checkoutPage = {
-  successTitle: "Bestellung eingegangen",
+  successTitle: "Zahlungsstatus bei Wompi",
   successLead:
-    "Vielen Dank. Der Kauf wurde an Wompi übermittelt und wird von Negative Dialektik weiterbearbeitet.",
+    "Den Status Ihrer Zahlung finden Sie in der Rückmeldung von Wompi.",
   successText:
-    "Sobald die Zahlung bestätigt ist, speichern wir die Bestellung intern und koordinieren Versand oder Abholung manuell per E-Mail.",
+    "Bei bestätigter Zahlung melden wir uns per E-Mail zum Versand oder zur Abholung. Wenn der Status unklar ist, kontaktieren Sie uns bitte, bevor Sie erneut bezahlen.",
   successProgram: "Zurück zum Programm",
   successContact: "Kontakt",
   cancelTitle: "Zahlung abgebrochen",
   cancelLead:
-    "Es wurde keine Zahlung belastet. Sie können den Vorgang jederzeit erneut starten.",
+    "Bitte prüfen Sie den Status bei Wompi, bevor Sie den Zahlungsvorgang erneut starten.",
   cancelBook: "Zurück zum Titel",
   cancelContact: "Kontakt",
 };
