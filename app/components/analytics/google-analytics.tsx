@@ -17,6 +17,9 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
   const measurementId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
   const pathname = usePathname();
   const [consent, setConsent] = useState<"granted" | "denied" | null>(null);
+  const [editing, setEditing] = useState(false);
+  const [tagReady, setTagReady] = useState(false);
+  const isCheckout = pathname.startsWith(`/${lang}/checkout/`);
 
   useEffect(() => {
     const saved = window.localStorage.getItem(consentKey);
@@ -26,41 +29,61 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
   }, []);
 
   useEffect(() => {
-    if (consent === "granted" && window.gtag && measurementId) {
-      window.gtag("config", measurementId, { page_path: pathname });
+    if (consent === "granted" && tagReady && !isCheckout) {
+      window.gtag?.("event", "page_view", {
+        page_location: window.location.href,
+        page_title: document.title,
+      });
     }
-  }, [consent, measurementId, pathname]);
+  }, [consent, isCheckout, pathname, tagReady]);
 
-  if (!measurementId) return null;
+  if (!measurementId || !/^G-[A-Z0-9]+$/.test(measurementId)) return null;
 
   const choose = (value: "granted" | "denied") => {
     window.localStorage.setItem(consentKey, value);
+    if (consent === "granted" && value === "denied") {
+      Object.assign(window, { [`ga-disable-${measurementId}`]: true });
+      window.location.reload();
+      return;
+    }
     setConsent(value);
+    setEditing(false);
   };
 
   return (
     <>
-      {consent === "granted" ? (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','${measurementId}',{anonymize_ip:true});`}
-          </Script>
-        </>
+      {consent === "granted" && !isCheckout ? (
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+          strategy="afterInteractive"
+          onReady={() => {
+            if (!window.gtag) {
+              window.dataLayer ||= [];
+              window.gtag = function gtag() { window.dataLayer.push(arguments); };
+              window.gtag("js", new Date());
+              window.gtag("config", measurementId, { send_page_view: false, allow_google_signals: false });
+            }
+            setTagReady(true);
+          }}
+        />
       ) : null}
 
-      {consent === null ? (
+      {pathname === `/${lang}/datenschutz` && consent !== null && (
+        <div className="mx-auto max-w-3xl px-5 pb-6">
+          <button type="button" className="underline" onClick={() => setEditing(true)}>
+            {lang === "de" ? "Analytics-Einstellungen ändern" : "Cambiar preferencias de analítica"}
+          </button>
+        </div>
+      )}
+      {consent === null || editing ? (
         <aside
           className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-3xl border border-[var(--color-border)] bg-[var(--color-card)] p-5 shadow-xl"
           aria-label={lang === "de" ? "Analytics-Einwilligung" : "Consentimiento de analítica"}
         >
           <p className="text-[15px] leading-6 text-[var(--color-text)]">
             {lang === "de"
-              ? "Dürfen wir anonyme Nutzungsdaten mit Google Analytics erfassen, um die Website zu verbessern?"
-              : "¿Podemos recopilar datos de uso anónimos con Google Analytics para mejorar el sitio web?"}
+              ? "Dürfen wir mit Google Analytics messen, welche Seiten besucht werden und wie oft der Checkout gestartet wird?"
+              : "¿Podemos usar Google Analytics para medir las visitas y el inicio del proceso de compra?"}
             {" "}
             <a href={`/${lang}/datenschutz`} className="underline underline-offset-4">
               {lang === "de" ? "Datenschutz" : "Privacidad"}

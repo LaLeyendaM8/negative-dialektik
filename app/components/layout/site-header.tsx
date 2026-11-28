@@ -29,7 +29,9 @@ type SiteHeaderProps = {
 function LanguageSwitch({ lang }: { lang: string }) {
   const pathname = usePathname();
   const newLang = lang === "de" ? "es" : "de";
-  const newPath = pathname.replace(`/${lang}`, `/${newLang}`);
+  const newPath = pathname.startsWith(`/${lang}/blog/`)
+    ? `/${newLang}/blog`
+    : pathname.replace(`/${lang}`, `/${newLang}`);
 
   return (
     <Link
