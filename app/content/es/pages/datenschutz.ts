@@ -1,3 +1,11 @@
+export const analyticsPrivacy = {
+  title: "Analítica web con Google Analytics 4",
+  paragraphs: [
+    "Con tu consentimiento usamos Google Analytics 4 para medir las visitas y el inicio del proceso de compra. Google puede recibir información sobre el dispositivo, el navegador, las páginas visitadas y el origen de la visita, y utilizar cookies de analítica.",
+    "Tu elección se guarda en el navegador. Puedes cambiarla en cualquier momento para ese navegador en »Cambiar preferencias de analítica«.",
+  ],
+};
+
 export const datenschutzPage = {
   title: "Protección de datos",
   lead: "Información sobre el tratamiento de datos personales",

@@ -20,6 +20,13 @@ Lokal in `.env.local` und in Vercel setzen:
 - `CONTACT_RECEIVER_EMAIL`
 - `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID` (optional; aktiviert consent-basiertes GA4)
 
+Vor Aktivierung die DE- und ES-Datenschutzhinweise mit den Einstellungen
+des GA4-Webstreams abgleichen. Deaktiviere automatische Seitenaufrufe bei
+Browser-Verlaufsänderungen im Webstream, da die Website Seitenaufrufe selbst
+sendet. Prüfe anschließend Ablehnen, Zustimmen und Widerruf sowie
+`page_view` und `begin_checkout` in GA4. Bestätigte Käufe werden derzeit
+über Wompi und die Bestelldaten erfasst.
+
 In Vercel Preview bleibt `NEXT_PUBLIC_SITE_URL` auf der kanonischen
 Produktionsdomain. Der Checkout verwendet dort automatisch `VERCEL_URL` als
 Rücksprungziel, sodass Sandbox-Zahlungen in der Preview enden.

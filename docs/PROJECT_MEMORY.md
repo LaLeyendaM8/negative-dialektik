@@ -1,6 +1,7 @@
 # NEGATIVE DIALEKTIK – Projektgedächtnis
 
-Stand: 17. November 2026  
+Stand: 28. November 2026
+
 Zweck: Dauerhafter, knapper Kontext für Menschen und Agenten. Fakten aus Code und freigegebenen Projektgesprächen werden von offenen Annahmen getrennt.
 
 ## 1. Projektkern
@@ -63,20 +64,20 @@ Große neue Features, eine neue Shop-Plattform, Warenkorb, automatisierter Versa
 ### Repository und Freigabe
 
 - Arbeitsbranch: `codex/marketing-infrastructure`
-- Draft Pull Request: [#2 – Marketing infrastructure](https://github.com/LaLeyendaM8/negative-dialektik/pull/2)
+- [PR #2](https://github.com/LaLeyendaM8/negative-dialektik/pull/2) ist gemergt und wurde auf Produktion geprüft.
 - Zielbranch: `main`
 - Lint und Produktions-Build wurden nach den Änderungen erfolgreich ausgeführt.
-- Die Änderungen sind noch nicht für Produktion freigegeben; der Pull Request bleibt der Prüf- und Freigabepunkt.
+- Die Weiterleitung der öffentlichen Buchseite zu Wompi nutzte beim letzten Test die Sandbox. Ein abgeschlossener Zahlungstest steht aus.
 
 ### Master-Checkliste
 
 | Bereich | Status | Stand |
 | --- | --- | --- |
 | Website-Audit | **Code-seitig abgeschlossen** | Struktur, Build, Checkout und zentrale Sicherheitsrisiken geprüft; Live-Abnahme bleibt offen. |
-| SEO | **Weitgehend umgesetzt** | Lokalisierte Metadaten, Canonicals, `hreflang`, Sitemap, robots.txt und strukturierte Buchdaten vorhanden; Deployment und Search Console fehlen. |
+| SEO | **Live** | Technische Grundlage auf Produktion geprüft. Domain-Verifizierung und Einreichung der Sitemap laut Projektgespräch erledigt. Indexierungsstatus prüfen. |
 | Tracking | **Grundlage umgesetzt** | Consent-basiertes GA4 und `begin_checkout`; Property/ID, Conversion-Konfiguration, weitere Events und UTM-Standard fehlen. |
 | Instagram | **Launch umgesetzt** | Profil `@negative.dialektik`, Branding, Bio, drei Startkarussells, Stories und fünf Highlights veröffentlicht. Linktitel soll `Ver libros y programa` lauten. |
-| Blog | **Offen** | Noch keine Blogstruktur oder redaktionelle Vorlage umgesetzt. |
+| Blog | **Struktur implementiert** | Zweisprachige Übersicht, Artikelseiten, Entwürfe und Veröffentlichungsformat. Freigegebene Artikel stehen aus. Siehe [Blog-Anleitung](BLOG.md). |
 | Newsletter | **Teilweise vorhanden, Marketingprozess offen** | Formular und Speicherung existieren im Code; Einwilligungsmodell, E-Mail-Tool, Templates und Versandprozess sind nicht abschließend eingerichtet. |
 | Launch-Readiness | **In Arbeit** | Preview und technische Tests vorhanden; vollständiger Wompi-/Supabase-/Mail-/Tracking-Livetest fehlt. |
 

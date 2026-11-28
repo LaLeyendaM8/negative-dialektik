@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getCatalogContent } from "@/lib/getCatalog";
+import { getBlogAlternates, getPublishedArticles } from "@/lib/blog";
 import {
   absoluteUrl,
   getLocalizedPath,
@@ -41,6 +42,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ...catalog.books.map((book) => `buecher/${book.slug}`),
     ];
 
-    return paths.map((path) => sitemapEntry(lang, path));
+    const articles = getPublishedArticles(lang);
+    const blogEntries = articles.length ? [
+      { ...getBlogAlternates(lang), lastModified: undefined },
+      ...articles.map(({ slug, date }) => ({ ...getBlogAlternates(lang, slug), lastModified: date })),
+    ] : [];
+    return [
+      ...paths.map((path) => sitemapEntry(lang, path)),
+      ...blogEntries.map(({ canonical, languages, lastModified }) => ({
+        url: absoluteUrl(canonical),
+        lastModified,
+        alternates: { languages: Object.fromEntries(
+          Object.entries(languages).map(([key, url]) => [key, absoluteUrl(url)]),
+        ) },
+      })),
+    ];
   });
 }
