@@ -59,7 +59,11 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
           onReady={() => {
             if (!window.gtag) {
               window.dataLayer ||= [];
-              window.gtag = function gtag() { window.dataLayer.push(arguments); };
+              window.gtag = function gtag() {
+                // Match the command format used by Google's gtag bootstrap.
+                // eslint-disable-next-line prefer-rest-params
+                window.dataLayer.push(arguments);
+              };
               window.gtag("js", new Date());
               window.gtag("config", measurementId, { send_page_view: false, allow_google_signals: false });
             }
