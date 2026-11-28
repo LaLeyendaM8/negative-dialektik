@@ -2,6 +2,9 @@
 
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
+import Link from "next/link";
+import { newsletter as newsletterDe } from "@/app/content/de/newsletter";
+import { newsletter as newsletterEs } from "@/app/content/es/newsletter";
 import {
   submitContactForm,
   subscribeNewsletter,
@@ -106,6 +109,7 @@ export function ContactForms({
     subscribeNewsletter,
     initialState,
   );
+  const newsletterCopy = lang === "de" ? newsletterDe : newsletterEs;
 
   return (
     <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr]">
@@ -195,8 +199,11 @@ export function ContactForms({
           {newsletterForm.text}
         </p>
 
-        <form action={newsletterAction} className="space-y-6">
+        <form id="newsletter" action={newsletterAction} className="space-y-6">
           <input type="hidden" name="language" value={lang} />
+          <div hidden aria-hidden="true">
+            <input name="company_website" type="text" autoComplete="off" tabIndex={-1} />
+          </div>
 
           <div>
             <label
@@ -209,11 +216,22 @@ export function ContactForms({
               id="newsletter-email"
               name="email"
               type="email"
+              maxLength={254}
+              autoComplete="email"
               required
               className="w-full border border-[var(--color-border)] bg-transparent px-4 py-3 text-[16px] outline-none transition-colors focus:border-[var(--color-text)]"
             />
           </div>
 
+          <div>
+            <label className="flex items-start gap-2">
+              <input type="checkbox" name="newsletter_consent" value="yes" required className="mt-1" />
+              {newsletterCopy.consent}
+            </label>
+            <Link href={`/${lang}/datenschutz`} className="mt-2 inline-block underline">
+              {newsletterCopy.privacy}
+            </Link>
+          </div>
           <div className="flex flex-col items-start gap-4">
             <SubmitButton
               idleLabel={newsletterForm.submitLabel}

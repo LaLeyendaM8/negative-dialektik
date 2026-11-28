@@ -19,7 +19,7 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
   const [consent, setConsent] = useState<"granted" | "denied" | null>(null);
   const [editing, setEditing] = useState(false);
   const [tagReady, setTagReady] = useState(false);
-  const isCheckout = pathname.startsWith(`/${lang}/checkout/`);
+  const isPrivateFlow = pathname.startsWith(`/${lang}/checkout/`) || pathname.startsWith(`/${lang}/newsletter/`);
 
   useEffect(() => {
     const saved = window.localStorage.getItem(consentKey);
@@ -29,15 +29,15 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
   }, []);
 
   useEffect(() => {
-    if (consent === "granted" && tagReady && !isCheckout) {
+    if (consent === "granted" && tagReady && !isPrivateFlow) {
       window.gtag?.("event", "page_view", {
         page_location: window.location.href,
         page_title: document.title,
       });
     }
-  }, [consent, isCheckout, pathname, tagReady]);
+  }, [consent, isPrivateFlow, pathname, tagReady]);
 
-  if (!measurementId || !/^G-[A-Z0-9]+$/.test(measurementId)) return null;
+  if (!measurementId || !/^G-[A-Z0-9]+$/.test(measurementId) || isPrivateFlow) return null;
 
   const choose = (value: "granted" | "denied") => {
     window.localStorage.setItem(consentKey, value);
@@ -52,7 +52,7 @@ export function GoogleAnalytics({ lang }: { lang: string }) {
 
   return (
     <>
-      {consent === "granted" && !isCheckout ? (
+      {consent === "granted" ? (
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
           strategy="afterInteractive"
