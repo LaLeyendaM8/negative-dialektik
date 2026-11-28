@@ -7,6 +7,7 @@ import { newsletter as es } from "@/app/content/es/newsletter";
 import { getSiteUrl, type SupportedLanguage } from "./site";
 import { hashNewsletterToken, newsletterBucket, newsletterToken } from "./newsletter-token";
 import { syncNewsletterContact, type NewsletterSyncEntry } from "./newsletter-resend";
+import { supabaseServerHeaders } from "./supabase-auth";
 
 export const newsletterCopy = { de, es };
 const consentVersion = "newsletter-2026-11-v1";
@@ -25,12 +26,13 @@ function newsletterConfig() {
 }
 
 async function rpc<T>(name: string, args: Record<string, unknown> = {}): Promise<T> {
-  const { SUPABASE_URL: url, SUPABASE_SERVICE_ROLE_KEY: key } = process.env;
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SECRET_KEY?.trim() || process.env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   if (!url || !key) throw new Error("Newsletter database configuration missing");
 
   const response = await fetch(new URL(`/rest/v1/rpc/nd_newsletter_${name}`, url), {
     method: "POST",
-    headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    headers: { ...supabaseServerHeaders(key), "Content-Type": "application/json" },
     body: JSON.stringify(args),
     cache: "no-store",
     ...timeout(),

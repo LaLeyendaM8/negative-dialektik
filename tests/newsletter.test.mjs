@@ -4,10 +4,18 @@ import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { PGlite } from "@electric-sql/pglite";
 import { syncNewsletterContact, verifyNewsletterWebhook } from "../lib/newsletter-resend.ts";
+import { supabaseServerHeaders } from "../lib/supabase-auth.ts";
 import {
   hashNewsletterToken, isNewsletterToken, matchesNewsletterSecret,
   newsletterBucket, newsletterToken, normalizeNewsletterEmail,
 } from "../lib/newsletter-token.ts";
+
+test("Supabase sends new backend secrets as API keys and supports legacy JWTs", () => {
+  assert.deepEqual(supabaseServerHeaders("sb_secret_fixture"), { apikey: "sb_secret_fixture" });
+  assert.deepEqual(supabaseServerHeaders("legacy.jwt.fixture"), {
+    apikey: "legacy.jwt.fixture", Authorization: "Bearer legacy.jwt.fixture",
+  });
+});
 
 test("Resend verifies the exact webhook payload and rejects stale signatures", () => {
   const secret = randomBytes(32);

@@ -24,7 +24,7 @@ der globalen Resend-Audience.
 
 | Variable | Zweck |
 | --- | --- |
-| `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | Bereits verwendete serverseitige Datenbankkonfiguration. Für die Abnahme ein Testprojekt verwenden. |
+| `SUPABASE_URL`, `SUPABASE_SECRET_KEY` | Projekt-URL und serverseitiger `sb_secret_…`-Schlüssel. Für die Abnahme beide aus dem Testprojekt verwenden. Der Newsletter unterstützt `SUPABASE_SERVICE_ROLE_KEY` als Legacy-Fallback. |
 | `NEXT_PUBLIC_SITE_URL` | In Produktion die kanonische Domain, in der isolierten Testumgebung der feste Preview-Host für Bestätigungslinks. Derselbe Wert steuert die SEO-Basis der Preview. |
 | `NEWSLETTER_RESEND_API_KEY` | Separater Schlüssel mit Versand- und Kontaktberechtigungen im Newsletter-Konto. |
 | `NEWSLETTER_FROM_EMAIL` | Verifizierter Newsletter-Absender. |
@@ -36,6 +36,9 @@ der globalen Resend-Audience.
 Schlüssel und Secrets ausschließlich als serverseitige Vercel-Variablen
 speichern. Resend soll die Bestätigungslinks nicht per Click-Tracking
 umschreiben. Teste, dass der Link einschließlich Fragment im Mailclient funktioniert.
+
+Der Checkout verwendet weiterhin `SUPABASE_SERVICE_ROLE_KEY`. Die Migration
+der Checkout-Zugriffe separat prüfen, bevor ihr den Legacy-Schlüssel dort deaktiviert.
 
 5. Einen Scheduler für einen POST pro Minute auf
    `https://<host>/api/newsletter/sync` einrichten. Er muss den Header
