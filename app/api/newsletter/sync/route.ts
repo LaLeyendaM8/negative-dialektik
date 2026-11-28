@@ -1,12 +1,13 @@
 import { cleanupNewsletter, syncNextNewsletterContact } from "@/lib/newsletter";
-import { matchesNewsletterSecret } from "@/lib/newsletter-token";
+import { newsletterSyncAuthorization } from "@/lib/newsletter-token";
 
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
-  const secret = process.env.NEWSLETTER_SYNC_SECRET ?? "";
-  if (secret.length < 32 || !matchesNewsletterSecret(request.headers.get("authorization"), `Bearer ${secret}`)) {
-    return new Response(null, { status: 401 });
+  const auth = newsletterSyncAuthorization(request.headers, process.env.NEWSLETTER_SYNC_SECRET ?? "");
+  if (auth !== "authorized") {
+    console.warn("Newsletter sync request rejected:", auth);
+    return new Response(null, { status: auth === "secret_not_configured" ? 503 : 401 });
   }
   try {
     await cleanupNewsletter();

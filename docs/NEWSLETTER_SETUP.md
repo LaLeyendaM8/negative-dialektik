@@ -42,6 +42,7 @@ der Checkout-Zugriffe separat prüfen, bevor ihr den Legacy-Schlüssel dort deak
 
 5. Einen Scheduler für einen POST pro Minute auf
    `https://<host>/api/newsletter/sync` einrichten. Er muss den Header
+   `X-ND-Newsletter-Sync: <NEWSLETTER_SYNC_SECRET>` oder
    `Authorization: Bearer <NEWSLETTER_SYNC_SECRET>` setzen können.
    Der Endpunkt verarbeitet pro Aufruf einen Datensatz und meldet `synced`
    oder `empty`. Bei 503 bleibt der Eintrag zur Wiederholung vorgemerkt.

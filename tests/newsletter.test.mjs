@@ -7,8 +7,17 @@ import { syncNewsletterContact, verifyNewsletterWebhook } from "../lib/newslette
 import { supabaseServerHeaders } from "../lib/supabase-auth.ts";
 import {
   hashNewsletterToken, isNewsletterToken, matchesNewsletterSecret,
-  newsletterBucket, newsletterToken, normalizeNewsletterEmail,
+  newsletterBucket, newsletterSyncAuthorization, newsletterToken, normalizeNewsletterEmail,
 } from "../lib/newsletter-token.ts";
+
+test("newsletter sync accepts either protected header and reports only a reason code", () => {
+  const secret = "x".repeat(40);
+  assert.equal(newsletterSyncAuthorization(new Headers(), ""), "secret_not_configured");
+  assert.equal(newsletterSyncAuthorization(new Headers(), secret), "header_missing");
+  assert.equal(newsletterSyncAuthorization(new Headers({ Authorization: "Bearer wrong" }), secret), "secret_mismatch");
+  assert.equal(newsletterSyncAuthorization(new Headers({ Authorization: `Bearer ${secret}` }), secret), "authorized");
+  assert.equal(newsletterSyncAuthorization(new Headers({ "X-ND-Newsletter-Sync": secret }), secret), "authorized");
+});
 
 test("Supabase sends new backend secrets as API keys and supports legacy JWTs", () => {
   assert.deepEqual(supabaseServerHeaders("sb_secret_fixture"), { apikey: "sb_secret_fixture" });

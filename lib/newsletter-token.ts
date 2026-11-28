@@ -30,3 +30,15 @@ export function matchesNewsletterSecret(value: string | null, secret: string) {
     Buffer.from(hashNewsletterToken(secret), "hex"),
   );
 }
+
+export function newsletterSyncAuthorization(headers: Headers, rawSecret: string) {
+  const secret = rawSecret.trim();
+  if (secret.length < 32) return "secret_not_configured";
+  const dedicated = headers.get("x-nd-newsletter-sync");
+  const authorization = headers.get("authorization");
+  if (dedicated === null && authorization === null) return "header_missing";
+  const valid = dedicated !== null
+    ? matchesNewsletterSecret(dedicated, secret)
+    : matchesNewsletterSecret(authorization, `Bearer ${secret}`);
+  return valid ? "authorized" : "secret_mismatch";
+}
