@@ -78,7 +78,7 @@ Große neue Features, eine neue Shop-Plattform, Warenkorb, automatisierter Versa
 | Tracking | **Grundlage umgesetzt** | Consent-basiertes GA4 und `begin_checkout`; Property/ID, Conversion-Konfiguration, weitere Events und UTM-Standard fehlen. |
 | Instagram | **Launch umgesetzt** | Profil `@negative.dialektik`, Branding, Bio, drei Startkarussells, Stories und fünf Highlights veröffentlicht. Linktitel soll `Ver libros y programa` lauten. |
 | Blog | **Struktur implementiert** | Zweisprachige Übersicht, Artikelseiten, Entwürfe und Veröffentlichungsformat. Freigegebene Artikel stehen aus. Siehe [Blog-Anleitung](BLOG.md). |
-| Newsletter | **Teilweise vorhanden, Marketingprozess offen** | Formular und Speicherung existieren im Code; Einwilligungsmodell, E-Mail-Tool, Templates und Versandprozess sind nicht abschließend eingerichtet. |
+| Newsletter | **Code zur Abnahme** | Zweisprachiger Double-Opt-in mit Supabase und dedizierten Resend-Segmenten. Migration, Konfiguration und Provider-Abnahme vor Produktionsfreigabe. Siehe [Newsletter-Einrichtung](NEWSLETTER_SETUP.md). |
 | Launch-Readiness | **In Arbeit** | Preview und technische Tests vorhanden; vollständiger Wompi-/Supabase-/Mail-/Tracking-Livetest fehlt. |
 
 ### Instagram-Entscheidungen
@@ -99,7 +99,7 @@ Große neue Features, eine neue Shop-Plattform, Warenkorb, automatisierter Versa
 5. Bestellung in Supabase, Versanddaten, Idempotenz und interne Resend-Mail prüfen.
 6. GA4-Property/Datastream einrichten, Measurement-ID in Vercel setzen und Consent sowie `begin_checkout` testen.
 7. Google Search Console verbinden, Domain verifizieren und `/sitemap.xml` einreichen.
-8. Erst danach Blog- und Newsletter-System spezifizieren und umsetzen.
+8. Newsletter im separaten Testprojekt abnehmen. Erst nach Freigabe Produktionsmigration und Resend-Segmente konfigurieren.
 
 ## 7. Offene Ideen und fehlende Informationen
 
@@ -115,7 +115,7 @@ Große neue Features, eine neue Shop-Plattform, Warenkorb, automatisierter Versa
 - Produktionsstatus und Vollständigkeit aller Vercel-, Wompi-, Supabase-, Resend- und GA4-Zugänge.
 - Lieferländer, Versandkosten, Lieferzeiten, Rückgabeprozess und operative Verantwortlichkeiten.
 - Priorisierte Marktsegmente, Kampagnenbudget und messbare Ziele für Kampagne 01.
-- Newsletter-Tool, Double-Opt-in-/Einwilligungsprozess, Versandrhythmus und Absenderverantwortung.
+- Versandrhythmus und Absenderverantwortung für die Newsletter-Broadcasts.
 - Blog-Verantwortung, Veröffentlichungsrhythmus und Freigabeprozess.
 - Rechte/Freigaben für Testimonials, Autorenmaterial und Social-Media-Nutzung, insbesondere Christoph Menke.
 - Ob das Instagram-Konto als professionelles Business-/Creator-Konto vollständig konfiguriert ist.
